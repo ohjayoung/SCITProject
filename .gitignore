@@ -1,2 +1,2 @@
 target/
-*.prefs
+src/main/webapp/WEB-INF/views/home.jsp
