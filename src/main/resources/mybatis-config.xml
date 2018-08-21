@@ -8,11 +8,17 @@
     </settings>
 
   	<typeAliases>
-		<!-- <typeAlias type="com.pearl.www.dto.User"	alias="User" /> -->
+		<typeAlias type="global.sesoc.www.dto.T_Friend"	alias="friend" />
+		<typeAlias type="global.sesoc.www.dto.T_GRequest"	alias="grequest" />
+		<typeAlias type="global.sesoc.www.dto.T_Message"	alias="message" />
+		<typeAlias type="global.sesoc.www.dto.T_Reply"	alias="reply" />
 	</typeAliases>
 
 	<mappers>
-		<!-- <mapper resource="mappers/userMapper.xml" /> -->
+		<mapper resource="mappers/T_FriendMapper.xml" />
+		<mapper resource="mappers/T_GRequestMapper.xml" />
+		<mapper resource="mappers/T_MessageMapper.xml" />
+		<mapper resource="mappers/T_ReplyMapper.xml" />
 	</mappers> 
 
 </configuration>
