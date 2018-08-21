@@ -10,7 +10,7 @@
   	<typeAliases>
 
   	<typeAlias type="global.sesoc.www.dto.T_Board" alias="board"/>
-  	<typeAlias type="global.sesoc.www.dto.T_Group" alias="group"/>\
+  	<typeAlias type="global.sesoc.www.dto.T_Group" alias="group"/>
     <typeAlias type="global.sesoc.www.dto.T_Planner" alias="planner"/>
   	<typeAlias type="global.sesoc.www.dto.T_Plist" alias="plist"/>
     <typeAlias type="global.sesoc.www.dto.T_Request" alias="request"/>
