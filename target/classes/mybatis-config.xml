@@ -8,11 +8,24 @@
     </settings>
 
   	<typeAliases>
-		<!-- <typeAlias type="com.pearl.www.dto.User"	alias="User" /> -->
+  		<typeAlias type="global.sesoc.www.dto.T_Board" alias="T_Board"/>
+  		<typeAlias type="global.sesoc.www.dto.T_Group" alias="group"/>
+  		<typeAlias type="global.sesoc.www.dto.T_Planner" alias="planner"/>
+  		<typeAlias type="global.sesoc.www.dto.T_Plist" alias="plist"/>
+  		<typeAlias type="global.sesoc.www.dto.T_Request" alias="request"/>
+		<typeAlias type="global.sesoc.www.dto.T_Schedule" alias="schedule" />
+		<typeAlias type="global.sesoc.www.dto.T_User" alias="user"/>	
 	</typeAliases>
 
 	<mappers>
-		<!-- <mapper resource="mappers/userMapper.xml" /> -->
+		<mapper resource="mappers/T_BoardMapper.xml"/>
+		<mapper resource="mappers/T_GroupMapper.xml"/>
+		<mapper resource="mappers/T_PlannerMapper.xml"/>
+		<mapper resource="mappers/T_PlistMapper.xml"/>
+		<mapper resource="mappers/T_RequestMapper.xml"/>
+		<mapper resource="mappers/T_ScheduleMapper.xml" />
+		<mapper resource="mappers/T_UserMapper.xml"/>
+		
 	</mappers> 
 
 </configuration>
