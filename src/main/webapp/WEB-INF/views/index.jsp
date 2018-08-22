@@ -26,7 +26,6 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -34,13 +33,14 @@
 					<img src="images/logo.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" id="loginForm" action="login" method="post" onsubmit="return login()">
+					<input type="hidden" id="islogined" name="islogined" value="${islogined}">
 					<span class="login100-form-title">
 						Member Login
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
+					<div class="wrap-input100 validate-input" data-validate = "">
+						<input class="input100" id="userId" type="text" name="userId" placeholder="ID記入">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -48,19 +48,21 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" id="userPwd" type="password" name="userPwd" placeholder="パスワード記入">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
-					
 					<div class="container-login100-form-btn">
+<<<<<<< HEAD
 							<!-- button class="login100-form-btn" id="loginCheck" onclick="login_click()"> -->
 								<a href="main" >Login</a>
 							<!-- </button> -->
+=======
+						<input type="submit" id="submit" class="login100-form-btn" value="Login" > 
+>>>>>>> 4daa95f74c78ab6c8f2162bd886544df5d0ce45c
 					</div>
-
 					<div class="text-center p-t-12">
 						<span class="txt1">
 							Forgot
@@ -69,7 +71,6 @@
 							Username / Password?
 						</a>
 					</div>
-
 					<div class="text-center p-t-136">
 						<a class="txt2" href="#">
 							Create your Account
@@ -80,12 +81,9 @@
 			</div>
 		</div>
 	</div>
-	
-	
-
-	
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<<<<<<< HEAD
 	<script>
 		function login_click(){
 			alert("button");
@@ -93,17 +91,43 @@
 		}
 	</script>
 	
+=======
+<!--===============================================================================================-->
+>>>>>>> 4daa95f74c78ab6c8f2162bd886544df5d0ce45c
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="vendor/select2/select2.min.js"></script>
 	<script src="vendor/tilt/tilt.jquery.min.js"></script>
-	<script >
+	<script>
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
+	
+        if(document.getElementById("islogined").value =="1") {
+            alert('IDとパスワードが合わないです。');
+        }
+ 		function login() {
+			var userId = document.getElementById("userId");
+			var userPwd = document.getElementById("userPwd");
+			var form = document.getElementById("loginForm");
+			if (userId.value == '') {
+				alert('IDを入れてください。');
+				userId.focus();
+				return false;
+			}if (userPwd.value.length == 0) {
+				alert('パスワードを入れてください。');
+				userPwd.focus();
+				return false;
+			}
+			form.submit();
+		}
 	</script>
 <!--===============================================================================================-->
+<<<<<<< HEAD
 	<!-- <script src="js/main.js"></script> -->
 	
+=======
+	<script src="js/main.js"></script>
+>>>>>>> 4daa95f74c78ab6c8f2162bd886544df5d0ce45c
 </body>
 </html>
