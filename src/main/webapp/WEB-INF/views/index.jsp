@@ -56,9 +56,9 @@
 					</div>
 					
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
+							<button class="login100-form-btn" id="loginCheck" onclick="login_click()">
+								Login
+							</button>
 					</div>
 
 					<div class="text-center p-t-12">
@@ -86,6 +86,13 @@
 	
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script>
+		function login_click(){
+			alert("button");
+			goReplace('user/main.jsp');
+		}
+	</script>
+	
 <!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -100,6 +107,6 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
+	
 </body>
 </html>
