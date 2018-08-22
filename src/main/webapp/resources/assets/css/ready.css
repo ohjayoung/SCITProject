@@ -2054,7 +2054,7 @@ body {
   z-index: 1001;
   font-size: 18px;
   font-weight: 600;
-  padding-left: 25px;
+  padding-left: 1px;		/* logo padding */
   padding-right: 25px;
   z-index: 1001;
   display: inline-block;
@@ -2099,12 +2099,13 @@ body {
   box-shadow: 6px 1px 20px rgba(69, 65, 78, 0.1);
 }
 .sidebar .user {
-  margin-top: 12.5px;
+  padding-top: 12.5px;
   padding-left: 25px;
   padding-right: 25px;
   padding-bottom: 12.5px;
   border-bottom: 1px solid #eee;
   display: block;
+  background-color: #15243f;	/* user background-color */
 }
 .sidebar .user .photo {
   width: 40px;
@@ -2130,7 +2131,7 @@ body {
 .sidebar .user .info a > span {
   font-size: 14px;
   font-weight: 600;
-  color: #777;
+  color: #e1eef6;		/* text color */
   letter-spacing: 0.04em;
   display: flex;
   flex-direction: column;
@@ -2160,6 +2161,7 @@ body {
   z-index: 4;
   padding-top: 55px;
   padding-bottom: 100px;
+  background-color: #15243f;	/* sidebar background color */
 }
 .sidebar .nav {
   display: block;
@@ -2201,7 +2203,7 @@ body {
 .sidebar .nav .nav-item a {
   display: flex;
   align-items: center;
-  color: #83848a;
+  color: #e1eef6;			/* text color */
   padding: 13px 25px;
   width: 100%;
   font-size: 14px;
@@ -2245,7 +2247,7 @@ body {
   width: calc(100% - 260px);
   min-height: 100%;
   float: right;
-  background: #f2f3f8;
+  background: #F8FAFF;	/* dashboard background color */
 }
 .main-panel .content {
   padding: 30px 15px;
@@ -6408,7 +6410,7 @@ body {
 .pagination > li > a, .pagination > li:first-child > a, .pagination > li:last-child > a, .pagination > li > span, .pagination > li:first-child > span, .pagination > li:last-child > span {
   border-radius: 100px !important;
   margin: 0 2px;
-  color: #777777;
+  color: #ffffff;		/* text color */
   border-color: #ddd;
 }
 .pagination.pg-primary > li.active > a, .pagination.pg-primary > li.active:first-child > a, .pagination.pg-primary > li.active:last-child > a, .pagination.pg-primary > li.active > span, .pagination.pg-primary > li.active:first-child > span, .pagination.pg-primary > li.active:last-child > span {
@@ -6604,7 +6606,7 @@ body {
     position: relative;
     justify-content: center;
   }
-  .main-header .logo-header .navbar-toggler {
+  .main-header C .navbar-toggler {
     position: absolute;
     top: auto;
     height: 100%;
@@ -6615,7 +6617,7 @@ body {
     opacity: 1;
     position: absolute;
     right: 15px;
-    color: #545454;
+    color: #333030;
     cursor: pointer;
   }
 
@@ -6670,5 +6672,19 @@ body {
     display: none;
   }
 }
+/* ======================================================== */
+  .caretDiv {
+  	padding-left: 80px;
+  }
+  
+  .navTop {
+  	/* background-color: #bfc3c9; */
+  	background: linear-gradient( to right, #c9cdd6,  #bfc3c9);
+  	
+  }
 
+  .logoStyle {
+  	background-color: #15243f;
+  }
+  
 /*# sourceMappingURL=ready.css.map */
