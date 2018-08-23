@@ -1,4 +1,4 @@
-package global.sesoc.www;
+package global.sesoc.www.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,14 +21,16 @@ public class T_UserController {
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public String login(T_User user, HttpSession session, Model model) {
+    	
+    	
     	T_User t = repository.selectOne(user);
     	if(t != null) {
     		session.setAttribute("loginId", t.getUserId());
     		session.setAttribute("loginName", t.getUserName());
-    		return "user/userDetail";
     	}else {
     		model.addAttribute("islogined", "1");
     		return "index";
     	}
+    	return "user/main";
     }
 }
