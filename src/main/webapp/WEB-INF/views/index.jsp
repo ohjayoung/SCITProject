@@ -55,13 +55,7 @@
 						</span>
 					</div>
 					<div class="container-login100-form-btn">
-<<<<<<< HEAD
-							<!-- button class="login100-form-btn" id="loginCheck" onclick="login_click()"> -->
-								<a href="main" >Login</a>
-							<!-- </button> -->
-=======
 						<input type="submit" id="submit" class="login100-form-btn" value="Login" > 
->>>>>>> 4daa95f74c78ab6c8f2162bd886544df5d0ce45c
 					</div>
 					<div class="text-center p-t-12">
 						<span class="txt1">
@@ -83,20 +77,12 @@
 	</div>
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<<<<<<< HEAD
-	<script>
-		function login_click(){
-			alert("button");
-			location.href="main";
-		}
-	</script>
-	
-=======
 <!--===============================================================================================-->
->>>>>>> 4daa95f74c78ab6c8f2162bd886544df5d0ce45c
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
 	<script src="vendor/tilt/tilt.jquery.min.js"></script>
 	<script>
 		$('.js-tilt').tilt({
@@ -123,11 +109,6 @@
 		}
 	</script>
 <!--===============================================================================================-->
-<<<<<<< HEAD
 	<!-- <script src="js/main.js"></script> -->
-	
-=======
-	<script src="js/main.js"></script>
->>>>>>> 4daa95f74c78ab6c8f2162bd886544df5d0ce45c
 </body>
 </html>
