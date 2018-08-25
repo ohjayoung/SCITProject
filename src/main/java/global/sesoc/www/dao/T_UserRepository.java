@@ -19,4 +19,12 @@ public class T_UserRepository {
 		return t;
 	}
 
+	public int signUp(T_User tuser) {
+		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
+		System.out.println(tuser);
+		int result = mapper.insert(tuser);
+		
+		return result;
+	}
+
 }

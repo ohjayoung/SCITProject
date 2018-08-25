@@ -35,7 +35,7 @@
 
 				<input type="hidden" id="islogined" name="islogined" value="${islogined}">
 		
-				<form class="login100-form validate-form" id="login" action="login" method="post" onsubmit="return login()">
+				<form class="login100-form validate-form" id="login" name="login" action="login" method="post" onsubmit="return login()">
 					<span class="login100-form-title">
 						TICKS TICKS <br>
 						<span class="txt1">スケジュール SNS ウェブサイト</span>
@@ -69,7 +69,7 @@
 							アカウントをお待ちでないですか？　
 						</span>
 						<br>
-						<a class="txt2" href="#">
+						<a class="txt2" href="signUp">
 							登録する
 						</a>
 					</div>

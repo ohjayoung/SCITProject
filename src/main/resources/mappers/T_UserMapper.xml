@@ -22,7 +22,29 @@
 			AND
 				USERPWD = #{userPwd}
 		</if>
-</select>   
+</select>
+
+<insert id="insert" parameterType="user">
+	 INSERT INTO T_USER(
+	 	USERID, USERPWD, USERNAME, BIRTH, PHONE, EMAIL
+	 	<if test="originalImage != null or savedImage != null or introduce != null or belong != null ">
+	 	,ORIGINALIMAGE, SAVEDIMAGE, INTRODUCE, BELONG
+	 	</if>
+	 )VALUES(
+	 	    #{userId},
+            #{userPwd},
+            #{userName},
+            #{birth},
+            #{phone},
+            #{email}
+            <if test="originalImage != null or savedImage != null or introduce != null or belong != null ">
+            ,#{originalImage},
+            #{savedImage},
+            #{introduce},
+            #{belong}
+            </if>
+     )
+</insert> 
 </mapper>
 
 
