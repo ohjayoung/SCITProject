@@ -7,10 +7,10 @@
 		USERID,
 		USERPWD,
 		USERNAME,
-		TO_CHAR(BIRTH, 'YYYY/MM/DD') BIRTH,
+		TO_CHAR(BIRTH, 'YYYY-MM-DD') BIRTH,
 		PHONE,
-		EMAIL,
-		IMAGE,
+		ORIGINALIMAGE,
+		SAVEDIMAGE,
 		INTRODUCE,
 		BELONG
 	FROM
@@ -21,7 +21,18 @@
 			AND
 				USERPWD = #{userPwd}
 		</if>
-</select>   
+</select>
+<update id="userUpdate" parameterType="user">
+	UPDATE T_USER
+	SET
+		BIRTH = #{birth},
+		PHONE = #{phone},
+		ORIGINALIMAGE = #{originalImage},
+		SAVEDIMAGE = #{savedImage},
+		INTRODUCE = #{introduce},
+		BELONG = #{belong}
+	WHERE USERID = #{userId}
+</update>   
 </mapper>
 
 
