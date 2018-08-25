@@ -135,16 +135,16 @@ iframe {
 [ Utility ]*/
 .txt1 {
   font-family: Poppins-Regular;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.5;
   color: #999999;
 }
 
 .txt2 {
   font-family: Poppins-Regular;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.5;
-  color: #666666;
+  color: #77AAAD;
 }
 
 
@@ -168,11 +168,11 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #9053c7;
-  background: -webkit-linear-gradient(-135deg, #ed65a9, #f9ef2f);
+  background: #15243f;
+  background: -webkit-linear-gradient(-135deg, #15243f, #bfc3c9);
   background: -o-linear-gradient(-135deg, #f9ef2f, #f9ef2f);
   background: -moz-linear-gradient(-135deg, #ed65a9, #f9ef2f);
-  background: linear-gradient(-135deg, #ed65a9, #f9ef2f);
+  background: linear-gradient(-135deg, #15243f, #bfc3c9);
 }
 
 .wrap-login100 {
@@ -189,6 +189,22 @@ iframe {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 177px 130px 33px 95px;
+}
+
+.wrap-signUp100 {
+  width: 960px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 80px 50px 10px 50px;
 }
 
 /*------------------------------------------------------------------
@@ -210,7 +226,7 @@ iframe {
 
 .login100-form-title {
   font-family: Poppins-Bold;
-  font-size: 24px;
+  font-size: 40px;
   color: #333333;
   line-height: 1.2;
   text-align: center;
@@ -233,16 +249,31 @@ iframe {
   font-family: Poppins-Medium;
   font-size: 15px;
   line-height: 1.5;
-  color: #666666;
+  color: #3f4047;
 
   display: block;
   width: 100%;
-  background: #e6e6e6;
+  background: #FFFFF3;
   height: 50px;
   border-radius: 25px;
   padding: 0 30px 0 68px;
+  border: 0.5px solid #ced4da;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+.signUp100 {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 
 /*------------------------------------------------------------------
 [ Focus ]*/

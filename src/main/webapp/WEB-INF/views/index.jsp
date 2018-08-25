@@ -33,17 +33,19 @@
 					<img src="images/logo.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" id="loginForm" action="login" method="post" onsubmit="return login()">
-					<input type="hidden" id="islogined" name="islogined" value="${islogined}">
+				<input type="hidden" id="islogined" name="islogined" value="${islogined}">
+		
+				<form class="login100-form validate-form" id="login" name="login" action="login" method="post" onsubmit="return login()">
 					<span class="login100-form-title">
-						Member Login
+						TICKS TICKS <br>
+						<span class="txt1">スケジュール SNS ウェブサイト</span>
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "">
 						<input class="input100" id="userId" type="text" name="userId" placeholder="ID記入">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
+							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
 
@@ -55,20 +57,20 @@
 						</span>
 					</div>
 					<div class="container-login100-form-btn">
-						<input type="submit" id="submit" class="login100-form-btn" value="Login" > 
+						<input type="submit" id="loginBtn" class="login100-form-btn" value="ログイン" > 
 					</div>
 					<div class="text-center p-t-12">
-						<span class="txt1">
-							Forgot
-						</span>
 						<a class="txt2" href="#">
-							Username / Password?
+							パスワードを忘れた場合
 						</a>
 					</div>
 					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
-							Create your Account
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						<span class="txt1">
+							アカウントをお待ちでないですか？　
+						</span>
+						<br>
+						<a class="txt2" href="signUp">
+							登録する
 						</a>
 					</div>
 				</form>
@@ -88,27 +90,33 @@
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
-	
-        if(document.getElementById("islogined").value =="1") {
-            alert('IDとパスワードが合わないです。');
-        }
- 		function login() {
+		
+		var islogined = document.getElementById("islogined").value;
+		if (islogined == "1") {
+			alert('IDとパスワードが合わないです。');
+ 			islogined = "0"; 
+		}
+		
+		function login() {
 			var userId = document.getElementById("userId");
 			var userPwd = document.getElementById("userPwd");
 			var form = document.getElementById("loginForm");
+		
 			if (userId.value == '') {
 				alert('IDを入れてください。');
 				userId.focus();
 				return false;
-			}if (userPwd.value.length == 0) {
+			}
+		
+			if (userPwd.value.length == 0) {
 				alert('パスワードを入れてください。');
 				userPwd.focus();
 				return false;
-			}
-			form.submit();
-		}
+			}//if
+			login.submit();
+			return true;
+		}//login
 	</script>
 <!--===============================================================================================-->
-	<!-- <script src="js/main.js"></script> -->
 </body>
 </html>

@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="assets/css/ready.css">
 	<link rel="stylesheet" href="assets/css/demo.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 	<div class="wrapper">
@@ -27,13 +29,14 @@
 				<div class="container-fluid">
 					
 					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
-						<div class="input-group">
-							<input type="text" placeholder="친구검색" class="form-control">
-							<div class="input-group-append">
+						<div class="wrap-input100  input-group" data-validate = "">
+							<input type="text" placeholder="&nbsp; 친구검색" class="form-control input100">
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
 								<span class="input-group-text">
 									<i class="la la-search search-icon"></i>
 								</span>
-							</div>
+							</span>
 						</div>
 					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
@@ -421,8 +424,8 @@
 							<div class="col-md-6">
 								<div class="card card-tasks">
 									<div class="card-header ">
-										<h4 class="card-title">오늘의 할일</h4>
-										<p class="card-category">오늘 할일을 내일로 미루지마라</p>
+										<h4 class="card-title">미 체크리스트</h4>
+										<p class="card-category">어제 하루는 어떠셨나요?</p>
 									</div>
 									<div class="card-body ">
 										<div class="table-full-width">
@@ -545,21 +548,34 @@
 		</div>
 	</div>
 
-
+<!--===============================================================================================-->	
 <script src="assets/js/core/jquery.3.2.1.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/core/popper.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/core/bootstrap.min.js"></script>
-<!-- <script src="assets/js/plugin/chartist/chartist.min.js"></script>
-<script src="assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script> -->
+<!--===============================================================================================-->	
+ <script src="assets/js/plugin/chartist/chartist.min.js"></script>
+<!--===============================================================================================-->	
+<script src="assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!--===============================================================================================-->	
 <script src="assets/js/ready.min.js"></script>
-<!-- <script src="assets/js/demo.js"></script> -->
+<!--===============================================================================================-->	
+<script src="assets/js/demo.js"></script>
 
 </body>
 </html>
