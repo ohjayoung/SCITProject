@@ -2039,7 +2039,6 @@ body {
 .main-header {
   min-height: 55px;
   width: 100%;
-  background: #ffffff;
   position: fixed;
   z-index: 1001;
   border-bottom: 1px solid #eee;
@@ -2247,7 +2246,11 @@ body {
   width: calc(100% - 260px);
   min-height: 100%;
   float: right;
-  background: #F8FAFF;	/* dashboard background color */
+  background: #15243f;
+  background: -webkit-linear-gradient(-135deg, #15243f, #bfc3c9);
+  background: -o-linear-gradient(-135deg, #f9ef2f, #f9ef2f);
+  background: -moz-linear-gradient(-135deg, #ed65a9, #f9ef2f);
+  background: linear-gradient(-135deg, #15243f, #bfc3c9);	/* dashboard content background color */
 }
 .main-panel .content {
   padding: 30px 15px;

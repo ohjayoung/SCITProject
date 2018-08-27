@@ -249,5 +249,4 @@ ALTER TABLE T_REQUEST
 
 commit
 INSERT INTO T_USER (USERID, USERPWD, USERNAME, BIRTH, PHONE, EMAIL) VALUES ('admin', 'admin', 'admin', '1992-05-05', '010-0000-0000', 'admin@admin.net');
-
-
+SELECT * FROM T_USER;

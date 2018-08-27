@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,7 +38,7 @@ public class T_UserController {
 			model.addAttribute("islogined", "1");
 			return "index";
 		}
-		return "user/main";
+		return "main";
 	}
 
 	@RequestMapping(value = "signUp", method = RequestMethod.POST)
@@ -70,7 +71,7 @@ public class T_UserController {
 	}
 
 	@RequestMapping(value = "duplicateCheck", method = RequestMethod.POST)
-	public @ResponseBody Integer duplicateCheck(String userId) {
+	public @ResponseBody int duplicateCheck(String userId) {
 		T_User user = new T_User();
 		user.setUserId(userId);
 		System.out.println(user);
@@ -91,4 +92,21 @@ public class T_UserController {
 
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
+	public String userDelete() {
+		return "user/userDelete";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/pwdCheck", method = RequestMethod.POST)
+	public T_User pwdCheck(@RequestBody T_User user, HttpSession session) {
+		String userId = (String) session.getAttribute("loginId");
+		user.setUserId(userId);
+		System.out.println(user);
+		T_User t = repository.pwdCheck(user);
+		return t;
+	}
+	
+	
 }

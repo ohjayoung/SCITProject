@@ -27,4 +27,11 @@ public class T_UserRepository {
 		return result;
 	}
 
+	public T_User pwdCheck(T_User user) {
+		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
+		T_User t = mapper.selectOne(user);
+		System.out.println(t);
+		return t;
+	}
+
 }

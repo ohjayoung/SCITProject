@@ -105,7 +105,7 @@
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="assets/img/profile.jpg" alt="user-img" width="36" class="img-circle"><span >마동희</span></span> </a>
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="assets/img/profile.jpg" alt="user-img" width="36" class="img-circle"><span >마동희</span> </a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
@@ -120,9 +120,9 @@
 									<a class="dropdown-item" href="#"></i> 그룹 리스트</a>
 									<a class="dropdown-item" href="#"><i class="ti-email"></i> 메시지 리스트</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="ti-settings"></i> 회원정보수정 및 회원탈퇴</a>
+									<a class="dropdown-item" href="userDelete"><i class="ti-settings"></i> パスワード変更、アカウント脱退</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>로그아웃</a>
+									<a class="dropdown-item" href="logout"><i class="fa fa-power-off"></i>로그아웃</a>
 								</ul>
 								<!-- /.dropdown-user -->
 							</li>
@@ -545,8 +545,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 
 <!--===============================================================================================-->	
 <script src="assets/js/core/jquery.3.2.1.min.js"></script>
@@ -556,10 +554,6 @@
 <script src="assets/js/core/popper.min.js"></script>
 <!--===============================================================================================-->	
 <script src="assets/js/core/bootstrap.min.js"></script>
-<!--===============================================================================================-->	
- <script src="assets/js/plugin/chartist/chartist.min.js"></script>
-<!--===============================================================================================-->	
-<script src="assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
 <!--===============================================================================================-->	
 <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 <!--===============================================================================================-->	
@@ -575,7 +569,6 @@
 <!--===============================================================================================-->	
 <script src="assets/js/ready.min.js"></script>
 <!--===============================================================================================-->	
-<script src="assets/js/demo.js"></script>
 
 </body>
 </html>

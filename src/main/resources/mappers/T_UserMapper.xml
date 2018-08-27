@@ -7,7 +7,7 @@
 		USERID,
 		USERPWD,
 		USERNAME,
-		TO_CHAR(BIRTH, 'YYYY/MM/DD') BIRTH,
+		TO_CHAR(BIRTH, 'YYYY-MM-DD') BIRTH,
 		PHONE,
 		EMAIL,
 		ORIGINALIMAGE,
@@ -17,9 +17,9 @@
 	FROM
 		T_USER
 	WHERE
-		USERID = #{userId}
-		<if test="userPwd != null">
+				USERID = #{userId}
 			AND
+		<if test="userPwd != null">
 				USERPWD = #{userPwd}
 		</if>
 </select>

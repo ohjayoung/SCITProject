@@ -20,6 +20,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
-		return "user/main";
+		return "main";
 	}
 }
