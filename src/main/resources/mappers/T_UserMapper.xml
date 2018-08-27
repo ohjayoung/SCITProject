@@ -45,6 +45,17 @@
             </if>
      )
 </insert> 
+<update id="userUpdate" parameterType="user">
+	UPDATE T_USER
+	SET
+		BIRTH = #{birth},
+		PHONE = #{phone},
+		ORIGINALIMAGE = #{originalImage},
+		SAVEDIMAGE = #{savedImage},
+		INTRODUCE = #{introduce},
+		BELONG = #{belong}
+	WHERE USERID = #{userId}
+</update> 
 </mapper>
 
 

@@ -18,7 +18,7 @@ public class T_UserRepository {
 		T_User t = mapper.selectOne(user);
 		return t;
 	}
-
+	//회원가입
 	public int signUp(T_User user) {
 		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
 		System.out.println(user);
@@ -26,5 +26,10 @@ public class T_UserRepository {
 		
 		return result;
 	}
-
+	//프로필 수정
+	public int userUpdate(T_User user) {
+		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
+		int t = mapper.userUpdate(user);
+		return t;
+	}
 }

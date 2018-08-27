@@ -190,6 +190,7 @@ $(function(){
 		
 		var phone1 = $('#phone1 option:selected').text();
 		var phone2 = $('#phone2').val();
+		
 		if(phone2.length == 0){
 			alert("電話番号を入力してください.")
 			return false;

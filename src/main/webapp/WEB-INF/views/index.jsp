@@ -94,7 +94,7 @@
 		var islogined = document.getElementById("islogined").value;
 		if (islogined == "1") {
 			alert('IDとパスワードが合わないです。');
- 			islogined = "0"; 
+			
 		}
 		
 		function login() {
@@ -113,8 +113,7 @@
 				userPwd.focus();
 				return false;
 			}//if
-			login.submit();
-			return true;
+			form.submit();
 		}//login
 	</script>
 <!--===============================================================================================-->
