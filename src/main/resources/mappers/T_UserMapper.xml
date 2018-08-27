@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.www.dao.T_UserMapper">
+
+<select id="selectOne" parameterType="user" resultType="user">
+	SELECT 
+		USERID,
+		USERPWD,
+		USERNAME,
+		TO_CHAR(BIRTH, 'YYYY/MM/DD') BIRTH,
+		PHONE,
+		EMAIL,
+		ORIGINALIMAGE,
+		SAVEDIMAGE,
+		INTRODUCE,
+		BELONG
+	FROM
+		T_USER
+	WHERE
+		USERID = #{userId}
+		<if test="userPwd != null">
+			AND
+				USERPWD = #{userPwd}
+		</if>
+</select>
+
+<insert id="insert" parameterType="user">
+	 INSERT INTO T_USER(
+	 	USERID, USERPWD, USERNAME, BIRTH, PHONE, EMAIL
+	 	<if test="originalImage != null or savedImage != null or introduce != null or belong != null ">
+	 	,ORIGINALIMAGE, SAVEDIMAGE, INTRODUCE, BELONG
+	 	</if>
+	 )VALUES(
+	 	    #{userId},
+            #{userPwd},
+            #{userName},
+            #{birth},
+            #{phone},
+            #{email}
+            <if test="originalImage != null or savedImage != null or introduce != null or belong != null ">
+            ,#{originalImage},
+            #{savedImage},
+            #{introduce},
+            #{belong}
+            </if>
+     )
+</insert> 
+<update id="userUpdate" parameterType="user">
+	UPDATE T_USER
+	SET
+		BIRTH = #{birth},
+		PHONE = #{phone},
+		ORIGINALIMAGE = #{originalImage},
+		SAVEDIMAGE = #{savedImage},
+		INTRODUCE = #{introduce},
+		BELONG = #{belong}
+	WHERE USERID = #{userId}
+</update> 
 </mapper>
+
 
