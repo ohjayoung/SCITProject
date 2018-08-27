@@ -78,9 +78,8 @@
 				</div>
 				
 				<div class="form-group">
-					<input type="hidden" id="phone" name="phone" />
 						<label for="exampleFormControlSelect2">電話番号</label>
-						<select class="form-control" id="phone1" name="phone1">
+						<select class="form-control" id="phone1" name="phone">
 							<option value="+82" selected>Korea +82</option>
 							<option value="+81">Japan +81</option>
 							<option value="+1">USA +1</option>
@@ -91,7 +90,7 @@
 						</select>
 					<br>
 					<div class="wrap-input100  input-group" data-validate = "">
-						<input type="text" id="phone2" name="phone2" placeholder="'ー' なしで入力してください" class="input100">
+						<input type="text" id="phone2" name="phone" placeholder="'ー' なしで入力してください" class="input100">
 						<span class="focus-input100"></span>
 					</div>
 					<span id="phoneHelp" class="form-text">key up 들어가는자리</span>
@@ -208,7 +207,7 @@ $(function(){
     	var userId = $(this).val();
     	if(userId.length < 3||userId.length > 10){
 			$('#userIdHelp').text("IDは３~１０以内です。").css('color','red');
-			return;
+			return false;
 		}
     	$.ajax({
     		method : 'post',
@@ -232,7 +231,7 @@ $(function(){
 		}else{
 			$('#userPwdHelp').text("使えるパスワードです。").css('color','blue');
 			$('#userPwd').addClass('has-success');
-			return;
+			return false;
 		}
     });
    
@@ -248,7 +247,7 @@ $(function(){
    	filesArr.forEach(function(f) {
    		if(!f.type.match("image.*")){
    			alert("확장자는 이미지 확장자만 가능");
-   			return;
+   			return false;
    		}
    		
    		selfile = f;

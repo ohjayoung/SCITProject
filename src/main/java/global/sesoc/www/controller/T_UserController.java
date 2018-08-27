@@ -14,7 +14,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+<<<<<<< HEAD
 import org.springframework.util.FileCopyUtils;
+=======
+import org.springframework.web.bind.annotation.RequestBody;
+>>>>>>> dev
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -72,7 +76,7 @@ public class T_UserController {
 	}
 
 	@RequestMapping(value = "duplicateCheck", method = RequestMethod.POST)
-	public @ResponseBody Integer duplicateCheck(String userId) {
+	public @ResponseBody int duplicateCheck(String userId) {
 		T_User user = new T_User();
 		user.setUserId(userId);
 		if (userId.length() < 3) {
@@ -91,6 +95,7 @@ public class T_UserController {
 		
 		return "redirect:/";
 	}
+<<<<<<< HEAD
 	//내프로필 화면 요청
     @RequestMapping(value="/userDetail", method=RequestMethod.GET)
     public String userDetail(HttpSession session, Model model) {
@@ -172,4 +177,23 @@ public class T_UserController {
 		}
 		return null; 
 	}
+=======
+	
+	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
+	public String userDelete() {
+		return "user/userDelete";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/pwdCheck", method = RequestMethod.POST)
+	public T_User pwdCheck(@RequestBody T_User user, HttpSession session) {
+		String userId = (String) session.getAttribute("loginId");
+		user.setUserId(userId);
+		System.out.println(user);
+		T_User t = repository.pwdCheck(user);
+		return t;
+	}
+	
+	
+>>>>>>> dev
 }
