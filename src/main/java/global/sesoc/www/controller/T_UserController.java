@@ -14,11 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
 import org.springframework.util.FileCopyUtils;
-=======
 import org.springframework.web.bind.annotation.RequestBody;
->>>>>>> dev
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -95,7 +92,6 @@ public class T_UserController {
 		
 		return "redirect:/";
 	}
-<<<<<<< HEAD
 	//내프로필 화면 요청
     @RequestMapping(value="/userDetail", method=RequestMethod.GET)
     public String userDetail(HttpSession session, Model model) {
@@ -177,7 +173,6 @@ public class T_UserController {
 		}
 		return null; 
 	}
-=======
 	
 	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
 	public String userDelete() {
@@ -195,5 +190,4 @@ public class T_UserController {
 	}
 	
 	
->>>>>>> dev
 }

@@ -26,14 +26,12 @@ public class T_UserRepository {
 		
 		return result;
 	}
-<<<<<<< HEAD
 	//프로필 수정
 	public int userUpdate(T_User user) {
 		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
 		int t = mapper.userUpdate(user);
 		return t;
 	}
-=======
 
 	public T_User pwdCheck(T_User user) {
 		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
@@ -42,5 +40,4 @@ public class T_UserRepository {
 		return t;
 	}
 
->>>>>>> dev
 }
