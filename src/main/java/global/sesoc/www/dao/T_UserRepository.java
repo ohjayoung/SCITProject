@@ -23,7 +23,6 @@ public class T_UserRepository {
 		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
 		System.out.println(user);
 		int result = mapper.insert(user);
-		
 		return result;
 	}
 	//프로필 수정
@@ -32,11 +31,16 @@ public class T_UserRepository {
 		int t = mapper.userUpdate(user);
 		return t;
 	}
-
+	//비밀번호 변경
 	public T_User pwdCheck(T_User user) {
 		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
 		T_User t = mapper.selectOne(user);
-		System.out.println(t);
+		return t;
+	}
+	//회원탈퇴
+	public int userDelete(String userId) {
+		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
+		int t = mapper.userDelete(userId);
 		return t;
 	}
 

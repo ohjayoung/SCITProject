@@ -18,8 +18,8 @@
 		T_USER
 	WHERE
 				USERID = #{userId}
-			AND
 		<if test="userPwd != null">
+			AND
 				USERPWD = #{userPwd}
 		</if>
 </select>
@@ -48,14 +48,27 @@
 <update id="userUpdate" parameterType="user">
 	UPDATE T_USER
 	SET
+		<if test="userPwd != null">
+		userPwd = #{userPwd}
+		</if>
+		
+		<if test="userPwd == null">
 		BIRTH = #{birth},
 		PHONE = #{phone},
 		ORIGINALIMAGE = #{originalImage},
 		SAVEDIMAGE = #{savedImage},
 		INTRODUCE = #{introduce},
 		BELONG = #{belong}
+		</if>
+		
 	WHERE USERID = #{userId}
-</update> 
+</update>
+
+<delete id="userDelete" parameterType="String">
+	DELETE FROM T_USER
+	WHERE USERID = #{userId}
+</delete>
+
 </mapper>
 
 

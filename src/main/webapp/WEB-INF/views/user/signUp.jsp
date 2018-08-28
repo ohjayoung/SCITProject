@@ -138,10 +138,6 @@
 <!-- ================================================================================ -->
 <script src="assets/js/core/bootstrap.min.js"></script>
 <!-- ================================================================================ -->
-<script src="assets/js/plugin/chartist/chartist.min.js"></script>
-<!-- ================================================================================ -->
-<script src="assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<!-- ================================================================================ -->
 <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 <!-- ================================================================================ -->
 <script src="assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
@@ -228,10 +224,10 @@ $(function(){
     	if(userPwd.length < 6 || userPwd.length > 10){
     		$('#userPwdHelp').text("パスワードは6~10以内です。").css('color','red');
     		$('#userPwd').addClass('has-error');
+			return false;
 		}else{
 			$('#userPwdHelp').text("使えるパスワードです。").css('color','blue');
 			$('#userPwd').addClass('has-success');
-			return false;
 		}
     });
    

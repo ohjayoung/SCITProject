@@ -22,4 +22,9 @@ public class HomeController {
 	public String main(Locale locale, Model model) {
 		return "main";
 	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index(Locale locale, Model model) {
+		return "index";
+	}
 }
