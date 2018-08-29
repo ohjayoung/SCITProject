@@ -243,31 +243,10 @@
 						</div>
 						</li>
 						<li class="nav-item">
-							<div class="info">
-							<a class="" data-toggle="collapse" href="#fr" aria-expanded="true">
-									<i class="la la-drupal"></i>
-									<span class="user-level">친구</span>
-									<div class= "caretDiv">
-										<span class="caret" style=""></span>
-									</div>
+							<a href="notifications.html">
+								<i class="la la-drupal"></i>
+								<p>친구</p>
 							</a>
-							<div class="clearfix"></div>
-
-							<div class="collapse in" id="fr" aria-expanded="true" style="">
-								<ul class="nav">
-									<li>
-										<a href="#profile">
-											<span class="link-collapse">1</span>
-										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">2</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
 						</li>
 						<li class="nav-item">
 							<a href="notifications.html">
