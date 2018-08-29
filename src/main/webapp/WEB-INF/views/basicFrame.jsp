@@ -28,14 +28,15 @@
 			<nav class="navbar navbar-header navbar-expand-lg navTop">
 				<div class="container-fluid">
 					
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
-						<div class="input-group">
-							<input type="text" placeholder="친구검색" class="form-control">
-							<div class="input-group-append">
+					<form class="navbar-left navbar-form nav-search mr-md-3" id="searchForm" name="searchForm" action="search" method="post">
+						<div class="wrap-input100  input-group" data-validate = "">
+							<input type="text" placeholder="&nbsp; 친구검색" class="form-control input100" name="searchCode" id="searchCode">
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
 								<span class="input-group-text">
-									<i class="la la-search search-icon"></i>
+									<button type="submit" id="searchBtn" name="searchBtn"><i class="la la-search search-icon"></i></button>
 								</span>
-							</div>
+							</span>
 						</div>
 					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
@@ -44,10 +45,10 @@
 								<i class="la la-envelope"></i>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">친구관리</a>
-								<a class="dropdown-item" href="#">메세지보기</a>
+								<a class="dropdown-item" href="friendList">a</a>
+								<a class="dropdown-item" href="#">b</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">닫기</a>
+								<a class="dropdown-item" href="#">close</a>
 							</div>
 						</li>
 						<li class="nav-item dropdown hidden-caret">
@@ -243,7 +244,7 @@
 						</div>
 						</li>
 						<li class="nav-item">
-							<a href="notifications.html">
+							<a href="friendList">
 								<i class="la la-drupal"></i>
 								<p>친구</p>
 							</a>
@@ -285,6 +286,9 @@
 <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 <!--===============================================================================================-->	
 <script src="assets/js/ready.min.js"></script>
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
+<script type="text/javascript">
+
+</script>
 </body>
 </html>

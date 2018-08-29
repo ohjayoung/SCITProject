@@ -8,11 +8,12 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
    <title>회원가입 폼</title>
    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-   <link rel="stylesheet" href="./resources/assets/css/ready.css">
-   <link rel="stylesheet" href="./resources/assets/css/demo.css">
-   <link rel="stylesheet" type="text/css" href="./resources/css/util.css">
-   <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+   <link rel="stylesheet" href="assets/css/ready.css">
+   <link rel="stylesheet" href="assets/css/demo.css">
+   <link rel="stylesheet" type="text/css" href="css/util.css">
+   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 <div class="limiter">
@@ -41,7 +42,8 @@
                   <input type="password" id="userPwd" name="userPwd" placeholder="パスワード 入力してください" class="input100">
                   <span class="focus-input100"></span>
                </div>
-               　　<span id="userPwdHelp" class="form-text"></span><br/>
+                  <span id="userPwdHelp" class="form-text"></span>
+                  <br>
                
                <label for="userPwdCheck">パスワード確認</label>
                <div class="wrap-input100  input-group" data-validate = "">
@@ -57,7 +59,7 @@
                   <input type="text" id="userName" name="userName" placeholder="名前を入力してください" class="input100">
                   <span class="focus-input100"></span>
                </div>
-                   <span id="userNameCheck" class="form-text"></span>
+               <span id="userNameCheck" class="form-text"></span>
             </div>
 
             <div class="form-group">
@@ -78,16 +80,15 @@
             </div>
             
             <div class="form-group">
-               <input type="hidden" id="phone" name="phone" />
                   <label for="exampleFormControlSelect2">電話番号</label>
-                  <select class="form-control" id="phone1" name="phone1">
+                  <select class="form-control" id="phone1" name="phone">
                      <option value="+82" selected>Korea +82</option>
                      <option value="+81">Japan +81</option>
                      <option value="+1">USA +1</option>
                      <option value="+84">Vietnam +84</option>
                      <option value="+86">China +86</option>
                      <option value="+852">Hong Kong +852</option>
-                     <option value="+61">AuuserIdalia +61</option>
+                     <option value="+61">Australia +61</option>
                   </select>
                <br>
                <div class="wrap-input100  input-group" data-validate = "">
@@ -131,27 +132,30 @@
 </div>
 </div>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="assets/js/core/jquery.3.2.1.min.js"></script>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/core/popper.min.js"></script>
+<script src="assets/js/core/popper.min.js"></script>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/plugin/chartist/chartist.min.js"></script>
+<script src="assets/js/core/bootstrap.min.js"></script>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
+<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
+<script src="assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/plugin/chart-circle/circles.min.js"></script>
+<script src="assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
 <!-- ================================================================================ -->
-<script src="./resources/assets/js/ready.min.js"></script>
+<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!-- ================================================================================ -->
+<script src="assets/js/ready.min.js"></script>
 <!-- ================================================================================ -->
 <script type="text/javascript">
+
 var message = "${not empty message ? message : ''}";
 //아이디
 function checkPasswordPattern(str) { 
@@ -319,11 +323,9 @@ $(function(){
        
        if(userPwd.length < 6 || userPwd.length > 10){
           $('#userPwdHelp').text("パスワードは6~10以内です。").css('color','red');
-          $('#userPwd').addClass('has-error');
           return false;
       }else{
-         $('#userPwdHelp').text("確認してください。").css('color','blue');
-         $('#userPwd').addClass('has-success');
+         $('#userPwdHelp').text("");
          return false;
       }
        
@@ -335,11 +337,9 @@ $(function(){
    
          if(pwdCheck!=$('#userPwd').val()){
             $('#userPwdCheck').text("パスワードが違います。確かめてください。").css('color','red');
-            $('#pwdCheck').addClass('has-error');
             return false;
          }else{
             $('#userPwdCheck').text("確認成功").css('color','blue');
-            $('#pwdCheck').addClass('has-success'); 
             return true;
       }
    });

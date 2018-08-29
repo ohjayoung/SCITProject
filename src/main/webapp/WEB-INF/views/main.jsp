@@ -109,7 +109,7 @@
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header ">
-										<h4 class="card-title">내친구리스트</h4>
+										<h4 class="card-title" id="friendList">내친구리스트</h4>
 										<p class="card-category">Users Table</p>
 									</div>
 									<div class="card-body">
