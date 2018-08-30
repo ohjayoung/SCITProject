@@ -20,6 +20,11 @@ public class HomeController {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
-		return "user/main";
+		return "main";
+	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index(Locale locale, Model model) {
+		return "index";
 	}
 }

@@ -29,7 +29,7 @@ body {
     z-index: 1001;
     font-size: 18px;
     font-weight: $font-weight-bold;
-    padding-left: 25px;
+    padding-left: 10px;
     padding-right: 25px;
     z-index: 1001;
     display: inline-block;
@@ -243,4 +243,7 @@ body {
     display: flex;
     align-items: center;
   }
+  
+  .caretDiv {
+ 	padding-left: 80px;
 }
