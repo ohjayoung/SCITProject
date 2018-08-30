@@ -38,7 +38,13 @@
 					<span class="login100-form-title">
 						Member Login
 					</span>
-
+					
+					<!--################# -->
+					<!-- test -->
+					
+					
+					<!--################# -->
+					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
@@ -69,7 +75,8 @@
 							Username / Password?
 						</a>
 					</div>
-
+					<a href="plannerList">plannerList</a><br/>
+					<a href="Calendar">Clendar 이동</a>
 					<div class="text-center p-t-136">
 						<a class="txt2" href="#">
 							Create your Account
@@ -77,6 +84,10 @@
 						</a>
 					</div>
 				</form>
+			
+				<a href="plannerList">plannerList</a>
+				<a href="Calendar">Clendar 이동</a>
+				
 			</div>
 		</div>
 	</div>
