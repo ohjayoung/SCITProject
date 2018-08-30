@@ -18,10 +18,4 @@ public class T_FriendController {
 		return "friend/friendList";
 	}
 	
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String search(String searchCode) {
-		System.out.println(searchCode);
-		return "friend/searchResult";
-	}
-	
 }
