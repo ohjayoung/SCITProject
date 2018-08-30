@@ -30,10 +30,7 @@ public class T_Plist {
 	public void setPlaNum(int plaNum) {
 		this.plaNum = plaNum;
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> 0e0d5fd26e6761a6bc6c7dfda6c1bc3f8d911c57
+
 	public String getUserId() {
 		return userId;
 	}
