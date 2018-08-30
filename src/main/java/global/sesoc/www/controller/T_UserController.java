@@ -14,11 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
 import org.springframework.util.FileCopyUtils;
-=======
 import org.springframework.web.bind.annotation.RequestBody;
->>>>>>> dev
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +27,7 @@ import global.sesoc.www.util.FileService;
 
 @Controller
 public class T_UserController {
+	
 	@Autowired
 	T_UserRepository repository;
 
@@ -88,6 +86,7 @@ public class T_UserController {
 			return 0;
 		}
 	}
+	
 	//로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
@@ -95,7 +94,6 @@ public class T_UserController {
 		
 		return "redirect:/";
 	}
-<<<<<<< HEAD
 	//내프로필 화면 요청
     @RequestMapping(value="/userDetail", method=RequestMethod.GET)
     public String userDetail(HttpSession session, Model model) {
@@ -145,7 +143,7 @@ public class T_UserController {
 			user.setSavedImage(savedImage);	
 		}
   		int result = repository.userUpdate(user);
-  		return "redirect:userDetail";
+  		return "redirect:/";
   	}
   	
   	@RequestMapping(value="/download", method=RequestMethod.GET)
@@ -177,11 +175,15 @@ public class T_UserController {
 		}
 		return null; 
 	}
-=======
-	
+  	
 	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
 	public String userDelete() {
 		return "user/userDelete";
+	}
+	
+	@RequestMapping(value = "pwdUpdate", method = RequestMethod.GET)
+	public String pwdUpdate() {
+		return "user/pwdUpdate";
 	}
 	
 	@ResponseBody
@@ -189,11 +191,32 @@ public class T_UserController {
 	public T_User pwdCheck(@RequestBody T_User user, HttpSession session) {
 		String userId = (String) session.getAttribute("loginId");
 		user.setUserId(userId);
-		System.out.println(user);
 		T_User t = repository.pwdCheck(user);
 		return t;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/pwdUpdate", method = RequestMethod.POST)
+	public int pwdUpdate(@RequestBody T_User user, HttpSession session) {
+		String userId = (String) session.getAttribute("loginId");
+		user.setUserId(userId);
+		int t = repository.userUpdate(user);
+		return t;
+	}
 	
->>>>>>> dev
+	@ResponseBody
+	@RequestMapping(value = "/userDelete", method = RequestMethod.POST)
+	public String userDelete(HttpSession session) {
+		String userId = (String) session.getAttribute("loginId");
+		String result = "";
+		int r = repository.userDelete(userId);
+		if(r == 1) {
+			result = "1";
+		}else {
+			result = "0";
+		}
+		return result;
+	}
+	
+	
 }

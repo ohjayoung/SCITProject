@@ -28,14 +28,15 @@
 			<nav class="navbar navbar-header navbar-expand-lg navTop">
 				<div class="container-fluid">
 					
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
-						<div class="input-group">
-							<input type="text" placeholder="친구검색" class="form-control">
-							<div class="input-group-append">
+					<form class="navbar-left navbar-form nav-search mr-md-3" id="searchForm" name="searchForm" action="search" method="post">
+						<div class="wrap-input100  input-group" data-validate = "">
+							<input type="text" placeholder="&nbsp; 친구검색" class="form-control input100" name="searchCode" id="searchCode">
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
 								<span class="input-group-text">
-									<i class="la la-search search-icon"></i>
+									<button type="submit" id="searchBtn" name="searchBtn"><i class="la la-search search-icon"></i></button>
 								</span>
-							</div>
+							</span>
 						</div>
 					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
@@ -44,10 +45,10 @@
 								<i class="la la-envelope"></i>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">친구관리</a>
-								<a class="dropdown-item" href="#">메세지보기</a>
+								<a class="dropdown-item" href="friendList">a</a>
+								<a class="dropdown-item" href="#">b</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">닫기</a>
+								<a class="dropdown-item" href="#">close</a>
 							</div>
 						</li>
 						<li class="nav-item dropdown hidden-caret">
@@ -115,16 +116,11 @@
 											<p class="text-muted">${sessionScope.email }</p>
 											<a href="userDetail" class="btn btn-rounded btn-danger btn-sm">내 프로필 보기</a></div>
 										</div>
-									</li>
-									
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="ti-user"></i> 친구 리스트</a>
-									<a class="dropdown-item" href="#"></i> 그룹 리스트</a>
-									<a class="dropdown-item" href="#"><i class="ti-email"></i> 메시지 리스트</a>
-									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="pwdUpdate"><i class="ti-user"></i>비밀번호 변경</a>
+									<a class="dropdown-item" href="userDelete"><i class="ti-user"></i>회원탈퇴</a>
 									<a class="dropdown-item" href="logout"><i class="fa fa-power-off"></i>로그아웃</a>
-									
-									
+									</li>
 								</ul>
 								<!-- /.dropdown-user -->
 							</li>
@@ -140,7 +136,7 @@
 							<img src="download?${user.originalImage }">
 						</div>
 						<div class="info">
-							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+							<a class="" data-toggle="collapse" href="#navcoll" aria-expanded="true">
 								<span>
 									${sessionScope.loginName }
 									<span class="user-level">${sessionScope.loginId }</span>
@@ -149,7 +145,7 @@
 							</a>
 							<div class="clearfix"></div>
 
-							<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
+							<div class="collapse in" id="navcoll" aria-expanded="true" style="">
 								<ul class="nav">
 									<li>
 										<a href="userDetail">
@@ -248,31 +244,10 @@
 						</div>
 						</li>
 						<li class="nav-item">
-							<div class="info">
-							<a class="" data-toggle="collapse" href="#fr" aria-expanded="true">
-									<i class="la la-drupal"></i>
-									<span class="user-level">친구</span>
-									<div class= "caretDiv">
-										<span class="caret" style=""></span>
-									</div>
+							<a href="friendList">
+								<i class="la la-drupal"></i>
+								<p>친구</p>
 							</a>
-							<div class="clearfix"></div>
-
-							<div class="collapse in" id="fr" aria-expanded="true" style="">
-								<ul class="nav">
-									<li>
-										<a href="#profile">
-											<span class="link-collapse">1</span>
-										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">2</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
 						</li>
 						<li class="nav-item">
 							<a href="notifications.html">
@@ -298,10 +273,6 @@
 <!--===============================================================================================-->	
 <script src="assets/js/core/bootstrap.min.js"></script>
 <!--===============================================================================================-->	
- <script src="assets/js/plugin/chartist/chartist.min.js"></script>
-<!--===============================================================================================-->	
-<script src="assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<!--===============================================================================================-->	
 <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 <!--===============================================================================================-->	
 <script src="assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
@@ -315,9 +286,9 @@
 <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 <!--===============================================================================================-->	
 <script src="assets/js/ready.min.js"></script>
-<!--===============================================================================================-->	
-<script src="assets/js/demo.js"></script>
-<!--===============================================================================================-->	
-<script src="assets/sass/ready/components/_charts.scss"></script>
+<!--===============================================================================================-->
+<script type="text/javascript">
+
+</script>
 </body>
 </html>
