@@ -1,6 +1,7 @@
 package global.sesoc.www.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import global.sesoc.www.dto.T_Schedule;
 
@@ -14,4 +15,5 @@ public interface T_ScheduleMapper {
 	public int deleteSchedule(int schNum);
 	public List<T_Schedule> selectUserAllSchedule(String userId);
 	public List<T_Schedule> selectUserPlannerSchedule(T_Schedule schedule);
+	public List<T_Schedule> selectMixSchedule(Map<String,String> map);
 }

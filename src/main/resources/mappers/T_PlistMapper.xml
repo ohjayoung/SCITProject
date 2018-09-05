@@ -5,10 +5,16 @@
 	INSERT INTO T_PLIST(
     PLNUM,
     PLANUM,
+    <if test="groNum!=0">
+    GRONUM,
+    </if>
     USERID
     )VALUES(
     T_PLIST_SEQ.NEXTVAL,
     #{plaNum},
+    <if test="groNum!=0">
+    #{groNum},
+    </if>
     #{userId}
     )
 	</insert>

@@ -38,15 +38,26 @@
 
 	////////////////////////////   
 	   
-	 
+	    
 			   
 			
 
 	       // $(this).removeClass();   //bgi 체인지
-	   $(".schedule_div").on('drop',function(e){
-		   alert('zz');
-	   });
-	   
+	   /* $(".schedule_div").droppable('#garbage_dump',function(){
+		  alert('aa'); 
+	   }); */
+	   $("#garbage_dump").droppable({
+		    // the activeClass option specifies the class to add to
+		    // the droppable when it is a possible candidate for
+		    // a draggable element
+		   activeClass: "active",
+
+		    // here we specify the function to be run when the drop event
+		    // is triggered.
+		    drop: function (event, ui) {
+		      alert($(this).attr('id'));
+		    }
+		  });
 	});
 
  
@@ -61,7 +72,7 @@
       <c:forEach var="schedule" items="${schdulelist}">
       <tr>
          <td>
-            <div class="schedule_div" draggable="true"  >
+            <div class="schedule_div" draggable="true"  />
                <input type="button" class="title" data-rno="${schedule.schNum}" value="${schedule.schTitle}" />
                <input type="hidden" class="content" value="${schedule.schContent}">
                

@@ -2,5 +2,23 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="global.sesoc.www.dao.T_GRequestMapper">
-
+	<insert id="insertGrequest" parameterType="grequest">
+	INSERT INTO T_GREQUEST(
+    GREQNUM,
+	GREQUESTER,
+	GREQACCEPTER,
+	GRONUM
+    )VALUES(
+    T_REQUEST_SEQ.NEXTVAL,
+    #{gRequester},
+    #{greqAccepter},
+    #{groNum}
+    )
+	</insert>
+	<select id="selectGrequest" parameterType="grequest" resultType="grequest">
+	SELECT *FROM T_GREQUEST WHERE GRONUM=#{groNum}
+	</select>
+	<select id="groupAccept" resultType="grequest" parameterType="string">
+	SELECT *FROM T_GREQUEST WHERE GREQACCEPTER=#{greqAccepter} AND ISGREQACCEPTED=0
+	</select>
 </mapper>

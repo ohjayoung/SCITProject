@@ -40,7 +40,7 @@
 						TICKS TICKS <br>
 						<span class="txt1">スケジュール SNS ウェブサイト</span>
 					</span>
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/osh.jsp
+
 					
 					<!--################# -->
 					<!-- test -->
@@ -50,11 +50,11 @@
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email" placeholder="Email">
-=======
+
 
 					<div class="wrap-input100 validate-input" data-validate = "">
 						<input class="input100" id="userId" type="text" name="userId" placeholder="ID記入">
->>>>>>> 0e0d5fd26e6761a6bc6c7dfda6c1bc3f8d911c57:src/main/webapp/WEB-INF/views/index.jsp
+
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -76,11 +76,10 @@
 							パスワードを忘れた場合
 						</a>
 					</div>
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/osh.jsp
+
 					<a href="plannerList">plannerList</a><br/>
-					<a href="Calendar">Clendar 이동</a>
-=======
->>>>>>> 0e0d5fd26e6761a6bc6c7dfda6c1bc3f8d911c57:src/main/webapp/WEB-INF/views/index.jsp
+					<a href="Calendar">Clendar 이동</a><br/>
+					<a href="insertGroup">그룹 만들기</a>
 					<div class="text-center p-t-136">
 						<span class="txt1">
 							アカウントをお待ちでないですか？　
