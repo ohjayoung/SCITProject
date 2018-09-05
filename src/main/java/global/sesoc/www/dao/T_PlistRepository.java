@@ -11,6 +11,7 @@ public class T_PlistRepository {
 	@Autowired
 	SqlSession session;
 	public int insertPlist(T_Plist plist) {
+		System.out.println(plist);
 		T_PlistMapper mapper=session.getMapper(T_PlistMapper.class);
 		int result=mapper.insertPlist(plist);
 		return result;
