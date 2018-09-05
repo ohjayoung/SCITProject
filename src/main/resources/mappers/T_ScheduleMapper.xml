@@ -74,7 +74,7 @@
             schedule.CATEGORY CATEGORY
    		 FROM T_SCHEDULE schedule,T_PLIST plist 
   		  where schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
-   		 order by PLANUM	
+   		 order by PLANUM
 	</select>
 	
 	<select id="selectUserPlannerSchedule" resultType="schedule" parameterType="schedule">
@@ -93,6 +93,23 @@
     where schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
         AND schedule.PLANUM=#{plaNum}
     order by PLANUM
+	</select>
+	<select id="selectMixSchedule" parameterType="map" resultType="schedule">
+	   SELECT schedule.SCHNUM SCHNUM,
+            schedule.SCHTITLE SCHTITLE,
+            schedule.SCHCONTENT SCHCONTENT,
+            TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
+            TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
+            TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
+            schedule.IMPORTANCE IMPORTANCE,
+            schedule.CHECKED CHECKED,
+            schedule.SHAREABLE SHAREABLE,
+            schedule.PLANUM PLANUM,
+            schedule.CATEGORY CATERGORY
+    FROM T_SCHEDULE schedule,T_PLIST plist 
+    where schedule.PLANUM=plist.PLANUM AND plist.USERID in(#{loginId},#{friendId})
+    order by PLANUM
+	
 	</select>
 </mapper>
 

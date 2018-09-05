@@ -16,6 +16,30 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
+<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.groupManual').on('click',function(){
+		var isAccepted='';
+		isAccepted +='<a href="groupApply">';
+		isAccepted +='<span class="link-collapse">## 그룹 신청이 왔습니다!!!##</span>';
+		isAccepted +='</a>';
+		 $.ajax({
+			method:'post',
+			url:'isAccepted',
+			contentType:'application/json;charset=json',
+			success:function(r){
+				if(r==1){
+					$("#a").html(isAccepted);
+				}
+			}
+		}); 
+	});
+	////
+	
+	
+});
+</script>
 <body>
 		<input type="hidden" name="loginId" id="loginId" value="${sessionScope.loginId}">
 		<div class="main-header">
@@ -163,13 +187,13 @@
 							<div class="collapse in" id="pp" aria-expanded="true" style="">
 								<ul class="nav">
 									<li>
-										<a href="#profile">
-											<span class="link-collapse">1</span>
+										<a href="plannerList">
+											<span class="link-collapse">1. Schedule</span>
 										</a>
 									</li>
 									<li>
-										<a href="#edit">
-											<span class="link-collapse">2</span>
+										<a href="Calendar">
+											<span class="link-collapse">2. Calendar</span>
 										</a>
 									</li>
 								</ul>
@@ -205,11 +229,11 @@
 						</li>
 						<li class="nav-item">
 							<div class="info">
-							<a class="" data-toggle="collapse" href="#gr" aria-expanded="true">
+							<a class="groupManual" data-toggle="collapse" href="#gr" aria-expanded="true">
 									<i class="la la-group"></i>
 									<span class="user-level">그룹</span>
 									<div class= "caretDiv">
-										<span class="caret" style=""></span>
+<!-- 										<span class="caret" style=""></span> -->
 									</div>
 							</a>
 							<div class="clearfix"></div>
@@ -217,15 +241,21 @@
 							<div class="collapse in" id="gr" aria-expanded="true" style="">
 								<ul class="nav">
 									<li>
-										<a href="#profile">
-											<span class="link-collapse">1</span>
+										<a href="insertGroup">
+											<span class="link-collapse">1. insertGroup</span>
 										</a>
 									</li>
 									<li>
-										<a href="#edit">
-											<span class="link-collapse">2</span>
+										<a href="groupList">
+											<span class="link-collapse">2. groupList</span>
 										</a>
 									</li>
+									<li >
+										<a href="myGroupList">
+											<span class="link-collapse">3. myGroup</span>
+										</a>
+									</li>
+										<li id="a"><!-- ##group 신청## --></li>
 								</ul>
 							</div>
 						</div>

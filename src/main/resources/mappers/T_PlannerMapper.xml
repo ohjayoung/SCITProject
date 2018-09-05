@@ -6,7 +6,7 @@
     PLANUM,
     PLATITLE
     )VALUES(
-    T_USER_SEQ.NEXTVAL,
+    T_PLANNER_SEQ.NEXTVAL,
     #{plaTitle}
     )
 	</insert>

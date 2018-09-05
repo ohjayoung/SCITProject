@@ -16,6 +16,7 @@ import global.sesoc.www.dao.T_PlannerRepository;
 import global.sesoc.www.dao.T_ScheduleRepository;
 import global.sesoc.www.dto.T_Planner;
 import global.sesoc.www.dto.T_Schedule;
+import global.sesoc.www.dto.T_User;
 
 @Controller
 public class ScheduleController {
@@ -80,8 +81,16 @@ public class ScheduleController {
 	@ResponseBody
 	@RequestMapping(value="/selectUserAllSchedule" , method=RequestMethod.POST)
 	public List<T_Schedule> selectUserAllSchedule(HttpSession session){
+	
 		List<T_Schedule> schduleList=T_ScheduleRepository.selectUserAllSchedule("aaa");
-		System.out.println(schduleList);
+		return schduleList;
+		
+	}
+	@ResponseBody
+	@RequestMapping(value="/selectFriendAllSchedule" , method=RequestMethod.POST)
+	public List<T_Schedule> selectFriendAllSchedule(@RequestBody T_User user){
+		
+		List<T_Schedule> schduleList=T_ScheduleRepository.selectUserAllSchedule(user.getUserId());
 		return schduleList;
 	}
 	@RequestMapping(value="/Calendar", method=RequestMethod.GET)
@@ -90,5 +99,21 @@ public class ScheduleController {
 		model.addAttribute("schedule",list);
 		return "Schedule/Calendar";
 	}
+	@ResponseBody
+	@RequestMapping(value="/deleteSchedule", method=RequestMethod.POST)
+	public String deleteSchedule(@RequestBody T_Schedule schedule) {
+		int result=T_ScheduleRepository.deleteSchedule(schedule.getSchNum());
+		return "삭제했습니다.";
+	}
+	@ResponseBody
+	@RequestMapping(value="/selectMixSchedule", method=RequestMethod.POST)
+	public List<T_Schedule> selectMixSchedule(@RequestBody String friendId){
+		friendId="osh";//친구 id
+
+		List<T_Schedule> list=T_ScheduleRepository.selectMixSchedule("aaa", friendId);
+		return list;
+		
+	}
 }
+
 
