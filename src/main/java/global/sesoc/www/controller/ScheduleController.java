@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import global.sesoc.www.dao.T_PlannerRepository;
 import global.sesoc.www.dao.T_ScheduleRepository;
-import global.sesoc.www.dto.T_Planner;
 import global.sesoc.www.dto.T_Schedule;
 import global.sesoc.www.dto.T_User;
 

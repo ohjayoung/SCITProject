@@ -26,8 +26,6 @@ public class T_Plist {
 		this.plaNum = plaNum;
 	}
 
-<<<<<<< HEAD
-=======
 	public int getGroNum() {
 		return groNum;
 	}
@@ -36,7 +34,6 @@ public class T_Plist {
 		this.groNum = groNum;
 	}
 
->>>>>>> feature
 	public String getUserId() {
 		return userId;
 	}
