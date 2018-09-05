@@ -91,8 +91,8 @@ $(function(){
 											<div class="notif-content">
 												<span class="time">오해성 님의 친구 요청</span>
 												<div id="btnDiv">
-														<input type="button" id="acceptBtn" class="btn btn-success" value="수락">
-														<button class="btn btn-danger" id="refuseBtn">거절</button>
+														<input type="button" id="successBtn" class="btn btn-success" value="수락">
+														<button class="btn btn-danger" id="dangerBtn">거절</button>
 												</div>
 													<%-- <input type="hidden" class="accepter" value="${list.userId}"> --%>
 											</div>
@@ -104,9 +104,8 @@ $(function(){
 											<div class="notif-content">
 												<span class="time">서봉균 님의 친구 요청</span>
 												<div id="btnDiv">
-														<button class="btn btn-success" id="acceptBtn">수락</button>
-														<!-- <input type="button" id="acceptBtn" class="btn btn-success" value="수락"> -->
-														<button class="btn btn-danger" id="refuseBtn">거절</button>
+														<button class="btn btn-success" id="successBtn">수락</button>
+														<button class="btn btn-danger" id="dangerBtn">거절</button>
 												</div>
 													<%-- <input type="hidden" class="accepter" value="${list.userId}"> --%>
 											</div>
@@ -324,7 +323,7 @@ $(function(){
 	}
 });
 
-$(document).on("click", "#acceptBtn", function(){
+$(document).on("click", "#successBtn", function(){
 	if(!confirm("수락하시겠습니까?")){
 		return false;
 	}else{
@@ -356,7 +355,7 @@ $(document).on("click", "#acceptBtn", function(){
 	}
 	});
 
-$(document).on("click", "#refuseBtn", function(){
+$(document).on("click", "#dangerBtn", function(){
 	if(!confirm("삭제하시겠습니까?")){
 		return false;
 	}else{
