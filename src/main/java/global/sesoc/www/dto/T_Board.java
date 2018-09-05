@@ -11,7 +11,6 @@ public class T_Board {
 	private String savedFile;
 	public T_Board() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getBoaNum() {
 		return boaNum;

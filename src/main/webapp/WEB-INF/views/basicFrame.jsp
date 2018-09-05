@@ -17,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
+		<input type="hidden" name="loginId" id="loginId" value="${sessionScope.loginId}">
 		<div class="main-header">
 			<div class="logo-header logoStyle">
 				<a href="main"><img alt="mainlogo" src="images/mainlogo.png"></a>
@@ -28,13 +29,13 @@
 			<nav class="navbar navbar-header navbar-expand-lg navTop">
 				<div class="container-fluid">
 					
-					<form class="navbar-left navbar-form nav-search mr-md-3" id="searchForm" name="searchForm" action="search" method="post">
+					<form class="navbar-left navbar-form nav-search mr-md-3" id="searchForm" name="searchForm" action="usersearch" method="post">
 						<div class="wrap-input100  input-group" data-validate = "">
 							<input type="text" placeholder="&nbsp; 유저검색" class="form-control input100" name="userName" id="userName">
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
 								<span class="input-group-text">
-									<button type="submit" id="searchBtn" name="searchBtn"><i class="la la-search search-icon"></i></button>
+									<button id="searchBtn" name="searchBtn"><i class="la la-search search-icon"></i></button>
 								</span>
 							</span>
 						</div>
@@ -287,8 +288,18 @@
 <!--===============================================================================================-->	
 <script src="assets/js/ready.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript">
-
+<script>
+$(function(){
+	$('#searchBtn').on("click",function(){
+		var word = $('#userName').val();
+		var userId = $('#loginId').val();
+		var userName = $('#loginName').val();
+		if(word == userId){
+			alert('자신의 ID는 검색할 수 없습니다.');
+			return false;
+		}
+	})
+});
 </script>
 </body>
 </html>

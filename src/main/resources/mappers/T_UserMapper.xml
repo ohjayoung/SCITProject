@@ -76,7 +76,14 @@
 
 <select id="searchName" parameterType="user" resultType="user">
 	SELECT * FROM T_USER
-	WHERE USERNAME = #{userName}
+	WHERE
+		<if test="userName != null">
+			USERNAME = #{userName}
+		</if>
+		<if test="userId != null">
+			USERID = #{userId}		
+		</if>
+		
 </select>
 
 </mapper>

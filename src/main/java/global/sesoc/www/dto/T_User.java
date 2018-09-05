@@ -12,6 +12,7 @@ public class T_User {
 	private String introduce;
 	private String belong;
 	
+	
 	public T_User() {
 		// TODO Auto-generated constructor stub
 	}

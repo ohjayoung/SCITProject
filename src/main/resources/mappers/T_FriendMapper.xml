@@ -2,5 +2,29 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="global.sesoc.www.dao.T_FriendMapper">
-
+	<insert id="friInsert" parameterType="friend">
+		INSERT INTO T_FRIEND(
+		FRINUM, FRIREQUESTER, FRIACCEPTER
+		)VALUES(
+		T_FRIEND_SEQ.NEXTVAL, #{friRequester}, #{friAccepter}
+		)
+	</insert>
+	
+	<select id="friCheck" parameterType="friend" resultType="friend">
+		SELECT * FROM T_FRIEND
+		WHERE 
+		FRIREQUESTER = #{friRequester}
+		OR FRIACCEPTER = #{friAccepter}
+	</select>
+	
+	<update id="friUpdate" parameterType="friend">
+		UPDATE T_FRIEND
+		SET
+			ISACCEPTED = '1'
+		WHERE FRIREQUESTER = #{friRequester} AND FRIACCEPTER = #{friAccepter}
+	</update>
+	
+	<delete id="friDelete" parameterType="friend">
+		DELETE FROM T_FRIEND WHERE FRIREQUESTER = #{friRequester} AND FRIACCEPTER = #{friAccepter}
+	</delete>
 </mapper>

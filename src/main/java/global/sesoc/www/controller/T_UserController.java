@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import global.sesoc.www.dao.T_UserRepository;
+import global.sesoc.www.dto.T_Friend;
 import global.sesoc.www.dto.T_User;
 import global.sesoc.www.util.FileService;
 
@@ -46,6 +49,7 @@ public class T_UserController {
 		if (t != null) {
 			session.setAttribute("loginId", t.getUserId());
 			session.setAttribute("loginName", t.getUserId());
+			model.addAttribute("user", t);
 		} else {
 			model.addAttribute("islogined", "1");
 			return "index";
@@ -143,7 +147,7 @@ public class T_UserController {
 			user.setOriginalImage(originalImage);
 			user.setSavedImage(savedImage);	
 		}
-  		int result = repository.userUpdate(user);
+  		repository.userUpdate(user);
   		return "redirect:/";
   	}
   	
@@ -152,7 +156,6 @@ public class T_UserController {
   		String userId = (String) session.getAttribute("loginId");
   		t.setUserId(userId);
   		T_User user = repository.selectOne(t);
-		
 		String originalImage = user.getOriginalImage();
 		String fullPath = uploadPath + "/" + user.getSavedImage();
 		try {
@@ -176,6 +179,7 @@ public class T_UserController {
 		}
 		return null; 
 	}
+  	
   	
 	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
 	public String userDelete() {
@@ -219,13 +223,30 @@ public class T_UserController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String search(String userName, Model model) {
+	@RequestMapping(value = "/usersearch", method = RequestMethod.POST)
+	public String usersearch(String userName, Model model, HttpSession session, T_User user) {
+		String loginId = (String) session.getAttribute("loginId");
+		String loginName = (String) session.getAttribute("loginName");
+		
 		System.out.println(userName);
-		List<T_User> userList = repository.searchName(userName);
-		System.out.println(userList);
+		user.setUserName(userName);
+		List<T_User> userList = repository.searchName(user);
+		
+		if(userList.size() == 0) {
+			user.setUserName(null);
+			String userId = userName;
+			user.setUserId(userId);
+			userList = repository.searchName(user);
+		}
+		
+		for (int i = 0; i < userList.size(); i++) {
+			if(userList.get(i).getUserId().equals(loginId) || userList.get(i).getUserName().equals(loginName)){		// 자기이름검색 불가
+				userList.remove(i);
+			}
+		}
 		model.addAttribute("searchWord", userName);
-		model.addAttribute("userList", userList);
+		model.addAttribute("list", userList);
 		return "friend/searchResult";
 	}
+	
 }
