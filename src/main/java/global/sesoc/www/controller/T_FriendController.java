@@ -77,7 +77,6 @@ public class T_FriendController {
 				friList.add(user);
 			}
 		}
-		System.out.println("requestList입니다 : " + requestList);
 		model.addAttribute("requestList", requestList);
 		model.addAttribute("friList", friList);
 

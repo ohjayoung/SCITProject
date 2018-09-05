@@ -44,61 +44,47 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-envelope"></i>
+								<span class="notification">!</span>		<!-- 새로운 메세지가 있으면 ! 표시-->
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="friendList">a</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">	<!-- 알림 구현이 끝나면 메세지도 만들기 메세지방보여주기, c:if 새로운 레코드가 추가되면 알려주기 -->
+								<a class="dropdown-item" href="friendList">메세지리스트</a>
 								<a class="dropdown-item" href="#">b</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">close</a>
 							</div>
 						</li>
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-bell"></i>
-								<span class="notification">n</span>
+								<span class="notification">!</span>		<!-- 새로운 요청이 있으면 ! 표시 -->
 							</a>
 							<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
-								<li>
+								<li id="reqSignal">
 									<div class="dropdown-title">현재 n개의 알림이 있습니다 !</div>
 								</li>
 								<li>
 									<div class="notif-center">
-										<a href="#">
+										<a href="friendList">
 											<div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
 											<div class="notif-content">
-												<span class="block">
-													오자영 님의 친구 요청
-												</span>
-												<span class="time">5 minutes ago</span> 
+												<span class="time">오해성 님의 친구 요청</span>
+												<div id="btnDiv">
+														<input type="button" id="acceptBtn" class="btn btn-success" value="수락">
+														<button class="btn btn-danger" id="refuseBtn">거절</button>
+												</div>
+													<%-- <input type="hidden" class="accepter" value="${list.userId}"> --%>
 											</div>
 										</a>
-										<a href="#">
-											<div class="notif-icon notif-success"> <i class="la la-comment"></i> </div>
+									</div>
+									<div class="notif-center">
+										<a href="friendList">
+											<div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
 											<div class="notif-content">
-												<span class="block">
-													서봉균 님이 그룹초대를 하였습니다.
-												</span>
-												<span class="time">12 minutes ago</span> 
-											</div>
-										</a>
-										<a href="#">
-											<div class="notif-img"> 
-												<img src="assets/img/profile2.jpg" alt="Img Profile">
-											</div>
-											<div class="notif-content">
-												<span class="block">
-													오승현 님이 메세지를 보냈습니다.
-												</span>
-												<span class="time">12 minutes ago</span> 
-											</div>
-										</a>
-										<a href="#">
-											<div class="notif-icon notif-danger"> <i class="la la-heart"></i> </div>
-											<div class="notif-content">
-												<span class="block">
-													오해성님이 공유다이어리 요청을 하였습니다.
-												</span>
-												<span class="time">17 minutes ago</span> 
+												<span class="time">서봉균 님의 친구 요청</span>
+												<div id="btnDiv">
+														<button class="btn btn-success" id="acceptBtn">수락</button>
+														<!-- <input type="button" id="acceptBtn" class="btn btn-success" value="수락"> -->
+														<button class="btn btn-danger" id="refuseBtn">거절</button>
+												</div>
+													<%-- <input type="hidden" class="accepter" value="${list.userId}"> --%>
 											</div>
 										</a>
 									</div>
@@ -290,6 +276,9 @@
 <!--===============================================================================================-->
 <script>
 $(function(){
+	
+	requestNotify();
+	
 	$('#searchBtn').on("click",function(){
 		var word = $('#userName').val();
 		var userId = $('#loginId').val();
@@ -299,7 +288,75 @@ $(function(){
 			return false;
 		}
 	})
+	
+	function requestNotify(){		//요청뿌려주기
+		console.log('requestNotify');
+	}
 });
+
+$(document).on("click", "#acceptBtn", function(){
+	if(!confirm("수락하시겠습니까?")){
+		return false;
+	}else{
+		var friRequester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"friRequester" : friRequester}
+		
+		console.log($(this).parent().parent().parent().parent());
+		$(this).parent().parent().parent().parent().remove();
+		
+		if($('.notif-center').length == 0){
+			
+			$('#reqSignal').parent().remove();
+		}
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'friAccept'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("친구등록이 완료되었습니다.");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
+	});
+
+$(document).on("click", "#refuseBtn", function(){
+	if(!confirm("삭제하시겠습니까?")){
+		return false;
+	}else{
+		var friRequester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"friRequester" : friRequester}
+		
+		console.log($(this).parent().parent().parent().parent());
+		$(this).parent().parent().parent().parent().remove();
+		
+		if($('.notif-center').length == 0){
+			$('#reqSignal').parent().remove();
+		}
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'friDelete'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("완료되었습니다.");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
+	});
+
 </script>
 </body>
 </html>

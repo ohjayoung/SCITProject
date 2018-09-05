@@ -127,7 +127,7 @@ if(!confirm("수락하시겠습니까?")){
 	var friRequester = $(this).parent().parent().children('.accepter').val();
 	var sendData = {"friRequester" : friRequester}
 	console.log($(this).parent().parent().parent());
-	$(this).parent().parent().parent().fadeOut(1000);
+	$(this).parent().parent().parent().fadeOut(1500);
 	
 	$.ajax({
 		method : 'post'
@@ -154,7 +154,7 @@ if(!confirm("삭제하시겠습니까?")){
 	var sendData = {"friRequester" : friRequester}
 	
 	console.log($(this).parent().parent().parent());
-	$(this).parent().parent().parent().fadeOut(1000);
+	$(this).parent().parent().parent().fadeOut(1500);
 	
 	$.ajax({
 		method : 'post'
