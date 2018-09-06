@@ -2098,7 +2098,7 @@ body {
   box-shadow: 6px 1px 20px rgba(69, 65, 78, 0.1);
 }
 .sidebar .user {
-  padding-top: 12.5px;
+  padding-top: 35px;
   padding-left: 25px;
   padding-right: 25px;
   padding-bottom: 12.5px;
@@ -6698,5 +6698,20 @@ body {
  
  .img_wrap img{
      max-width: 100%;
+ }
+
+ /* nav search ======================================================== */
+ #searchForm {
+	padding-top: 10px;
+}
+
+ /* friend ======================================================== */
+ #buddyIcon {
+ 	font-size: 33px;
+ }
+ 
+  #searchWord{
+ 	font-size: 20px;
+ 	color: red;
  }
 /*# sourceMappingURL=ready.css.map */

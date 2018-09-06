@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.www.dao.T_PlistMapper">
-
+	<insert id="insertPlist" parameterType="plist">
+	INSERT INTO T_PLIST(
+    PLNUM,
+    PLANUM,
+    <if test="groNum!=0">
+    GRONUM,
+    </if>
+    USERID
+    )VALUES(
+    T_PLIST_SEQ.NEXTVAL,
+    #{plaNum},
+    <if test="groNum!=0">
+    #{groNum},
+    </if>
+    #{userId}
+    )
+	</insert>
+	<delete id="deletePlanner_Plist" parameterType="int">
+	DELETE T_PLIST WHERE PLANUM=#{plaNum}
+	</delete>
 </mapper>
 

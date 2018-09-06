@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.www.dao.T_ScheduleMapper">
+
 <select id="selectCategory" parameterType="schedule" resultType="map">
 	SELECT 
 		schedule.SCHNUM SCHNUM,
@@ -49,5 +50,116 @@
 	FROM T_SCHEDULE schedule,T_PLIST plist
 	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId} AND schedule.CHECKED = 0
 </select>
+
+<insert id="insertSchedule" parameterType="schedule">
+	INSERT INTO T_SCHEDULE(
+    SCHNUM,
+    SCHTITLE,
+    SCHCONTENT,
+    SCHSTARTDATE,
+    SCHENDDATE,
+    IMPORTANCE,
+    <if test="SHAREABLE=!null">
+    SHAREABLE,
+    </if>
+    PLANUM,
+	CATEGORY
+    )VALUES(
+    T_SCHEDULE_SEQ.NEXTVAL,
+    #{schTitle},
+    #{schContent},
+    #{schStartdate},
+    #{schEnddate},
+    #{importance},
+    <if test="shareable!=null">
+    #{shareable},
+    </if>
+    #{plaNum},
+    #{category}
+    )
+</insert>
+	
+	<select id="selectUserSchedule" parameterType="string" resultType="schedule">
+	SELECT *FROM T_SCHEDULE
+    WHERE PLANUM=
+    (SELECT PLANUM FROM T_PLIST WHERE USERID=#{userId})
+	</select>
+	<select id="selectOneUserSchedule" parameterType="schedule" resultType="schedule">
+	SELECT *FROM T_SCHEDULE WHERE SCHNUM=#{schNum}
+	</select>
+	<select id="selectPlannerSchedule" parameterType="int" resultType="schedule">
+	 select *from T_SCHEDULE WHERE PLANUM=#{plaNum}
+	</select>
+	
+	<update id="updateSchedule" parameterType="schedule">
+	UPDATE T_SCHEDULE
+    SET 
+    SCHTITLE=#{schTitle},
+    SCHCONTENT=#{schContent},
+    SCHSTARTDATE=#{schStartdate},
+    SCHENDDATE=#{schEnddate},
+    IMPORTANCE=#{importance},
+    SHAREABLE=#{shareable},
+    CATEGORY=#{category}
+    WHERE 
+    SCHNUM=#{schNum}
+	</update>
+	<delete id="deletePlanner_Schedule" parameterType="int">
+	DELETE T_SCHEDULE WHERE PLANUM=#{plaNum}
+	</delete>
+	<delete id="deleteSchedule" parameterType="int">
+	DELETE T_SCHEDULE WHERE SCHNUM=#{schNum}
+	</delete>
+	<select id="selectUserAllSchedule" resultType="schedule" parameterType="string">
+	    SELECT schedule.SCHNUM SCHNUM,
+            schedule.SCHTITLE SCHTITLE,
+            schedule.SCHCONTENT SCHCONTENT,
+            TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
+            TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
+            TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
+            schedule.IMPORTANCE IMPORTANCE,
+            schedule.CHECKED CHECKED,
+            schedule.SHAREABLE SHAREABLE,
+            schedule.PLANUM PLANUM,
+            schedule.CATEGORY CATEGORY
+   		 FROM T_SCHEDULE schedule,T_PLIST plist 
+  		  where schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
+   		 order by PLANUM
+	</select>
+	
+	<select id="selectUserPlannerSchedule" resultType="schedule" parameterType="schedule">
+	  SELECT schedule.SCHNUM SCHNUM,
+            schedule.SCHTITLE SCHTITLE,
+            schedule.SCHCONTENT SCHCONTENT,
+            TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
+            TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
+            TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
+            schedule.IMPORTANCE IMPORTANCE,
+            schedule.CHECKED CHECKED,
+            schedule.SHAREABLE SHAREABLE,
+            schedule.PLANUM PLANUM,
+            schedule.CATEGORY CATEGORY
+    FROM T_SCHEDULE schedule,T_PLIST plist 
+    where schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
+        AND schedule.PLANUM=#{plaNum}
+    order by PLANUM
+	</select>
+	<select id="selectMixSchedule" parameterType="map" resultType="schedule">
+	   SELECT schedule.SCHNUM SCHNUM,
+            schedule.SCHTITLE SCHTITLE,
+            schedule.SCHCONTENT SCHCONTENT,
+            TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
+            TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
+            TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
+            schedule.IMPORTANCE IMPORTANCE,
+            schedule.CHECKED CHECKED,
+            schedule.SHAREABLE SHAREABLE,
+            schedule.PLANUM PLANUM,
+            schedule.CATEGORY CATERGORY
+    FROM T_SCHEDULE schedule,T_PLIST plist 
+    where schedule.PLANUM=plist.PLANUM AND plist.USERID in(#{loginId},#{friendId})
+    order by PLANUM
+	
+	</select>
 </mapper>
 

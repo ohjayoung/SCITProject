@@ -44,7 +44,7 @@ $('#pw').on('keyup',function(){
 				if(response != "") {
 					$('#pwHelp').text("축하한다 성공이다.").css('color','blue');
 					$('#pwdCheckForm').fadeOut(1000);
-					deleteForm(response);
+					deleteForm();
 				}
 			}
 		});
@@ -53,7 +53,7 @@ $('#pw').on('keyup',function(){
 	return false;
 });
 
-function deleteForm(response){
+function deleteForm(){
 	var deleteForm = '';
 	deleteForm += '<div class="wrap-signUp100">';
 	deleteForm += 	'<div class="container-fluid">';
@@ -61,15 +61,16 @@ function deleteForm(response){
 	deleteForm +=			'<div class="form-group">';
 	deleteForm +=				'<label for="userPwd">新しいパスワード</label>';
 	deleteForm +=				'<div class="wrap-input100  input-group" data-validate = "">';
-	deleteForm +=					'<input type="password" id="pwd" name="pwd" placeholder="パスワード 入力してください" class="input100">';
+	deleteForm +=					'<input type="password" id="userPwd" name="userPwd" placeholder="パスワード 入力してください" class="input100">';
 	deleteForm +=					'<span class="focus-input100"></span>';
 	deleteForm +=				'</div>';
+	deleteForm +=				'<span id="userPwdHelp" class="form-text"></span><br>';
 	deleteForm +=				'<label for="userPwdCheck">パスワード確認</label>';
 	deleteForm +=				'<div class="wrap-input100  input-group" data-validate = "">';
 	deleteForm +=					'<input type="password" id="pwdCheck" name="pwdCheck" placeholder="上のパスワードをもう一回入力してください" class="input100">';
 	deleteForm +=					'<span class="focus-input100"></span>';
+	deleteForm +=					'<span id="userPwdCheck" class="form-text"></span>';
 	deleteForm +=				'</div>';
-	deleteForm +=				'<span id="userPwdHelp" class="form-text"></span>';
 	deleteForm +=				'<br>';
 	deleteForm +=				'<div class="card-action">';
 	deleteForm +=					'<button class="btn btn-success" id="updateBtn">비밀번호변경</button>';
@@ -117,6 +118,33 @@ function deleteForm(response){
 			return false;
 		}
 	});
+	
+	//비밀번호
+    $('#userPwd').on('keyup',function(){
+       var userPwd = $(this).val();
+       
+       if(userPwd.length < 6 || userPwd.length > 10){
+          $('#userPwdHelp').text("パスワードは6~10以内です。").css('color','red');
+          return false;
+      }else{
+    	  $('#userPwdHelp').text("");
+         return false;
+      }
+       
+    });
+    
+   //비밀번호 확인
+   $('#pwdCheck').on('keyup',function(){
+      var pwdCheck = $(this).val();
+   
+         if(pwdCheck!=$('#userPwd').val()){
+            $('#userPwdCheck').text("パスワードが違います。確かめてください。").css('color','red');
+            return false;
+         }else{
+            $('#userPwdCheck').text("確認成功").css('color','blue');
+            return true;
+      }
+   });
 }
 </script>
 </body>

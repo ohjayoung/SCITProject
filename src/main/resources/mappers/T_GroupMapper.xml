@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.www.dao.T_GroupMapper">
-
+	<insert id="insertGroup" parameterType="group">
+	INSERT INTO T_GROUP
+	(
+    GRONUM,
+    USERID, 
+    GRONAME,
+    GROINTRO
+    <if test="originalImage!=null and savedImage!=null">
+    ,ORIGINALIMAGE,
+    SAVEDIMAGE
+    </if>
+	)VALUES(
+    T_GROUP_SEQ.NEXTVAL,
+    #{userId},
+    #{groName},
+    #{groIntro}
+    <if test="originalImage!=null and savedImage!=null">
+    ,#{originalImage},
+	#{savedImage}
+    </if>
+    )
+	</insert>
+	<select id="selectAllGroup" resultType="group">
+	SELECT *from T_GROUP
+	</select>
+	
+	<select id="selectOneGroup" resultType="group" parameterType="group">
+	SELECT *from T_GROUP 
+    WHERE GRONUM=#{groNum}
+	</select>
+	<select id="selectMyGroupList" resultType="group" parameterType="group">
+	SELECT *FROM T_GROUP WHERE USERID=#{userId}
+	</select>
 </mapper>
 

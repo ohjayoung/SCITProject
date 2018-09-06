@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,7 @@ import global.sesoc.www.util.FileService;
 
 @Controller
 public class T_UserController {
+	
 	@Autowired
 	T_UserRepository repository;
 
@@ -190,7 +192,7 @@ public class T_UserController {
 	public T_User pwdCheck(@RequestBody T_User user, HttpSession session) {
 		String userId = (String) session.getAttribute("loginId");
 		user.setUserId(userId);
-		T_User t = repository.pwdCheck(user);
+		T_User t = repository.selectOne(user);
 		return t;
 	}
 	
@@ -217,5 +219,13 @@ public class T_UserController {
 		return result;
 	}
 	
-	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search(String userName, Model model) {
+		System.out.println(userName);
+		List<T_User> userList = repository.searchName(userName);
+		System.out.println(userList);
+		model.addAttribute("searchWord", userName);
+		model.addAttribute("userList", userList);
+		return "friend/searchResult";
+	}
 }
