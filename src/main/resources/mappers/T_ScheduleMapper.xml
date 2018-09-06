@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.www.dao.T_ScheduleMapper">
+<select id="selectCategory" parameterType="schedule" resultType="map">
+	SELECT 
+		schedule.SCHNUM SCHNUM,
+		plist.USERID USERID,
+		schedule.SCHTITLE SCHTITLE,
+		schedule.SCHCONTENT SCHCONTENT,
+		TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
+		TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
+		TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
+		schedule.IMPORTANCE IMPORTANCE,
+		schedule.CHECKED CHECKED,
+		schedule.SHAREABLE SHAREABLE,
+		schedule.PLANUM PLANUM,
+		schedule.CATEGORY CATEGORY,
+		SUBSTR(schedule.schstartdate, 4,2) MONTH
+	FROM T_SCHEDULE schedule,T_PLIST plist
+	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
+	ORDER BY PLANUM  
+</select>
+<select id="select" parameterType="map" resultType="schedule">
+	SELECT 
+		schedule.SCHNUM SCHNUM,
+		plist.USERID USERID,
+		schedule.SCHTITLE SCHTITLE,
+		schedule.SCHCONTENT SCHCONTENT,
+		TO_CHAR(schedule.SCHREGDATE,'YYYY-MM-DD') SCHREGDATE,
+		TO_CHAR(schedule.SCHSTARTDATE,'YYYY-MM-DD') SCHSTARTDATE,
+		TO_CHAR(schedule.SCHENDDATE,'YYYY-MM-DD') SCHENDDATE,
+		schedule.IMPORTANCE IMPORTANCE,
+		schedule.CHECKED CHECKED,
+		schedule.SHAREABLE SHAREABLE,
+		schedule.PLANUM PLANUM,
+		schedule.CATEGORY CATEGORY,
+		SUBSTR(schedule.schstartdate, 4,2) MONTH
+	FROM T_SCHEDULE schedule,T_PLIST plist
+	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId} AND schedule.CHECKED=#{checked}
+	ORDER BY CATEGORY  
+</select>
+<select id="selectCount" parameterType="map" resultType="string">
+	SELECT COUNT(schedule.SCHNUM) COUNT
+	FROM T_SCHEDULE schedule,T_PLIST plist
+	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
+</select>
+<select id="selectCountUnChecked" parameterType="map" resultType="string">
+	SELECT COUNT(schedule.SCHNUM) COUNT
+	FROM T_SCHEDULE schedule,T_PLIST plist
+	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId} AND schedule.CHECKED = 0
+</select>
 </mapper>
 
