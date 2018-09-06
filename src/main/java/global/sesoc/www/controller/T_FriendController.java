@@ -137,5 +137,34 @@ public class T_FriendController {
 		return r;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/reqCheck", method = RequestMethod.POST)
+	public List<T_User> reqCheck(T_Friend check, HttpSession session, Model model) {
+		String userId = (String) session.getAttribute("loginId");
+		check.setFriRequester(userId);
+		check.setFriAccepter(userId);
+
+		List<T_Friend> rList = new ArrayList<>();					// 요청리스트
+		
+		List<T_Friend> list = repository.friCheck(check);			
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getIsAccepted() == 0) {
+				if (list.get(i).getFriAccepter().equals(userId)) {
+					rList.add(list.get(i));
+				}
+			}
+		}
+		
+		List<T_User> checkList = new ArrayList<>();				// 요청한 유저의 정보 가져오기
+		for (int i = 0; i < rList.size(); i++) {
+				String reqId = rList.get(i).getFriRequester();
+				T_User user = new T_User();
+				user.setUserId(reqId);
+				user = repository2.selectOne(user);
+				checkList.add(user);
+		}
+		System.out.println(checkList);
+		return checkList;
+	}
 	
 }

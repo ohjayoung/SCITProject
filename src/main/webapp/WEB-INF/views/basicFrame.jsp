@@ -65,52 +65,24 @@ $(function(){
 						</div>
 					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-						<li class="nav-item dropdown hidden-caret">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- message toggle ------------------------------>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-envelope"></i>
-								<span class="notification">!</span>		<!-- 새로운 메세지가 있으면 ! 표시-->
+								<span class="notification messageNotify">!</span>		<!-- 새로운 메세지가 있으면 ! 표시-->
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">	<!-- 알림 구현이 끝나면 메세지도 만들기 메세지방보여주기, c:if 새로운 레코드가 추가되면 알려주기 -->
-								<a class="dropdown-item" href="friendList">메세지리스트</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown1">	<!-- 알림 구현이 끝나면 메세지도 만들기 메세지방보여주기, c:if 새로운 레코드가 추가되면 알려주기 -->
+								<a class="dropdown-item" href="#">메세지리스트</a>
 								<a class="dropdown-item" href="#">b</a>
 							</div>
 						</li>
-						<li class="nav-item dropdown hidden-caret">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- request toggle ------------------------------>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-bell"></i>
-								<span class="notification">!</span>		<!-- 새로운 요청이 있으면 ! 표시 -->
 							</a>
-							<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
-								<li id="reqSignal">
-									<div class="dropdown-title">현재 n개의 알림이 있습니다 !</div>
+							<ul class="dropdown-menu notif-box reqDropdown" aria-labelledby="navbarDropdown2">
+								<li id="reqExistence">
 								</li>
-								<li>
-									<div class="notif-center">
-										<a href="friendList">
-											<div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
-											<div class="notif-content">
-												<span class="time">오해성 님의 친구 요청</span>
-												<div id="btnDiv">
-														<input type="button" id="successBtn" class="btn btn-success" value="수락">
-														<button class="btn btn-danger" id="dangerBtn">거절</button>
-												</div>
-													<%-- <input type="hidden" class="accepter" value="${list.userId}"> --%>
-											</div>
-										</a>
-									</div>
-									<div class="notif-center">
-										<a href="friendList">
-											<div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
-											<div class="notif-content">
-												<span class="time">서봉균 님의 친구 요청</span>
-												<div id="btnDiv">
-														<button class="btn btn-success" id="successBtn">수락</button>
-														<button class="btn btn-danger" id="dangerBtn">거절</button>
-												</div>
-													<%-- <input type="hidden" class="accepter" value="${list.userId}"> --%>
-											</div>
-										</a>
-									</div>
+								<li id="reqList">
 								</li>
 							</ul>
 						</li>
@@ -304,24 +276,63 @@ $(function(){
 <script src="assets/js/ready.min.js"></script>
 <!--===============================================================================================-->
 <script>
-$(function(){
+ $(function(){
 	
-	requestNotify();
-	
-	$('#searchBtn').on("click",function(){
-		var word = $('#userName').val();
-		var userId = $('#loginId').val();
-		var userName = $('#loginName').val();
-		if(word == userId){
-			alert('자신의 ID는 검색할 수 없습니다.');
-			return false;
+	reqCheck();
+});
+
+function reqCheck(){
+	$.ajax({
+		method : 'post'
+		,  url : 'reqCheck'
+		,  success : function(response){
+			console.log(response);
+			if(response.length > 0) {
+				reqOutput(response);
+			}else {
+				var noReq = '<div class="dropdown-title">お知らせなし</div>';
+				$('#reqExistence').html(noReq);
+			}
 		}
 	})
+}
+
+function reqOutput(response){
+	var reqSignal = '<i class="la la-bell"></i><span class="notification reqNotify">!</span>';
+	$('#navbarDropdown2').html(reqSignal);
 	
-	function requestNotify(){		//요청뿌려주기
-		console.log('requestNotify');
+	var req = '<div class="dropdown-title">お知らせがあります。</div>';
+	$('#reqExistence').html(req);
+	
+	var reqAll = '';
+	for ( var i in response) {
+		reqAll += '<div class="notif-center">';
+		reqAll += '<div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>';
+		reqAll += '<div class="notif-content">';
+		reqAll += '<span class="time">'+response[i].userName+'님의 친구 요청</span>';
+		reqAll += '<div id="btnDiv">';
+		reqAll += '<input type="button" id="successBtn" class="btn btn-success" value="수락"> &nbsp;';
+		reqAll += '<button class="btn btn-danger" id="dangerBtn">거절</button>';
+		reqAll += '</div>';
+		reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
+		reqAll += '</div>';
+		reqAll += '</div>';
+	}
+	
+	$('#reqList').html(reqAll);
+}
+
+$(document).on("click", '#searchBtn', function(){
+	var word = $('#userName').val();
+	var userId = $('#loginId').val();
+	var userName = $('#loginName').val();
+	
+	if(word == userId){
+		alert('자신의 ID는 검색할 수 없습니다.');
+		return false;
 	}
 });
+
 
 $(document).on("click", "#successBtn", function(){
 	if(!confirm("수락하시겠습니까?")){
@@ -353,7 +364,7 @@ $(document).on("click", "#successBtn", function(){
 			}
 		})
 	}
-	});
+});
 
 $(document).on("click", "#dangerBtn", function(){
 	if(!confirm("삭제하시겠습니까?")){
@@ -384,7 +395,7 @@ $(document).on("click", "#dangerBtn", function(){
 			}
 		})
 	}
-	});
+});
 
 </script>
 </body>
