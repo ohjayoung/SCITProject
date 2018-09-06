@@ -61,7 +61,6 @@ public class T_FriendController {
 		for (int i = 0; i < fList.size(); i++) {
 			if(fList.get(i).getFriRequester().equals(userId)) {
 				String friId = fList.get(i).getFriAccepter();
-				System.out.println("acc friId :" + friId);
 				T_User user = new T_User();
 				user.setUserId(friId);
 				user = repository2.selectOne(user);
@@ -70,7 +69,6 @@ public class T_FriendController {
 			
 			if(fList.get(i).getFriAccepter().equals(userId)) {
 				String friId = fList.get(i).getFriRequester();
-				System.out.println("req friId :" + friId);
 				T_User user = new T_User();
 				user.setUserId(friId);
 				user = repository2.selectOne(user);

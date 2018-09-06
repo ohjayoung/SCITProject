@@ -59,15 +59,6 @@
 					<div class="container-login100-form-btn">
 						<input type="submit" id="loginBtn" class="login100-form-btn" value="ログイン" > 
 					</div>
-					<div class="text-center p-t-12">
-						<a class="txt2" href="#">
-							パスワードを忘れた場合
-						</a>
-					</div>
-
-					<a href="plannerList">plannerList</a><br/>
-					<a href="Calendar">Clendar 이동</a><br/>
-					<a href="insertGroup">그룹 만들기</a>
 					<div class="text-center p-t-136">
 						<span class="txt1">
 							アカウントをお待ちでないですか？　
@@ -121,6 +112,5 @@
 			return true;
 		}//login
 	</script>
-<!--===============================================================================================-->
 </body>
 </html>

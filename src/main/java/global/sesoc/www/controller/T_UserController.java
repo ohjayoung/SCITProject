@@ -54,7 +54,7 @@ public class T_UserController {
 		return "main";
 	}
 	//회원가입
-	@RequestMapping(value = "signUp", method = RequestMethod.POST)
+	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	public String signUp(T_User user, Model model, MultipartFile upload) {
 		String savedImage = null;
 		String originalImage = null;
@@ -75,7 +75,7 @@ public class T_UserController {
 		return "message";
 	}
 
-	@RequestMapping(value = "duplicateCheck", method = RequestMethod.POST)
+	@RequestMapping(value = "/duplicateCheck", method = RequestMethod.POST)
 	public @ResponseBody int duplicateCheck(String userId) {
 		T_User user = new T_User();
 		user.setUserId(userId);
@@ -183,7 +183,7 @@ public class T_UserController {
 		return "user/userDelete";
 	}
 	
-	@RequestMapping(value = "pwdUpdate", method = RequestMethod.GET)
+	@RequestMapping(value = "/pwdUpdate", method = RequestMethod.GET)
 	public String pwdUpdate() {
 		return "user/pwdUpdate";
 	}

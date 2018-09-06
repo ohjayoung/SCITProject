@@ -191,7 +191,7 @@ $(function(){
 										</a>
 									</li>
 									<li>
-										<a href="Calendar">
+										<a href="calendar">
 											<span class="link-collapse">2. Calendar</span>
 										</a>
 									</li>

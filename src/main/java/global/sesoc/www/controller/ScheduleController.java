@@ -21,13 +21,13 @@ public class ScheduleController {
 	@Autowired
 	T_ScheduleRepository T_ScheduleRepository; 
 	
-	@RequestMapping(value="scheduleList", method=RequestMethod.GET)
+	@RequestMapping(value="/scheduleList", method=RequestMethod.GET)
 	public String scheduleList(Model model,T_Schedule schedule) {
 		
 		List<T_Schedule> list=T_ScheduleRepository.selectPlannerSchedule(schedule.getPlaNum()); //userId를 session의 loginId로
 		model.addAttribute("plaNum",schedule.getPlaNum());
 		model.addAttribute("schdulelist",list);
-		return "Schedule/scheduleList";		
+		return "schedule/scheduleList";		
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectContent", method=RequestMethod.POST)
@@ -40,14 +40,14 @@ public class ScheduleController {
 	public String scheduleDetail(T_Schedule schedule,Model model) {
 		T_Schedule s=T_ScheduleRepository.selectOneUserSchedule(schedule);
 		model.addAttribute("schedule",s);
-		return "Schedule/scheduleDetail";
+		return "schedule/scheduleDetail";
 	}
 	
 	//schedule insert
 	@RequestMapping(value="/insertSchedule", method=RequestMethod.GET)
 	public String insertSchedule(Model model,T_Schedule s) {	//화면요청
 		model.addAttribute("plaNum",s.getPlaNum());
-		return "Schedule/insertSchedule";
+		return "schedule/insertSchedule";
 	}
 	@RequestMapping(value="/insertSchedule", method=RequestMethod.POST)
 	public String insertSchedule(T_Schedule s,Model model) {	//schedule insert -- db
@@ -64,7 +64,7 @@ public class ScheduleController {
 	public String scheduleUpdate(T_Schedule schedule,Model model) { 	//화면 요청
 		T_Schedule s=T_ScheduleRepository.selectOneUserSchedule(schedule);
 		model.addAttribute("schedule",s);
-		return "Schedule/scheduleUpdate";
+		return "schedule/scheduleUpdate";
 	}
 	@RequestMapping(value="/scheduleUpdate" , method=RequestMethod.POST)
 	public String scheduleUpdate(Model model,T_Schedule schedule) {		//schedule update -- db
@@ -91,11 +91,11 @@ public class ScheduleController {
 		List<T_Schedule> schduleList=T_ScheduleRepository.selectUserAllSchedule(user.getUserId());
 		return schduleList;
 	}
-	@RequestMapping(value="/Calendar", method=RequestMethod.GET)
+	@RequestMapping(value="/calendar", method=RequestMethod.GET)
 	public String Calendar(Model model) {
 		List<T_Schedule> list=T_ScheduleRepository.selectUserAllSchedule("aaa");
 		model.addAttribute("schedule",list);
-		return "Schedule/Calendar";
+		return "schedule/calendar";
 	}
 	@ResponseBody
 	@RequestMapping(value="/deleteSchedule", method=RequestMethod.POST)
