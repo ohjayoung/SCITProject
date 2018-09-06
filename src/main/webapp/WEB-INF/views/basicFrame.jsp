@@ -238,7 +238,7 @@ $(function(){
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="notifications.html">
+							<a href="pattern">
 								<i class="la la-pie-chart"></i>
 								<p>패턴 관리</p>
 							</a>
