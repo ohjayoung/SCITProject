@@ -34,4 +34,9 @@ public class T_GroupRepository {
 		List<T_Group> list=mapper.selectMyGroupList(group);
 		return list;
 	}
+	public int plusUserCount(T_Group group) {
+		T_GroupMapper mapper=session.getMapper(T_GroupMapper.class);
+		int result=mapper.plusUserCount(group);
+		return result;
+	}
 }

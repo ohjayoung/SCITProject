@@ -21,4 +21,41 @@
 	<select id="groupAccept" resultType="grequest" parameterType="string">
 	SELECT *FROM T_GREQUEST WHERE GREQACCEPTER=#{greqAccepter} AND ISGREQACCEPTED=0
 	</select>
+	
+	<select id="selectGreqUsers" parameterType="string" resultType="greqUser">
+	SELECT 
+	t_group.GRONAME GRONAME,
+	t_grequest.GRONUM GRONUM,
+	t_grequest.GREQNUM GREQNUM,
+	t_grequest.GREQUESTER GREQUESTER,
+	t_grequest.GREQACCEPTER GREQACCEPTER,
+	t_grequest.ISGREQACCEPTED ISGREQACCEPTED,
+	t_user.USERNAME USERNAME,
+	t_user.ORIGINALIMAGE ORIGINALIMAGE,
+	t_user.SAVEDIMAGE SAVEDIMAGE,
+	t_user.INTRODUCE INTRODUCE,
+	t_user.EMAIL EMAIL,
+	t_user.BELONG BELONG
+	FROM T_USER t_user,T_GREQUEST t_grequest,T_GROUP t_group
+	WHERE 
+	t_group.GRONUM=t_grequest.GRONUM
+	AND t_user.USERID=t_grequest.GREQUESTER
+	AND t_grequest.ISGREQACCEPTED=0  
+	AND t_grequest.GREQACCEPTER=#{greqAccepter}
+	</select>
+	
+	<update id="applySuccess" parameterType="int">
+	UPDATE T_GREQUEST
+	SET 
+	ISGREQACCEPTED=1
+	WHERE
+	GREQNUM=#{greqNum}
+	</update>
+	<select id="selectGrequest2" parameterType="grequest" resultType="grequest">
+	SELECT *FROM T_GREQUEST WHERE GREQNUM=#{greqNum}
+	</select>
+	
+	<delete id="applyCancel" parameterType="int">
+	delete T_GREQUEST WHERE GREQNUM=#{greqNum}
+	</delete>
 </mapper>

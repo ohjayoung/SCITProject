@@ -69,6 +69,9 @@
 	WHERE USERID = #{userId}
 </delete>
 
+
+
+
 </mapper>
 
 

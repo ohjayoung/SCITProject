@@ -15,5 +15,7 @@ public interface T_UserMapper {
 	
 	// 회원탈퇴
 	public int userDelete(String userId);
-
+	
+	
+	
 }

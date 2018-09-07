@@ -1,6 +1,7 @@
 package global.sesoc.www.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.www.dao.T_GRequestRepository;
 import global.sesoc.www.dao.T_GroupRepository;
+import global.sesoc.www.dto.GrequestUser;
 import global.sesoc.www.dto.T_GRequest;
 import global.sesoc.www.dto.T_Group;
 
@@ -82,8 +84,23 @@ public class T_GrequestController {
 	@RequestMapping(value="/groupApply",method=RequestMethod.GET)
 	public String groupApply(HttpSession session,Model model) {
 		String userId=(String)session.getAttribute("loginId");
-		List<T_GRequest> list=T_GRequestRepository.groupAccept(userId);
-		model.addAttribute("gList",list);
+		List<GrequestUser> list=T_GRequestRepository.selectGreqUsers(userId);
+		model.addAttribute("list",list);
 		return "group/groupApply";
+	}
+	@ResponseBody
+	@RequestMapping(value="/applySuccess",method=RequestMethod.POST)
+	public int applySuccess(@RequestBody T_GRequest gRequest) {
+		T_GRequestRepository.applySuccess(gRequest.getGreqNum());
+		T_GRequest greq=T_GRequestRepository.selectGrequest2(gRequest);
+		T_Group group=new T_Group();	group.setGroNum(greq.getGroNum());
+		int result=T_GroupRepository.plusUserCount(group);
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value="/applyCancel",method=RequestMethod.POST)
+	public int applyCancel(@RequestBody T_GRequest gRequest) {
+		int result=T_GRequestRepository.applyCancel(gRequest.getGreqNum());
+		return result;
 	}
 }

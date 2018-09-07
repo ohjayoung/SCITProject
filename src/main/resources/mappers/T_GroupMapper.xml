@@ -34,5 +34,13 @@
 	<select id="selectMyGroupList" resultType="group" parameterType="group">
 	SELECT *FROM T_GROUP WHERE USERID=#{userId}
 	</select>
+	
+	<update id="plusUserCount" parameterType="group">
+	UPDATE T_GROUP
+	SET
+	USERCOUNT = USERCOUNT+1
+	WHERE 
+	GRONUM=#{groNum}
+	</update>
 </mapper>
 

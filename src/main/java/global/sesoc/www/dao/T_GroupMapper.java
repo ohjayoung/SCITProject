@@ -9,4 +9,5 @@ public interface T_GroupMapper {
 	public List<T_Group>selectAllGroup();
 	public T_Group selectOneGroup(T_Group group);
 	public List<T_Group> selectMyGroupList(T_Group group);
+	public int plusUserCount(T_Group group);
 }
