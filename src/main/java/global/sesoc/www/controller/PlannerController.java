@@ -27,12 +27,12 @@ public class PlannerController {
 	public String plannerList(Model model) {
 		List<T_Planner> plannerList=T_PlannerRepository.plannerList("aaa");
 		model.addAttribute("plannerList",plannerList);
-		return "Schedule/plannerList";
+		return "schedule/plannerList";
 	}
 	
 	@RequestMapping(value="/insertPlanner", method=RequestMethod.GET)
 	public String insertPlanner() {
-		return "Schedule/insertPlanner";
+		return "schedule/insertPlanner";
 	}
 	@RequestMapping(value="/insertPlanner", method=RequestMethod.POST)
 	public String insertPlanner(T_Planner planner) {
