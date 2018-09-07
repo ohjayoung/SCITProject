@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.www.dao.T_GrequestRepository;
 import global.sesoc.www.dao.T_GroupRepository;
+<<<<<<< HEAD
 import global.sesoc.www.dto.T_Grequest;
 import global.sesoc.www.dto.T_GrequestUser;
+=======
+import global.sesoc.www.dto.T_GrequestUser;
+import global.sesoc.www.dto.T_Grequest;
+>>>>>>> feature
 import global.sesoc.www.dto.T_Group;
 
 @Controller
@@ -36,6 +41,7 @@ public class T_GrequestController {
 		
 		List<T_Grequest> gList=T_GRequestRepository.selectGrequest(gRequest);
 		int result=1;
+		
 		
 		if(userId.equals(groupUserId)) {//가입신청 유저가 모임장일 경우
 			result=0;
