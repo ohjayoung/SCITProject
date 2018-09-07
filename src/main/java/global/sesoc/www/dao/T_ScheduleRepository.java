@@ -20,6 +20,7 @@ public class T_ScheduleRepository {
 		List<T_Schedule> t = mapper.selectCategory(map);
 		return t;
 	}
+	
 	public List<T_Schedule> select(String userId, String checked) {
 		T_ScheduleMapper mapper = session.getMapper(T_ScheduleMapper.class);
 		Map<String, Object> map = new HashMap<>();
@@ -28,11 +29,13 @@ public class T_ScheduleRepository {
 		List<T_Schedule> ts = mapper.select(map);
 		return ts;
 	}
+	
 	public String selectCount(HashMap<String, String> map) {
 		T_ScheduleMapper mapper = session.getMapper(T_ScheduleMapper.class);
 		String t_count = mapper.selectCount(map);
 		return t_count;
 	}
+	
 	public String selectCountUnChecked(HashMap<String, String> map) {
 		T_ScheduleMapper mapper = session.getMapper(T_ScheduleMapper.class);
 		String t_count = mapper.selectCountUnChecked(map);
@@ -44,46 +47,55 @@ public class T_ScheduleRepository {
 		int result=mapper.insertSchedule(schedule);
 		return result;
 	}
+	
 	public List<T_Schedule> selectUserSchedule(String userId) {
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
 		List<T_Schedule> list=mapper.selectUserSchedule(userId);
 		return list;
 	}
+	
 	public T_Schedule selectOneUserSchedule(T_Schedule schedule) {
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
 		T_Schedule s=mapper.selectOneUserSchedule(schedule);
 		return s;
 	}
+	
 	public List<T_Schedule> selectPlannerSchedule(int plaNum) {
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
 		List<T_Schedule> scheduleList=mapper.selectPlannerSchedule(plaNum);
 		return scheduleList;
 	}
+	
 	public int updateSchedule(T_Schedule schedule) {
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
 		int result=mapper.updateSchedule(schedule);
 		return result;
 	}
+	
 	public int deletePlanner_Schedule(int plaNum) {
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
 		int result=mapper.deletePlanner_Schedule(plaNum);
 		return result;
 	}
+	
 	public int deleteSchedule(int schNum) {
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
 		int result=mapper.deleteSchedule(schNum);
 		return result;
 	}
+	
 	public List<T_Schedule> selectUserAllSchedule(String userId){
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
 		List<T_Schedule> schduleList=mapper.selectUserAllSchedule(userId);
 		return schduleList;
 	}
+	
 	public List<T_Schedule> selectUserPlannerSchedule(T_Schedule schedule){
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
 		List<T_Schedule> schduleList =mapper.selectUserPlannerSchedule(schedule);
 		return schduleList;
 	}
+	
 	public List<T_Schedule> selectMixSchedule(String loginId,String friendId){
 		Map<String, String> map=new HashMap<String,String>();
 		map.put("loginId", loginId);	map.put("friendId", friendId);

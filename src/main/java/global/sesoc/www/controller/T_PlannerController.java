@@ -15,7 +15,7 @@ import global.sesoc.www.dto.T_Planner;
 import global.sesoc.www.dto.T_Plist;
 
 @Controller
-public class PlannerController {
+public class T_PlannerController {
 	@Autowired
 	T_PlannerRepository T_PlannerRepository; 
 	@Autowired

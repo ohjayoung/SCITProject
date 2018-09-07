@@ -33,11 +33,13 @@ public class T_UserController {
 	T_UserRepository repository;
 
 	final String uploadPath = "/uploadPath";
+	
 	//회원가입화면요청
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
 	public String signUp() {
 		return "user/signUp";
 	}
+	
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(T_User user, HttpSession session, Model model) {
