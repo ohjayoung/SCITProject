@@ -1,22 +1,13 @@
 package global.sesoc.www.dao;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
-import java.util.Map;
->>>>>>> feature
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
 import global.sesoc.www.dto.T_Grequest;
 import global.sesoc.www.dto.T_GrequestUser;
-=======
-import global.sesoc.www.dto.T_GrequestUser;
-import global.sesoc.www.dto.T_Grequest;
->>>>>>> feature
 
 @Repository
 public class T_GrequestRepository {

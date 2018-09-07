@@ -14,13 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.www.dao.T_GrequestRepository;
 import global.sesoc.www.dao.T_GroupRepository;
-<<<<<<< HEAD
 import global.sesoc.www.dto.T_Grequest;
 import global.sesoc.www.dto.T_GrequestUser;
-=======
-import global.sesoc.www.dto.T_GrequestUser;
-import global.sesoc.www.dto.T_Grequest;
->>>>>>> feature
 import global.sesoc.www.dto.T_Group;
 
 @Controller
