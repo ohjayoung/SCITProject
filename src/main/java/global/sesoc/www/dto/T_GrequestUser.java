@@ -1,6 +1,6 @@
 package global.sesoc.www.dto;
 
-public class GrequestUser {
+public class T_GrequestUser {
 	private String groName;
 	private int groNum;
 	private int greqNum;
@@ -13,7 +13,7 @@ public class GrequestUser {
 	private String introduce;
 	private String email;
 	private String belong;
-	public GrequestUser() {
+	public T_GrequestUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

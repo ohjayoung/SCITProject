@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import global.sesoc.www.dao.T_GroupRepository;
 import global.sesoc.www.dto.T_Group;
-import global.sesoc.www.dto.T_User;
 import global.sesoc.www.util.FileService;
 
 @Controller

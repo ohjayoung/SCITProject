@@ -1,13 +1,13 @@
 package global.sesoc.www.dto;
 
-public class T_GRequest {
+public class T_Grequest {
 	private int greqNum;
 	private String gRequester;
 	private String greqAccepter;
 	private int isgreqAccepter;
 	private int groNum;
 	
-	public T_GRequest() {
+	public T_Grequest() {
 		// TODO Auto-generated constructor stub
 	}
 
