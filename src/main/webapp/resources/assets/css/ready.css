@@ -6723,6 +6723,11 @@ body {
 
  /* friend ======================================================== */
  #buddyIcon {
- 	font-size: 50px;
+ 	font-size: 33px;
+ }
+ 
+  #searchWord{
+ 	font-size: 20px;
+ 	color: red;
  }
 /*# sourceMappingURL=ready.css.map */

@@ -17,7 +17,12 @@
 	FROM
 		T_USER
 	WHERE
+		<if test="userName != null">
+				USERNAME = #{userName}
+		</if>
+		<if test="userId != null">
 				USERID = #{userId}
+		</if>
 		<if test="userPwd != null">
 			AND
 				USERPWD = #{userPwd}
@@ -69,9 +74,9 @@
 	WHERE USERID = #{userId}
 </delete>
 
-
-
+<select id="searchName" parameterType="user" resultType="user">
+	SELECT * FROM T_USER
+	WHERE USERNAME = #{userName}
+</select>
 
 </mapper>
-
-

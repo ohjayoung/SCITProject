@@ -54,7 +54,7 @@ $(function(){
 					
 					<form class="navbar-left navbar-form nav-search mr-md-3" id="searchForm" name="searchForm" action="search" method="post">
 						<div class="wrap-input100  input-group" data-validate = "">
-							<input type="text" placeholder="&nbsp; 친구검색" class="form-control input100" name="searchCode" id="searchCode">
+							<input type="text" placeholder="&nbsp; 유저검색" class="form-control input100" name="userName" id="userName">
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
 								<span class="input-group-text">
@@ -280,7 +280,7 @@ $(function(){
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="notifications.html">
+							<a href="pattern">
 								<i class="la la-pie-chart"></i>
 								<p>패턴 관리</p>
 							</a>
