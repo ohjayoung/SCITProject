@@ -2048,29 +2048,47 @@ fieldset[disabled] a.btn {
   background-color: #28a745;
   border-color: #28a745;
 }
-
+.btn-del {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
 .btn-success:hover {
   color: #fff;
   background-color: #218838;
   border-color: #1e7e34;
 }
-
+.btn-del:hover {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+}
 .btn-success:focus, .btn-success.focus {
   box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
 }
-
+.btn-del:focus, .btn-del.focus {
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+}
 .btn-success.disabled, .btn-success:disabled {
   background-color: #28a745;
   border-color: #28a745;
 }
-
+.btn-del.disabled, .btn-del:disabled {
+  background-color: #28a745;
+  border-color: #28a745;
+}
 .btn-success:active, .btn-success.active,
 .show > .btn-success.dropdown-toggle {
   background-color: #218838;
   background-image: none;
   border-color: #1e7e34;
 }
-
+.btn-del:active, .btn-del.active,
+.show > .btn-del.dropdown-toggle {
+  background-color: #218838;
+  background-image: none;
+  border-color: #1e7e34;
+}
 .btn-info {
   color: #fff;
   background-color: #17a2b8;
