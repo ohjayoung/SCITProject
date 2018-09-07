@@ -41,6 +41,7 @@ $(function(){
 });
 </script>
 <body>
+		<input type="hidden" name="loginId" id="loginId" value="${sessionScope.loginId}">
 		<div class="main-header">
 			<div class="logo-header logoStyle">
 				<a href="main"><img alt="mainlogo" src="images/mainlogo.png"></a>
@@ -52,79 +53,36 @@ $(function(){
 			<nav class="navbar navbar-header navbar-expand-lg navTop">
 				<div class="container-fluid">
 					
-					<form class="navbar-left navbar-form nav-search mr-md-3" id="searchForm" name="searchForm" action="search" method="post">
+					<form class="navbar-left navbar-form nav-search mr-md-3" id="searchForm" name="searchForm" action="usersearch" method="post">
 						<div class="wrap-input100  input-group" data-validate = "">
 							<input type="text" placeholder="&nbsp; 유저검색" class="form-control input100" name="userName" id="userName">
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
 								<span class="input-group-text">
-									<button type="submit" id="searchBtn" name="searchBtn"><i class="la la-search search-icon"></i></button>
+									<button id="searchBtn" name="searchBtn"><i class="la la-search search-icon"></i></button>
 								</span>
 							</span>
 						</div>
 					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-						<li class="nav-item dropdown hidden-caret">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- message toggle ------------------------------>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-envelope"></i>
+								<span class="notification messageNotify">!</span>		<!-- 새로운 메세지가 있으면 ! 표시-->
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="friendList">a</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown1">	<!-- 알림 구현이 끝나면 메세지도 만들기 메세지방보여주기, c:if 새로운 레코드가 추가되면 알려주기 -->
+								<a class="dropdown-item" href="messageList">메세지리스트</a>
 								<a class="dropdown-item" href="#">b</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">close</a>
 							</div>
 						</li>
-						<li class="nav-item dropdown hidden-caret">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- request toggle ------------------------------>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-bell"></i>
-								<span class="notification">n</span>
 							</a>
-							<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
-								<li>
-									<div class="dropdown-title">현재 n개의 알림이 있습니다 !</div>
+							<ul class="dropdown-menu notif-box reqDropdown" aria-labelledby="navbarDropdown2">
+								<li id="reqExistence">
 								</li>
-								<li>
-									<div class="notif-center">
-										<a href="#">
-											<div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
-											<div class="notif-content">
-												<span class="block">
-													오자영 님의 친구 요청
-												</span>
-												<span class="time">5 minutes ago</span> 
-											</div>
-										</a>
-										<a href="#">
-											<div class="notif-icon notif-success"> <i class="la la-comment"></i> </div>
-											<div class="notif-content">
-												<span class="block">
-													서봉균 님이 그룹초대를 하였습니다.
-												</span>
-												<span class="time">12 minutes ago</span> 
-											</div>
-										</a>
-										<a href="#">
-											<div class="notif-img"> 
-												<img src="assets/img/profile2.jpg" alt="Img Profile">
-											</div>
-											<div class="notif-content">
-												<span class="block">
-													오승현 님이 메세지를 보냈습니다.
-												</span>
-												<span class="time">12 minutes ago</span> 
-											</div>
-										</a>
-										<a href="#">
-											<div class="notif-icon notif-danger"> <i class="la la-heart"></i> </div>
-											<div class="notif-content">
-												<span class="block">
-													오해성님이 공유다이어리 요청을 하였습니다.
-												</span>
-												<span class="time">17 minutes ago</span> 
-											</div>
-										</a>
-									</div>
+								<li id="reqList">
 								</li>
 							</ul>
 						</li>
@@ -205,7 +163,7 @@ $(function(){
 										</a>
 									</li>
 									<li>
-										<a href="Calendar">
+										<a href="calendar">
 											<span class="link-collapse">2. Calendar</span>
 										</a>
 									</li>
@@ -317,7 +275,127 @@ $(function(){
 <!--===============================================================================================-->	
 <script src="assets/js/ready.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript">
+<script>
+ $(function(){
+	
+	reqCheck();
+});
+
+function reqCheck(){
+	$.ajax({
+		method : 'post'
+		,  url : 'reqCheck'
+		,  success : function(response){
+			console.log(response);
+			if(response.length > 0) {
+				reqOutput(response);
+			}else {
+				var noReq = '<div class="dropdown-title">お知らせなし</div>';
+				$('#reqExistence').html(noReq);
+			}
+		}
+	})
+}
+
+function reqOutput(response){
+	var reqSignal = '<i class="la la-bell"></i><span class="notification reqNotify">!</span>';
+	$('#navbarDropdown2').html(reqSignal);
+	
+	var req = '<div class="dropdown-title">お知らせがあります。</div>';
+	$('#reqExistence').html(req);
+	
+	var reqAll = '';
+	for ( var i in response) {
+		reqAll += '<div class="notif-center">';
+		reqAll += '<div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>';
+		reqAll += '<div class="notif-content">';
+		reqAll += '<span class="time">'+response[i].userName+'님의 친구 요청</span>';
+		reqAll += '<div id="btnDiv">';
+		reqAll += '<input type="button" id="successBtn" class="btn btn-success" value="수락"> &nbsp;';
+		reqAll += '<button class="btn btn-danger" id="dangerBtn">거절</button>';
+		reqAll += '</div>';
+		reqAll += '<input type="hidden" class="accepter" value="'+response[i].userId+'">';
+		reqAll += '</div>';
+		reqAll += '</div>';
+	}
+	
+	$('#reqList').html(reqAll);
+}
+
+$(document).on("click", '#searchBtn', function(){
+	var word = $('#userName').val();
+	var userId = $('#loginId').val();
+	var userName = $('#loginName').val();
+	
+	if(word == userId){
+		alert('자신의 ID는 검색할 수 없습니다.');
+		return false;
+	}
+});
+
+
+$(document).on("click", "#successBtn", function(){
+	if(!confirm("수락하시겠습니까?")){
+		return false;
+	}else{
+		var friRequester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"friRequester" : friRequester}
+		
+		console.log($(this).parent().parent().parent().parent());
+		$(this).parent().parent().parent().parent().remove();
+		
+		if($('.notif-center').length == 0){
+			
+			$('#reqSignal').parent().remove();
+		}
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'friAccept'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("친구등록이 완료되었습니다.");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
+});
+
+$(document).on("click", "#dangerBtn", function(){
+	if(!confirm("삭제하시겠습니까?")){
+		return false;
+	}else{
+		var friRequester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"friRequester" : friRequester}
+		
+		console.log($(this).parent().parent().parent().parent());
+		$(this).parent().parent().parent().parent().remove();
+		
+		if($('.notif-center').length == 0){
+			$('#reqSignal').parent().remove();
+		}
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'friDelete'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("완료되었습니다.");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
+});
 
 </script>
 </body>

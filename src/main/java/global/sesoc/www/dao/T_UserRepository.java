@@ -24,7 +24,6 @@ public class T_UserRepository {
 	//회원가입
 	public int signUp(T_User user) {
 		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
-		System.out.println(user);
 		int result = mapper.insert(user);
 		return result;
 	}
@@ -43,10 +42,11 @@ public class T_UserRepository {
 		return t;
 	}
 	
-	public List<T_User> searchName(String userName) {
+	//이름, 아이디로 검색
+	public List<T_User> searchName(T_User user) {
 		T_UserMapper mapper = session.getMapper(T_UserMapper.class);
-		List<T_User> userList = mapper.searchName(userName);
+		List<T_User> userList = mapper.searchName(user);
 		return userList;
 	}
-
+	
 }

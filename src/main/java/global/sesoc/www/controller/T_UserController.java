@@ -33,11 +33,13 @@ public class T_UserController {
 	T_UserRepository repository;
 
 	final String uploadPath = "/uploadPath";
+	
 	//회원가입화면요청
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
 	public String signUp() {
 		return "user/signUp";
 	}
+	
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(T_User user, HttpSession session, Model model) {
@@ -46,6 +48,7 @@ public class T_UserController {
 		if (t != null) {
 			session.setAttribute("loginId", t.getUserId());
 			session.setAttribute("loginName", t.getUserId());
+			model.addAttribute("user", t);
 		} else {
 			model.addAttribute("islogined", "1");
 			return "index";
@@ -53,7 +56,7 @@ public class T_UserController {
 		return "main";
 	}
 	//회원가입
-	@RequestMapping(value = "signUp", method = RequestMethod.POST)
+	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	public String signUp(T_User user, Model model, MultipartFile upload) {
 		String savedImage = null;
 		String originalImage = null;
@@ -74,7 +77,7 @@ public class T_UserController {
 		return "message";
 	}
 
-	@RequestMapping(value = "duplicateCheck", method = RequestMethod.POST)
+	@RequestMapping(value = "/duplicateCheck", method = RequestMethod.POST)
 	public @ResponseBody int duplicateCheck(String userId) {
 		T_User user = new T_User();
 		user.setUserId(userId);
@@ -143,7 +146,7 @@ public class T_UserController {
 			user.setOriginalImage(originalImage);
 			user.setSavedImage(savedImage);	
 		}
-  		int result = repository.userUpdate(user);
+  		repository.userUpdate(user);
   		return "redirect:/";
   	}
   	
@@ -152,7 +155,6 @@ public class T_UserController {
   		String userId = (String) session.getAttribute("loginId");
   		t.setUserId(userId);
   		T_User user = repository.selectOne(t);
-		
 		String originalImage = user.getOriginalImage();
 		String fullPath = uploadPath + "/" + user.getSavedImage();
 		try {
@@ -177,12 +179,13 @@ public class T_UserController {
 		return null; 
 	}
   	
+  	
 	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
 	public String userDelete() {
 		return "user/userDelete";
 	}
 	
-	@RequestMapping(value = "pwdUpdate", method = RequestMethod.GET)
+	@RequestMapping(value = "/pwdUpdate", method = RequestMethod.GET)
 	public String pwdUpdate() {
 		return "user/pwdUpdate";
 	}
@@ -219,13 +222,30 @@ public class T_UserController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String search(String userName, Model model) {
+	@RequestMapping(value = "/usersearch", method = RequestMethod.POST)
+	public String usersearch(String userName, Model model, HttpSession session, T_User user) {
+		String loginId = (String) session.getAttribute("loginId");
+		String loginName = (String) session.getAttribute("loginName");
+		
 		System.out.println(userName);
-		List<T_User> userList = repository.searchName(userName);
-		System.out.println(userList);
+		user.setUserName(userName);
+		List<T_User> userList = repository.searchName(user);
+		
+		if(userList.size() == 0) {
+			user.setUserName(null);
+			String userId = userName;
+			user.setUserId(userId);
+			userList = repository.searchName(user);
+		}
+		
+		for (int i = 0; i < userList.size(); i++) {
+			if(userList.get(i).getUserId().equals(loginId) || userList.get(i).getUserName().equals(loginName)){		// 자기이름검색 불가
+				userList.remove(i);
+			}
+		}
 		model.addAttribute("searchWord", userName);
-		model.addAttribute("userList", userList);
+		model.addAttribute("list", userList);
 		return "friend/searchResult";
 	}
+	
 }

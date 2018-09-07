@@ -1,8 +1,6 @@
 package global.sesoc.www.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,64 +12,106 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-
 import global.sesoc.www.dao.T_ScheduleRepository;
 import global.sesoc.www.dto.T_Schedule;
+import global.sesoc.www.dto.T_User;
 
 @Controller
 public class T_ScheduleController {
 	@Autowired
-	T_ScheduleRepository repository;
-	//패턴분석 화면요청
-	@RequestMapping(value = "/pattern", method = RequestMethod.GET)
-	public String pattern(Locale locale, HttpSession session, Model model) {
-		String userId = (String) session.getAttribute("loginId");
-		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("userId",userId);
-		String list= repository.selectCount(map);
-		model.addAttribute("cateList", list);
-		String unCheckedlist= repository.selectCountUnChecked(map);
-		model.addAttribute("unCheckedlist", unCheckedlist);
-		return "pattern/pattern";
-	}
-	//패턴분석 첫번째: 카테고리별 분석
-	@ResponseBody
-    @RequestMapping(value = "/getCategory", method = RequestMethod.GET)
-    public String getCategory(String userId, T_Schedule schedule){
-		Gson gson = new Gson();
-		String checked =  schedule.getChecked()+"";
-		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("userId",userId);
-		map.put("checked", checked);
+	T_ScheduleRepository T_ScheduleRepository; 
+	
+	@RequestMapping(value="/scheduleList", method=RequestMethod.GET)
+	public String scheduleList(Model model,T_Schedule schedule) {
 		
-		List<T_Schedule> list= repository.selectCategory(map);
-		String g = gson.toJson(list);
-		return g;
+		List<T_Schedule> list=T_ScheduleRepository.selectPlannerSchedule(schedule.getPlaNum()); //userId를 session의 loginId로
+		model.addAttribute("plaNum",schedule.getPlaNum());
+		model.addAttribute("schdulelist",list);
+		return "schedule/scheduleList";		
 	}
-	//패턴분석 두번째: 월별 분석
 	@ResponseBody
-	@RequestMapping(value = "/getMonth", method = RequestMethod.GET)
-	public String getMonth(String userId, T_Schedule schedule, Model model){
-		Gson gson = new Gson();
-		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("userId",userId);
-		System.out.println("유저아이디"+userId);
-		List<T_Schedule> list= repository.selectCategory(map);
-		String g = gson.toJson(list);
-		return g;
+	@RequestMapping(value="/selectContent", method=RequestMethod.POST)
+	public T_Schedule selectContent(@RequestBody T_Schedule s) {
+
+		T_Schedule schedule=T_ScheduleRepository.selectOneUserSchedule(s);
+		return schedule;
 	}
-	//패턴분석 세번째: 수행안한 스케줄 리스트
+	@RequestMapping(value="/scheduleDetail" , method=RequestMethod.GET)
+	public String scheduleDetail(T_Schedule schedule,Model model) {
+		T_Schedule s=T_ScheduleRepository.selectOneUserSchedule(schedule);
+		model.addAttribute("schedule",s);
+		return "schedule/scheduleDetail";
+	}
+	
+	//schedule insert
+	@RequestMapping(value="/insertSchedule", method=RequestMethod.GET)
+	public String insertSchedule(Model model,T_Schedule s) {	//화면요청
+		model.addAttribute("plaNum",s.getPlaNum());
+		return "schedule/insertSchedule";
+	}
+	@RequestMapping(value="/insertSchedule", method=RequestMethod.POST)
+	public String insertSchedule(T_Schedule s,Model model) {	//schedule insert -- db
+		int result= T_ScheduleRepository.insertSchedule(s);
+		List<T_Schedule> list=T_ScheduleRepository.selectPlannerSchedule(s.getPlaNum());
+		model.addAttribute("plaNum",s.getPlaNum());
+		model.addAttribute("schdulelist",list);
+		return "redirect:/scheduleList";
+	}
+	
+	
+	//schedule update
+	@RequestMapping(value="/scheduleUpdate" , method=RequestMethod.GET)
+	public String scheduleUpdate(T_Schedule schedule,Model model) { 	//화면 요청
+		T_Schedule s=T_ScheduleRepository.selectOneUserSchedule(schedule);
+		model.addAttribute("schedule",s);
+		return "schedule/scheduleUpdate";
+	}
+	@RequestMapping(value="/scheduleUpdate" , method=RequestMethod.POST)
+	public String scheduleUpdate(Model model,T_Schedule schedule) {		//schedule update -- db
+			
+		int result=T_ScheduleRepository.updateSchedule(schedule);
+		
+		List<T_Schedule> list=T_ScheduleRepository.selectPlannerSchedule(schedule.getPlaNum()); //userId를 session의 loginId로
+		model.addAttribute("plaNum",schedule.getPlaNum());
+		model.addAttribute("schdulelist",list);
+		return "redirect:/scheduleList";
+	}
 	@ResponseBody
-	@RequestMapping(value="/scheduleList", method = RequestMethod.POST)
-	public List<T_Schedule> scheduleList(@RequestBody String checked, HttpSession session) {
-		String userId = (String) session.getAttribute("loginId");
-		List<T_Schedule> list = repository.select(userId, checked);
+	@RequestMapping(value="/selectUserAllSchedule" , method=RequestMethod.POST)
+	public List<T_Schedule> selectUserAllSchedule(HttpSession session){
+	
+		List<T_Schedule> schduleList=T_ScheduleRepository.selectUserAllSchedule("aaa");
+		return schduleList;
+		
+	}
+	@ResponseBody
+	@RequestMapping(value="/selectFriendAllSchedule" , method=RequestMethod.POST)
+	public List<T_Schedule> selectFriendAllSchedule(@RequestBody T_User user){
+		
+		List<T_Schedule> schduleList=T_ScheduleRepository.selectUserAllSchedule(user.getUserId());
+		return schduleList;
+	}
+	@RequestMapping(value="/calendar", method=RequestMethod.GET)
+	public String Calendar(Model model) {
+		List<T_Schedule> list=T_ScheduleRepository.selectUserAllSchedule("aaa");
+		model.addAttribute("schedule",list);
+		return "schedule/calendar";
+	}
+	@ResponseBody
+	@RequestMapping(value="/deleteSchedule", method=RequestMethod.POST)
+	public String deleteSchedule(@RequestBody T_Schedule schedule) {
+		int result=T_ScheduleRepository.deleteSchedule(schedule.getSchNum());
+		return "삭제했습니다.";
+	}
+	@ResponseBody
+	@RequestMapping(value="/selectMixSchedule", method=RequestMethod.POST)
+	public List<T_Schedule> selectMixSchedule(@RequestBody String friendId){
+		friendId="osh";//친구 id
+
+		List<T_Schedule> list=T_ScheduleRepository.selectMixSchedule("aaa", friendId);
 		return list;
+		
 	}
-	
-	
-	
-	
-	
 }
+
+

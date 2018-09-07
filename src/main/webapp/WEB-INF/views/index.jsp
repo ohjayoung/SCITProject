@@ -41,20 +41,8 @@
 						<span class="txt1">スケジュール SNS ウェブサイト</span>
 					</span>
 
-					
-					<!--################# -->
-					<!-- test -->
-					
-					
-					<!--################# -->
-					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
-
-
 					<div class="wrap-input100 validate-input" data-validate = "">
 						<input class="input100" id="userId" type="text" name="userId" placeholder="ID記入">
-
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -71,15 +59,6 @@
 					<div class="container-login100-form-btn">
 						<input type="submit" id="loginBtn" class="login100-form-btn" value="ログイン" > 
 					</div>
-					<div class="text-center p-t-12">
-						<a class="txt2" href="#">
-							パスワードを忘れた場合
-						</a>
-					</div>
-
-					<a href="plannerList">plannerList</a><br/>
-					<a href="Calendar">Clendar 이동</a><br/>
-					<a href="insertGroup">그룹 만들기</a>
 					<div class="text-center p-t-136">
 						<span class="txt1">
 							アカウントをお待ちでないですか？　
@@ -90,10 +69,6 @@
 						</a>
 					</div>
 				</form>
-			
-				<a href="plannerList">plannerList</a>
-				<a href="Calendar">Clendar 이동</a>
-				
 			</div>
 		</div>
 	</div>
@@ -114,7 +89,7 @@
 		var islogined = document.getElementById("islogined").value;
 		if (islogined == "1") {
 			alert('IDとパスワードが合わないです。');
-			
+ 			islogined = "0"; 
 		}
 		
 		function login() {
@@ -133,9 +108,9 @@
 				userPwd.focus();
 				return false;
 			}//if
-			form.submit();
+			login.submit();
+			return true;
 		}//login
 	</script>
-<!--===============================================================================================-->
 </body>
 </html>
