@@ -38,6 +38,7 @@ public class T_GrequestController {
 		List<T_Grequest> gList=T_GRequestRepository.selectGrequest(gRequest);
 		int result=1;
 		
+		
 		if(userId.equals(groupUserId)) {//가입신청 유저가 모임장일 경우
 			result=0;
 			return result;
