@@ -18,7 +18,9 @@ public interface T_UserMapper {
 	// 회원탈퇴
 	public int userDelete(String userId);
 	
+
 	// 회원검색
 	public List<T_User> searchName(T_User user);
+
 
 }

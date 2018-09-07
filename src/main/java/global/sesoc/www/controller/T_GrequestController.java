@@ -13,30 +13,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import global.sesoc.www.dao.T_GRequestRepository;
+import global.sesoc.www.dao.T_GrequestRepository;
 import global.sesoc.www.dao.T_GroupRepository;
-import global.sesoc.www.dto.GrequestUser;
-import global.sesoc.www.dto.T_GRequest;
+import global.sesoc.www.dto.T_GrequestUser;
+import global.sesoc.www.dto.T_Grequest;
 import global.sesoc.www.dto.T_Group;
 
 @Controller
 public class T_GrequestController {
 	@Autowired
-	T_GRequestRepository T_GRequestRepository;
+	T_GrequestRepository T_GRequestRepository;
 	@Autowired
 	T_GroupRepository T_GroupRepository;
 	
 	@ResponseBody
 	@RequestMapping(value="/checkGrequest", method=RequestMethod.POST)
-	public int checkGrequest(@RequestBody T_GRequest gRequest, HttpSession session) {
+	public int checkGrequest(@RequestBody T_Grequest gRequest, HttpSession session) {
 		String userId=(String)session.getAttribute("loginId"); //현재 유저 id
 		
 		T_Group g=new T_Group(); 	g.setGroNum(gRequest.getGroNum());
 		T_Group group=T_GroupRepository.selectOneGroup(g);
 		String groupUserId=group.getUserId();	//그룹 장의 id
 		
-		List<T_GRequest> gList=T_GRequestRepository.selectGrequest(gRequest);
+		List<T_Grequest> gList=T_GRequestRepository.selectGrequest(gRequest);
 		int result=1;
+		
 		
 		if(userId.equals(groupUserId)) {//가입신청 유저가 모임장일 경우
 			result=0;
@@ -57,7 +58,7 @@ public class T_GrequestController {
 	}	
 	@ResponseBody
 	@RequestMapping(value="/insertGrequest",method=RequestMethod.POST)
-	public int insertGrequest(@RequestBody T_GRequest gRequest,  HttpSession session) {
+	public int insertGrequest(@RequestBody T_Grequest gRequest,  HttpSession session) {
 		
 		T_Group g=new T_Group();  	g.setGroNum(gRequest.getGroNum());
 		T_Group group=T_GroupRepository.selectOneGroup(g);
@@ -75,7 +76,7 @@ public class T_GrequestController {
 		int result=1;
 		
 		 String userId=(String)session.getAttribute("loginId");
-		 List<T_GRequest> list=T_GRequestRepository.groupAccept(userId);
+		 List<T_Grequest> list=T_GRequestRepository.groupAccept(userId);
 		 if(list.size()==0) {
 			 result=0;
 		 }
@@ -84,22 +85,22 @@ public class T_GrequestController {
 	@RequestMapping(value="/groupApply",method=RequestMethod.GET)
 	public String groupApply(HttpSession session,Model model) {
 		String userId=(String)session.getAttribute("loginId");
-		List<GrequestUser> list=T_GRequestRepository.selectGreqUsers(userId);
+		List<T_GrequestUser> list=T_GRequestRepository.selectGreqUsers(userId);
 		model.addAttribute("list",list);
 		return "group/groupApply";
 	}
 	@ResponseBody
 	@RequestMapping(value="/applySuccess",method=RequestMethod.POST)
-	public int applySuccess(@RequestBody T_GRequest gRequest) {
+	public int applySuccess(@RequestBody T_Grequest gRequest) {
 		T_GRequestRepository.applySuccess(gRequest.getGreqNum());
-		T_GRequest greq=T_GRequestRepository.selectGrequest2(gRequest);
+		T_Grequest greq=T_GRequestRepository.selectGrequest2(gRequest);
 		T_Group group=new T_Group();	group.setGroNum(greq.getGroNum());
 		int result=T_GroupRepository.plusUserCount(group);
 		return result;
 	}
 	@ResponseBody
 	@RequestMapping(value="/applyCancel",method=RequestMethod.POST)
-	public int applyCancel(@RequestBody T_GRequest gRequest) {
+	public int applyCancel(@RequestBody T_Grequest gRequest) {
 		int result=T_GRequestRepository.applyCancel(gRequest.getGreqNum());
 		return result;
 	}
