@@ -3,7 +3,7 @@ package global.sesoc.www.dto;
 public class T_Board {
 	private int boaNum; //pk
 	private String boaTitle;
-	private String Content;
+	private String boaContent;
 	private String boaRegdate;
 	private String userId;	//T_User useId fk
 	private int groNum; //T_Group groNum
@@ -24,11 +24,11 @@ public class T_Board {
 	public void setBoaTitle(String boaTitle) {
 		this.boaTitle = boaTitle;
 	}
-	public String getContent() {
-		return Content;
+	public String getBoaContent() {
+		return boaContent;
 	}
-	public void setContent(String content) {
-		Content = content;
+	public void setBoaContent(String boaContent) {
+		this.boaContent = boaContent;
 	}
 	public String getBoaRegdate() {
 		return boaRegdate;
@@ -62,9 +62,10 @@ public class T_Board {
 	}
 	@Override
 	public String toString() {
-		return "T_Board [boaNum=" + boaNum + ", boaTitle=" + boaTitle + ", Content=" + Content + ", boaRegdate="
+		return "T_Board [boaNum=" + boaNum + ", boaTitle=" + boaTitle + ", boaContent=" + boaContent + ", boaRegdate="
 				+ boaRegdate + ", userId=" + userId + ", groNum=" + groNum + ", originalFile=" + originalFile
 				+ ", savedFile=" + savedFile + "]";
 	}
+	
 	
 }

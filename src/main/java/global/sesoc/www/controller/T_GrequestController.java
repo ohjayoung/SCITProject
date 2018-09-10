@@ -1,7 +1,6 @@
 package global.sesoc.www.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.www.dao.T_GrequestRepository;
 import global.sesoc.www.dao.T_GroupRepository;
-import global.sesoc.www.dto.T_GrequestUser;
 import global.sesoc.www.dto.T_Grequest;
+import global.sesoc.www.dto.T_GrequestUser;
 import global.sesoc.www.dto.T_Group;
 
 @Controller

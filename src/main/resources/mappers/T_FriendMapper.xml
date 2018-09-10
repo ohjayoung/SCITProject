@@ -27,4 +27,12 @@
 	<delete id="friDelete" parameterType="friend">
 		DELETE FROM T_FRIEND WHERE FRIREQUESTER = #{friRequester} AND FRIACCEPTER = #{friAccepter}
 	</delete>
+	
+	
+	<select id="myFriendList" parameterType="friend" resultType="friend">
+		SELECT * FROM T_FRIEND
+		WHERE 
+		FRIACCEPTER = #{friAccepter}
+		AND ISACCEPTED=1
+	</select>
 </mapper>

@@ -1,10 +1,10 @@
 package global.sesoc.www.dao;
 
 import java.util.List;
-import java.util.Map;
 
-import global.sesoc.www.dto.T_GrequestUser;
 import global.sesoc.www.dto.T_Grequest;
+import global.sesoc.www.dto.T_GrequestUser;
+
 
 public interface T_GrequestMapper {
 	public int insertGrequest(T_Grequest gRequest);
