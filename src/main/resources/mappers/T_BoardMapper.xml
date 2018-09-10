@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.www.dao.T_BoardMapper">
-
-
+<insert id="insertBoard" parameterType="board">
+INSERT INTO T_BOARD(
+   BOANUM,
+   BOATITLE,
+   BOACONTENT,
+   USERID,
+   GRONUM 
+   <if test="originalFile!=null and savedFile!=null">
+   ,ORIGINALFILE,
+   SAVEDFILE 
+   </if>
+   )VALUES(
+   T_BOARD_SEQ.NEXTVAL,
+   #{boaTitle},
+   #{boaContent},
+   #{userId},
+   #{groNum}
+   <if test="originalFile!=null and savedFile!=null">
+   ,#{originalFile},
+   #{savedFile}
+   </if>
+   )
+</insert>
+<select id="selectGroNumBoard" parameterType="int" resultType="board">
+SELECT *FROM T_BOARD WHERE GRONUM=#{groNum}
+</select>
 </mapper>
 

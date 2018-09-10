@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import global.sesoc.www.dao.T_BoardRepository;
 import global.sesoc.www.dao.T_GroupRepository;
+import global.sesoc.www.dto.T_Board;
 import global.sesoc.www.dto.T_Group;
 import global.sesoc.www.util.FileService;
 
@@ -25,6 +27,8 @@ import global.sesoc.www.util.FileService;
 public class T_GroupController {
 	@Autowired
 	T_GroupRepository T_GroupRepository; 
+	@Autowired
+	T_BoardRepository T_BoardRepository;
 	final String uploadPath="/uploadPath";
 	
 	@RequestMapping(value="/groupList", method=RequestMethod.GET)
@@ -71,8 +75,12 @@ public class T_GroupController {
 	}
 	@RequestMapping(value="/groupDetail", method=RequestMethod.GET)
 	public String groupDetail(T_Group group, Model model) {
+		List<T_Board> bList=T_BoardRepository.selectGroNumBoard(group.getGroNum());
 		T_Group g=T_GroupRepository.selectOneGroup(group);
+		
 		model.addAttribute("group",g);
+		model.addAttribute("bList",bList);
+		
 		return "group/groupDetail";
 	}
 	@RequestMapping(value="/groupDownload", method=RequestMethod.GET)

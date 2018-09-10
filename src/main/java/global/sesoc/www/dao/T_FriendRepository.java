@@ -41,6 +41,12 @@ public class T_FriendRepository {
 		int r = mapper.friDelete(check);
 		return r;
 	}
-
+	
+	//수락한 친구 출력
+	public List<T_Friend> myFriendList(T_Friend friend){
+		T_FriendMapper mapper = session.getMapper(T_FriendMapper.class);
+		List<T_Friend> list = mapper.myFriendList(friend);
+		return list;
+	}
 
 }
