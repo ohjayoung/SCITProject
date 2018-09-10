@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import global.sesoc.www.dao.T_FriendRepository;
 import global.sesoc.www.dao.T_ScheduleRepository;
+import global.sesoc.www.dto.T_Friend;
 import global.sesoc.www.dto.T_Schedule;
 import global.sesoc.www.dto.T_User;
 
@@ -20,7 +22,8 @@ import global.sesoc.www.dto.T_User;
 public class T_ScheduleController {
 	@Autowired
 	T_ScheduleRepository T_ScheduleRepository; 
-	
+	@Autowired
+	T_FriendRepository T_FriendRepository;
 	@RequestMapping(value="/scheduleList", method=RequestMethod.GET)
 	public String scheduleList(Model model,T_Schedule schedule) {
 		
@@ -79,21 +82,27 @@ public class T_ScheduleController {
 	@ResponseBody
 	@RequestMapping(value="/selectUserAllSchedule" , method=RequestMethod.POST)
 	public List<T_Schedule> selectUserAllSchedule(HttpSession session){
-	
-		List<T_Schedule> schduleList=T_ScheduleRepository.selectUserAllSchedule("aaa");
+		String userId=(String)session.getAttribute("loginId");
+		List<T_Schedule> schduleList=T_ScheduleRepository.selectUserAllSchedule(userId);
 		return schduleList;
 		
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectFriendAllSchedule" , method=RequestMethod.POST)
 	public List<T_Schedule> selectFriendAllSchedule(@RequestBody T_User user){
-		
-		List<T_Schedule> schduleList=T_ScheduleRepository.selectUserAllSchedule(user.getUserId());
+
+		List<T_Schedule> schduleList=T_ScheduleRepository.selectUserAllSchedule(user.getUserId());	
 		return schduleList;
 	}
 	@RequestMapping(value="/calendar", method=RequestMethod.GET)
-	public String Calendar(Model model) {
+	public String Calendar(Model model , HttpSession session) {
+		String userId=(String)session.getAttribute("loginId");
+		T_Friend friend=new T_Friend(); friend.setFriAccepter(userId); 
+		
 		List<T_Schedule> list=T_ScheduleRepository.selectUserAllSchedule("aaa");
+		List<T_Friend> fList=T_FriendRepository.myFriendList(friend);
+		
+		model.addAttribute("fList",fList);
 		model.addAttribute("schedule",list);
 		return "schedule/calendar";
 	}
@@ -105,10 +114,12 @@ public class T_ScheduleController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectMixSchedule", method=RequestMethod.POST)
-	public List<T_Schedule> selectMixSchedule(@RequestBody String friendId){
-		friendId="osh";//친구 id
+	public List<T_Schedule> selectMixSchedule(@RequestBody T_User user,HttpSession session){
+		String loginId=(String)session.getAttribute("loginId");
+		System.out.println(user);
 
-		List<T_Schedule> list=T_ScheduleRepository.selectMixSchedule("aaa", friendId);
+		List<T_Schedule> list=T_ScheduleRepository.selectMixSchedule(loginId, user.getUserId());
+		System.out.println(list);
 		return list;
 		
 	}

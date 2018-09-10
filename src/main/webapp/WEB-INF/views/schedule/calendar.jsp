@@ -252,11 +252,17 @@
   
   $(document).ready(function() {
      $('#friendCalendarBtn').on('click',function(){
-       
+       var friendIds=$('.friendId');
+       var friendId='';
+       for (var i = 0; i < friendIds.length; i++) {
+		if(friendIds[i].selected==true){
+			friendId=friendIds[i].value;
+		}
+	}
+      
        // 친구의 정보를 가져와서 ajax로 calendar를 가져오게 함.
-         /* var friendId=$('friendId').val();
-         var sendData={'friendId': friendId}; */
-         var sendData={'userId':'osh'};
+         var sendData={'userId': friendId}; 
+        
           $('#friendCalendar').fullCalendar({
             header: {
               left: 'prev,next today',
@@ -370,12 +376,18 @@
   $(document).ready(function(){
      
      $('#friendCalendar').on('dragenter',function(){
-      
+    	  var friendIds=$('.friendId');
+          var friendId='';
+          for (var i = 0; i < friendIds.length; i++) {
+   		if(friendIds[i].selected==true){
+   			friendId=friendIds[i].value;
+   		}
+   		}
+         var sendData={'userId':friendId};
+         
        $('.allCalendar').remove();
-        /* select 한 친구의 id를 가지고 와야 함. */
-        /* var friendId=$(".friendId").val();
-        sendData={'friendId':friendId}; */
-        sendData={'friendId':'osh'};
+     
+        
         $('.mixCalendar').fullCalendar({
             header: {
               left: 'prev,next today',
@@ -412,8 +424,9 @@
               
              //************************* 일정 입력란 *********************************
              //해당 스케줄을 모두 가져와서 for문으로 모두 입력시켜야 함  
-
+			
             events: function(start, end ,timezone, callback) {
+            	
           $.ajax({
               method:'post',
              url:'selectMixSchedule',
@@ -528,11 +541,11 @@
 			<div class="main-panel">
 				<div class="content">
 					 <!-- 선택할 친구를 불러올 수있게 -->
-   <%-- <select>
-   <c:forEach var="friendList" items="">
-      
+	 <select>
+   <c:forEach var="fList" items="${fList }">
+      <option class="friendId" value="${fList.friRequester}">${fList.friRequester}</option>
       </c:forEach>
-   </select> --%>
+   </select> 
    
    <input type="button" id="friendCalendarBtn" value="calendar 보기">
    <!-- 휴지통 사진 부분 -->
@@ -544,7 +557,7 @@
    <div id='calendar' draggable="true"></div> 
    
    <!-- 친구 캘린더  -->
-   <div id="friendCalendar"></div>
+   <div id="friendCalendar" ></div>
    </div>
    <div>
       <div class="mixCalendar"></div>
