@@ -7,7 +7,6 @@ public class T_Request {
 	private int isAccepted;
 	private int plaNum; //T_Planner fk
 	public T_Request() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 	public int getReqNum() {

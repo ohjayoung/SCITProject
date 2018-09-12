@@ -10,7 +10,6 @@ public class T_Group {
 	private String originalImage;
 	private String savedImage;
 	public T_Group() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 	public int getGroNum() {

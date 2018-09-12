@@ -6705,6 +6705,11 @@ body {
   .logoStyle {
  	 background : linear-gradient( to bottom, #1c1c19, #1e1e1d);
   }
+  
+  .cardDate {
+  	float: right;
+  	
+  }
  
  /* signUp ======================================================== */
  .img_wrap{

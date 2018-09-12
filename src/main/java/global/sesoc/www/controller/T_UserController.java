@@ -9,12 +9,10 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import global.sesoc.www.dao.T_UserRepository;
@@ -48,6 +48,7 @@ public class T_UserController {
 	public String login(T_User user, HttpSession session, Model model) {
 
 		T_User t = repository.selectOne(user);
+
 		if (t != null) {
 			session.setAttribute("loginId", t.getUserId());
 			session.setAttribute("loginName", t.getUserId());
@@ -58,6 +59,7 @@ public class T_UserController {
 		}
 		return "main";
 	}
+	
 	//회원가입
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	public String signUp(T_User user, Model model, MultipartFile upload) {
