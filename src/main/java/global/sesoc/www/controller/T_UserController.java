@@ -12,6 +12,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -243,6 +246,33 @@ public class T_UserController {
 				userList.remove(i);
 			}
 		}
+
+		/*	final String USER_AGENT = "Mozilla/5.0";
+
+		    // 1. URL 선언
+		    String connUrl = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=" + userName;
+
+		    Connection conn = Jsoup
+                    .connect(connUrl)
+                    .header("Content-Type", "application/json;charset=UTF-8")
+                    .userAgent(USER_AGENT)
+                    .method(Connection.Method.GET)
+                    .ignoreContentType(true);
+
+		    // 2. HTML 가져오기
+		    Document doc = null;
+			try {
+				doc = conn.get();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    // TODO POST의 data 값은 Jsoup.data(...) 을 사용하시면 됩니다.
+		    
+		    // 3. 가져온 HTML Document 를 확인하기
+			System.out.println(doc.select("ul.list_place_col1.type_2col").toString());*/
+			
+		
 		model.addAttribute("searchWord", userName);
 		model.addAttribute("list", userList);
 		return "friend/searchResult";
