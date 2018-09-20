@@ -105,5 +105,39 @@ public class T_ScheduleRepository {
 		return list;
 		
 	}
+	
+	
+	
+	public List<T_Schedule> selectCategoryP(String userId) {
+		T_ScheduleMapper mapper = session.getMapper(T_ScheduleMapper.class);
+		List<T_Schedule> replyList = mapper.selectCategoryP(userId);
+		System.out.println(userId);
+		System.out.println("========= Repository ============");
+		
+		return replyList;
+	}
+	
+	public int delete(int schNum) {
+		T_ScheduleMapper mapper = session.getMapper(T_ScheduleMapper.class);
+		int result = mapper.delete(schNum);
+		
+		return result;
+	}
+    
+	public List<T_Schedule> selectCategoryMoon(String userId){
+		T_ScheduleMapper mapper = session.getMapper(T_ScheduleMapper.class);
+		List<T_Schedule> replyList = mapper.selectCategoryMoon(userId);
+		System.out.println(userId);
+		
+		return replyList;
+	}
+	
+	public int updateCheck(T_Schedule checked) {
+		T_ScheduleMapper mapper = session.getMapper(T_ScheduleMapper.class);
+		int check = mapper.updateCheck(checked);
+		
+		return check;
+	}
+	
 
 }

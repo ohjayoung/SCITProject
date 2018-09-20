@@ -12,10 +12,7 @@
 }
 
 [type="checkbox"] {
-  &:not(:checked), &:checked {
-    position: absolute;
-    left: -9999px;
-  }
+ 
   &:not(:checked) + .form-check-sign, &:checked + .form-check-sign {
     position: relative;
     padding-left: 1.65em;

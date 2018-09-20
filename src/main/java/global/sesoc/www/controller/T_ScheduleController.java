@@ -1,5 +1,9 @@
 package global.sesoc.www.controller;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -122,6 +126,79 @@ public class T_ScheduleController {
 		System.out.println(list);
 		return list;
 		
+	}
+	
+	
+	
+	@RequestMapping(value="schDelete", method=RequestMethod.POST)
+	public String schDelete(String schNum) {
+		System.out.println(schNum +"schDelete쪽입니다.");
+		int result = T_ScheduleRepository.delete(Integer.parseInt(schNum));
+		
+		if(result == 1) {
+			return "성공!";
+		}
+		
+		return "실패";
+	}
+	
+	@RequestMapping(value = "/selectAll", method=RequestMethod.POST)
+	public @ResponseBody HashMap<String, Object> selectAll(Model model,HttpSession session){
+		String userId = (String) session.getAttribute("loginId");
+	/*	String userName = (String) session.getAttribute("loginName");*/
+		
+		List<T_Schedule> replylist = T_ScheduleRepository.selectCategoryMoon(userId);	
+		List<Integer> percentlist = new ArrayList<Integer>();
+		
+		for(int i = 0; i < replylist.size(); i++) {
+			T_Schedule sch = replylist.get(i);
+			percentlist.add(getPercent(sch));
+			System.out.println(userId);
+		}
+		
+		HashMap<String, Object> list = new HashMap<String, Object>();
+		list.put("replylist", replylist);
+		list.put("percentlist", percentlist);
+		model.addAttribute("replylist", replylist);
+		System.out.println(list);
+		
+		return list;
+		
+	}
+	
+	private int getPercent(T_Schedule schedule) {
+		String start = schedule.getSchStartdate();
+		String end = schedule.getSchEnddate();
+		
+		String[] startdate = start.split("-");
+		String[] enddate = end.split("-");
+		
+		LocalDate todate = LocalDate.now();
+		LocalDate schStartdate = LocalDate.of(Integer.parseInt(startdate[0]),Integer.parseInt(startdate[1]),Integer.parseInt(startdate[2])); // 2016-04-02
+		LocalDate schEnddate = LocalDate.of(Integer.parseInt(enddate[0]),Integer.parseInt(enddate[1]),Integer.parseInt(enddate[2]));
+		
+		int allDate = (int) ChronoUnit.DAYS.between(schStartdate, schEnddate);  //몇일 간인지 가저오는 기능
+		
+		int passDate = (int) ChronoUnit.DAYS.between(schStartdate, todate); //스케줄 시작날로부터 며칠이 지났는지
+		
+		String sAllDate = String.valueOf(allDate);
+		Double temp = passDate/Double.parseDouble(sAllDate);
+		
+		int percent = (int)(temp * 100);
+		
+		if(percent > 100) 
+			return 100;
+		else 
+			return percent;
+		
+	}
+	
+	@RequestMapping(value="/schUpdate", method=RequestMethod.GET)
+	public @ResponseBody int updateCheck(T_Schedule checked) {
+		System.out.println(checked+"뭐지");
+		int check = T_ScheduleRepository.updateCheck(checked);
+		
+		return check;
 	}
 }
 
