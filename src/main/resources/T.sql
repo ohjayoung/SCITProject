@@ -136,13 +136,14 @@ CREATE TABLE T_SCHEDULE
    SCHCONTENT varchar2(2000) NOT NULL,
    SCHREGDATE date DEFAULT SYSDATE,
    SCHSTARTDATE date NOT NULL,
-   -- null�� ��� startdate�� ����
+   -- null?? ??? startdate?? ????
    SCHENDDATE date,
    IMPORTANCE varchar2(20) NOT NULL,
    CHECKED number DEFAULT 0 NOT NULL,
    SHAREABLE number DEFAULT 0 NOT NULL,
    PLANUM number NOT NULL,
    CATEGORY varchar2(20) NOT NULL,
+   SCHLOCATION varchar2(50),
    PRIMARY KEY (SCHNUM)
 );
 
@@ -269,6 +270,121 @@ commit
 INSERT INTO T_USER (USERID, USERPWD, USERNAME, BIRTH, PHONE, EMAIL) VALUES ('admin', 'admin', 'admin', '1992-05-05', '010-0000-0000', 'admin@admin.net');
 SELECT * FROM T_USER;
 SELECT * FROM T_FRIEND;
+SELECT * FROM T_PLANNER;
 
-select * from t_friend where frirequester = 'duarltjd' or friaccepter = 'duarltjd';
 
+insert into T_SCHEDULE(
+    SCHNUM,
+    SCHTITLE,
+    SCHCONTENT,
+    SCHSTARTDATE,
+    SCHENDDATE,
+    IMPORTANCE,
+    PLANUM,
+   CATEGORY
+    )VALUES(
+    T_SCHEDULE_SEQ.NEXTVAL,
+    '스케줄',
+    'hghghghg',
+    '2018.9.01',
+    '2018.9.11',
+    '3',
+    41,
+    '카테고리...'
+    );
+    insert into T_SCHEDULE(
+    SCHNUM,
+    SCHTITLE,
+    SCHCONTENT,
+    SCHSTARTDATE,
+    SCHENDDATE,
+    IMPORTANCE,
+    PLANUM,
+   CATEGORY
+    )VALUES(
+    T_SCHEDULE_SEQ.NEXTVAL,
+    '두번째 스케줄',
+    'ㅋㅋㅋ',
+    '2018.9.01',
+    '2018.9.11',
+    '1',
+    41,
+    '카테고리2...'
+    );
+    insert into T_SCHEDULE(
+    SCHNUM,
+    SCHTITLE,
+    SCHCONTENT,
+    SCHSTARTDATE,
+    SCHENDDATE,
+    IMPORTANCE,
+    PLANUM,
+   CATEGORY
+    )VALUES(
+    T_SCHEDULE_SEQ.NEXTVAL,
+    '세번째 스케줄',
+    'ㅏㅏ',
+    '2018.9.01',
+    '2018.9.11',
+    '2',
+    1,
+    '카테고리...'
+    );
+    insert into T_SCHEDULE(
+    SCHNUM,
+    SCHTITLE,
+    SCHCONTENT,
+    SCHSTARTDATE,
+    SCHENDDATE,
+    IMPORTANCE,
+    PLANUM,
+   CATEGORY
+    )VALUES(
+    T_SCHEDULE_SEQ.NEXTVAL,
+    '네번째 스케줄',
+    'dgffgㅏㅏ',
+    '2018.9.01',
+    '2018.9.11',
+    '4',
+    1,
+    '카테고리...'
+    );
+    insert into T_SCHEDULE(
+    SCHNUM,
+    SCHTITLE,
+    SCHCONTENT,
+    SCHSTARTDATE,
+    SCHENDDATE,
+    IMPORTANCE,
+    PLANUM,
+   CATEGORY
+    )VALUES(
+    T_SCHEDULE_SEQ.NEXTVAL,
+    '여섯번째 스케줄',
+    'asdsdsaㅜㅠ',
+    '2018.9.01',
+    '2018.9.11',
+    '1',
+    6,
+    '카테고리...'
+    );
+    
+    insert into T_SCHEDULE(
+    SCHNUM,
+    SCHTITLE,
+    SCHCONTENT,
+    SCHSTARTDATE,
+    SCHENDDATE,
+    IMPORTANCE,
+    PLANUM,
+   CATEGORY
+    )VALUES(
+    T_SCHEDULE_SEQ.NEXTVAL,
+    'osh첫번째 스케줄',
+    'assaasㅏㅏㅏ',
+    '2018.9.01',
+    '2018.9.11',
+    '2',
+    4,
+    '카테고리...'
+    );
