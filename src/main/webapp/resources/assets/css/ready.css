@@ -6747,5 +6747,24 @@ body {
     height: 100%;
   }
   
-  
+/* non check list ======================================================== */
+.circle_strong{
+ position:absolute;
+ top:30px;
+ left:20px;
+ text-align:center;
+ line-height:40px;
+ font-size:24px;
+ }
+
+.selected{
+ text-decoration:line-through;
+ font-weight:700;
+ color:red;
+}
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: absolute;
+    left: auto;
+}
 /*# sourceMappingURL=ready.css.map */
