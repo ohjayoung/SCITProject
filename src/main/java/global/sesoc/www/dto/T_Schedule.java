@@ -12,7 +12,11 @@ public class T_Schedule {
 	private int shareable;
 	private int plaNum;	//T_Planner fk
 	private String category;
-	public T_Schedule() {}
+	
+	
+	public T_Schedule() {
+		
+	}
 	public int getSchNum() {
 		return schNum;
 	}

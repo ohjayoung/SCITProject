@@ -136,13 +136,14 @@ CREATE TABLE T_SCHEDULE
    SCHCONTENT varchar2(2000) NOT NULL,
    SCHREGDATE date DEFAULT SYSDATE,
    SCHSTARTDATE date NOT NULL,
-   -- null�� ��� startdate�� ����
+   -- null?? ??? startdate?? ????
    SCHENDDATE date,
    IMPORTANCE varchar2(20) NOT NULL,
    CHECKED number DEFAULT 0 NOT NULL,
    SHAREABLE number DEFAULT 0 NOT NULL,
    PLANUM number NOT NULL,
    CATEGORY varchar2(20) NOT NULL,
+   SCHLOCATION varchar2(50),
    PRIMARY KEY (SCHNUM)
 );
 
@@ -269,6 +270,50 @@ commit
 INSERT INTO T_USER (USERID, USERPWD, USERNAME, BIRTH, PHONE, EMAIL) VALUES ('admin', 'admin', 'admin', '1992-05-05', '010-0000-0000', 'admin@admin.net');
 SELECT * FROM T_USER;
 SELECT * FROM T_FRIEND;
+SELECT * FROM T_PLANNER;
 
-select * from t_friend where frirequester = 'duarltjd' or friaccepter = 'duarltjd';
 
+insert into T_SCHEDULE(
+    SCHNUM,
+    SCHTITLE,
+    SCHCONTENT,
+    SCHSTARTDATE,
+    SCHENDDATE,
+    IMPORTANCE,
+    PLANUM,
+   CATEGORY
+    )VALUES(
+    T_SCHEDULE_SEQ.NEXTVAL,
+    '스케줄',
+    'hghghghg',
+    '2018.9.01',
+    '2018.9.11',
+    '3',
+    41,
+    '카테고리...'
+    );
+INSERT INTO T_SCHEDULE(
+	SCHNUM,
+	SCHTITLE,
+	SCHCONTENT,
+	SCHSTARTDATE,
+	SCHENDDATE,
+	IMPORTANCE,
+	PLANUM,
+	CATEGORY,
+	SCHLOCATION
+	)
+VALUES(
+	T_SCHEDULE_SEQ.NEXTVAL,
+	'스케쥴15',
+	'내용15',
+	'2018.09.28',
+	'2018.09.30',
+	'3',
+	21,
+	'카테고리',
+	'삼성동'
+);
+
+SELECT * FROM T_SCHEDULE;
+DELETE FROM T_SCHEDULE WHERE IMPORTANCE = '3';

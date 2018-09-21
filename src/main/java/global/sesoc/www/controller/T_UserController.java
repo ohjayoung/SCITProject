@@ -48,6 +48,7 @@ public class T_UserController {
 	public String login(T_User user, HttpSession session, Model model) {
 
 		T_User t = repository.selectOne(user);
+
 		if (t != null) {
 			session.setAttribute("loginId", t.getUserId());
 			session.setAttribute("loginName", t.getUserId());
@@ -58,6 +59,7 @@ public class T_UserController {
 		}
 		return "main";
 	}
+	
 	//회원가입
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	public String signUp(T_User user, Model model, MultipartFile upload) {
@@ -247,7 +249,7 @@ public class T_UserController {
 			}
 		}
 
-		/*	final String USER_AGENT = "Mozilla/5.0";
+			final String USER_AGENT = "Mozilla/5.0";
 
 		    // 1. URL 선언
 		    String connUrl = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=" + userName;
@@ -270,8 +272,8 @@ public class T_UserController {
 		    // TODO POST의 data 값은 Jsoup.data(...) 을 사용하시면 됩니다.
 		    
 		    // 3. 가져온 HTML Document 를 확인하기
-			System.out.println(doc.select("ul.list_place_col1.type_2col").toString());*/
-			
+//			System.out.println(doc.select("ul.list_place_col1.type_2col").toString());
+			System.out.println(doc.select("div.ftv_lst").toString());
 		
 		model.addAttribute("searchWord", userName);
 		model.addAttribute("list", userList);

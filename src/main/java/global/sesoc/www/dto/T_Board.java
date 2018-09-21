@@ -10,7 +10,6 @@ public class T_Board {
 	private String originalFile;
 	private String savedFile;
 	public T_Board() {
-		super();
 	}
 	public int getBoaNum() {
 		return boaNum;
