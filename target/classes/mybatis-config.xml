@@ -21,6 +21,7 @@
 		<typeAlias type="global.sesoc.www.dto.T_Message"	alias="message" />
 		<typeAlias type="global.sesoc.www.dto.T_Reply"	alias="reply" />
 		<typeAlias type="global.sesoc.www.dto.T_GrequestUser"	alias="greqUser" />
+		<typeAlias type="global.sesoc.www.dto.T_MessageRoom"	alias="msg" />
       
 	</typeAliases>
 
