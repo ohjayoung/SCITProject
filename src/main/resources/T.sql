@@ -292,99 +292,28 @@ insert into T_SCHEDULE(
     41,
     '카테고리...'
     );
-    insert into T_SCHEDULE(
-    SCHNUM,
-    SCHTITLE,
-    SCHCONTENT,
-    SCHSTARTDATE,
-    SCHENDDATE,
-    IMPORTANCE,
-    PLANUM,
-   CATEGORY
-    )VALUES(
-    T_SCHEDULE_SEQ.NEXTVAL,
-    '두번째 스케줄',
-    'ㅋㅋㅋ',
-    '2018.9.01',
-    '2018.9.11',
-    '1',
-    41,
-    '카테고리2...'
-    );
-    insert into T_SCHEDULE(
-    SCHNUM,
-    SCHTITLE,
-    SCHCONTENT,
-    SCHSTARTDATE,
-    SCHENDDATE,
-    IMPORTANCE,
-    PLANUM,
-   CATEGORY
-    )VALUES(
-    T_SCHEDULE_SEQ.NEXTVAL,
-    '세번째 스케줄',
-    'ㅏㅏ',
-    '2018.9.01',
-    '2018.9.11',
-    '2',
-    1,
-    '카테고리...'
-    );
-    insert into T_SCHEDULE(
-    SCHNUM,
-    SCHTITLE,
-    SCHCONTENT,
-    SCHSTARTDATE,
-    SCHENDDATE,
-    IMPORTANCE,
-    PLANUM,
-   CATEGORY
-    )VALUES(
-    T_SCHEDULE_SEQ.NEXTVAL,
-    '네번째 스케줄',
-    'dgffgㅏㅏ',
-    '2018.9.01',
-    '2018.9.11',
-    '4',
-    1,
-    '카테고리...'
-    );
-    insert into T_SCHEDULE(
-    SCHNUM,
-    SCHTITLE,
-    SCHCONTENT,
-    SCHSTARTDATE,
-    SCHENDDATE,
-    IMPORTANCE,
-    PLANUM,
-   CATEGORY
-    )VALUES(
-    T_SCHEDULE_SEQ.NEXTVAL,
-    '여섯번째 스케줄',
-    'asdsdsaㅜㅠ',
-    '2018.9.01',
-    '2018.9.11',
-    '1',
-    6,
-    '카테고리...'
-    );
-    
-    insert into T_SCHEDULE(
-    SCHNUM,
-    SCHTITLE,
-    SCHCONTENT,
-    SCHSTARTDATE,
-    SCHENDDATE,
-    IMPORTANCE,
-    PLANUM,
-   CATEGORY
-    )VALUES(
-    T_SCHEDULE_SEQ.NEXTVAL,
-    'osh첫번째 스케줄',
-    'assaasㅏㅏㅏ',
-    '2018.9.01',
-    '2018.9.11',
-    '2',
-    4,
-    '카테고리...'
-    );
+INSERT INTO T_SCHEDULE(
+	SCHNUM,
+	SCHTITLE,
+	SCHCONTENT,
+	SCHSTARTDATE,
+	SCHENDDATE,
+	IMPORTANCE,
+	PLANUM,
+	CATEGORY,
+	SCHLOCATION
+	)
+VALUES(
+	T_SCHEDULE_SEQ.NEXTVAL,
+	'스케쥴15',
+	'내용15',
+	'2018.09.28',
+	'2018.09.30',
+	'3',
+	21,
+	'카테고리',
+	'삼성동'
+);
+
+SELECT * FROM T_SCHEDULE;
+DELETE FROM T_SCHEDULE WHERE IMPORTANCE = '3';

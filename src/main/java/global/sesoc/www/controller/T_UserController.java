@@ -9,10 +9,12 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import global.sesoc.www.dao.T_UserRepository;
@@ -249,7 +249,7 @@ public class T_UserController {
 			}
 		}
 
-		/*	final String USER_AGENT = "Mozilla/5.0";
+			final String USER_AGENT = "Mozilla/5.0";
 
 		    // 1. URL 선언
 		    String connUrl = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=" + userName;
@@ -272,8 +272,8 @@ public class T_UserController {
 		    // TODO POST의 data 값은 Jsoup.data(...) 을 사용하시면 됩니다.
 		    
 		    // 3. 가져온 HTML Document 를 확인하기
-			System.out.println(doc.select("ul.list_place_col1.type_2col").toString());*/
-			
+//			System.out.println(doc.select("ul.list_place_col1.type_2col").toString());
+			System.out.println(doc.select("div.ftv_lst").toString());
 		
 		model.addAttribute("searchWord", userName);
 		model.addAttribute("list", userList);

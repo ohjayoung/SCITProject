@@ -587,28 +587,12 @@ $(document).ready(function() {
 	 			maxMonth = chartLabel[i];
 	 		}	
 	 	}
- 		
 		str += '<div class="card card-stats">';
-		str += '<div class="card-header" >';
-		str += '<h4 class="card-title">' + '올해 가장 바빴던 달은' +'</h4>';
-		str += '</div>';
 		str += '<div class="card-body">' ;
-		str += '<h4 class="card-title">' + maxMonth + '입니다.'+'</h4>';
-		str += '<h4 class="card-title">' + maxMonth + '등록된 스케줄은'+'</h4>';
-		str += '<h4 class="card-title">' + '총' + max + '개' + '</h4>';
+		str += '<h4 class="card-title">올해 가장 바빴던 달은  ' + maxMonth + ' 입니다. </h4>';
+		str += '<h4 class="card-title">등록된 스케줄은 총 '+ max +' 개 입니다.</h4>';
 		str += '</div>';
 		str += '</div>';
-		str += '<div class="card">';
-		str += '<div class="card-header">';
-		str += '<h4 class="card-title">Task</h4>';
-		str += '</div>';
-		str += '<div class="card-body">';
-		str += '<div id="circle" class="chart-circle mt-4 mb-3">';
-		str += '<strong class="circle_strong"></strong> ';
-		str += '</div>';
-		str += '</div>';
-		str += '</div>';
-		str += '';
 		$('#secondDiv').html(str);
 		
 	}

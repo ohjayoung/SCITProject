@@ -46,55 +46,15 @@
 						<br><br>
 						</div> 
 						<div class="row">
-							<div class="col-md-6">
-								<div class="card">
+							<div class="col-md-10">
+								<div class="card card-tasks">
 									<div class="card-header ">
-										<h4 class="card-title" id="friendList">내친구리스트</h4>
-										<p class="card-category">Users Table</p>
+										<h4 class="card-title">미 체크리스트</h4>
+										<p class="card-category">어제 하루는 어떠셨나요?</p>
+										<input id="relyInsert" type="button" value="보기">
 									</div>
-									<div class="card-body">
-										<table class="table table-head-bg-success table-striped table-hover">
-											<thead>
-												<tr>
-													<th scope="col">#</th>
-													<th scope="col">First</th>
-													<th scope="col">Last</th>
-													<th scope="col">Handle</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Mark</td>
-													<td>Otto</td>
-													<td>@mdo</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Jacob</td>
-													<td>Thornton</td>
-													<td>@fat</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td colspan="2">Larry the Bird</td>
-													<td>@twitter</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div> 
-				<div class="col-md-10">
-					<div class="card card-tasks">
-						<div class="card-header ">
-							<h4 class="card-title">미 체크리스트</h4>
-							<p class="card-category">어제 하루는 어떠셨나요?</p>
-							<input id="relyInsert" type="button" value="보기">
-						</div>
-						<div class="card-body ">
-							  
-								 <table class="table table-hover" border="1">
+									<div class="card-body ">
+									 <table class="table table-hover" border="1">
 											<tr>
 												<th>完了チェック</th>
 												<th>スケジュール名前</th>
@@ -112,12 +72,10 @@
 								</table>
 							</div>
 						</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 
 <script>
  $(function(){
