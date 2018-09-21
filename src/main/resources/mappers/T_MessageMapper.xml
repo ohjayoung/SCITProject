@@ -2,5 +2,55 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="global.sesoc.www.dao.T_MessageMapper">
-
+<insert id="addUser" parameterType="msg">
+	INSERT INTO MESSAGEROOM
+	(
+		USERID
+		,ID
+	) VALUES(
+		#{userid}
+		,#{id}
+	)
+</insert>
+<insert id="addMessage" parameterType="message">
+		INSERT INTO T_Message(
+			MESNUM
+			,MESCONTEXT
+			,USERA
+			,USERB
+			,ACCESSED
+		)
+		VALUES(
+			T_MASSAGE_SEQ.nextVal
+			,#{mesContext}
+			,#{userA}
+			,#{userB}
+			,#{accessed}
+		)
+</insert >
+<delete id="deleteUser" parameterType="String">
+	DELETE FROM MESSAGEROOM
+	WHERE ID=#{id}
+</delete>
+<select id="messageList" parameterType="message" resultType="message">
+	SELECT *
+	FROM T_MESSAGE
+	WHERE USERB = #{userB}
+	ORDER BY MESREGDATE
+</select>
+<delete id="msgDelete" parameterType="message">
+	DELETE FROM T_MESSAGE
+	WHERE mesNum=#{mesNum}
+</delete>
+<select id="msgCount" parameterType="string" resultType="int">
+	SELECT COUNT(MESNUM)
+	FROM T_MESSAGE
+	WHERE ACCESSED = 1 AND USERB = #{userId} 
+	ORDER BY MESNUM
+</select>
+<update id="updateMsg" parameterType="string">
+	UPDATE T_MESSAGE
+	SET ACCESSED = 0
+	WHERE USERB = #{userId}
+</update>
 </mapper>

@@ -95,6 +95,7 @@
 												<td>
 													<div id="btnDiv">
 														<button class="btn btn-danger" id="refuseBtn">삭제</button>
+														<button class="btn btn-warning" id="messageBtn">메세지</button>
 													</div>
 														<input type="hidden" class="accepter" value="${friList.userId}">
 												</td>
@@ -106,12 +107,94 @@
 								</div> <!-- friList body -->
 							</div> 
 						</div>
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-body">
+									<c:if test="${empty msgList}">
+										<div class="card-sub">
+											메세지가 없습니다.
+										</div>
+									</c:if>
+									<c:if test="${not empty msgList}">
+										<div class="card-sub">
+											메세지 리스트입니다.
+										</div>
+										<table class="table mt-3">
+										<thead>
+										</thead>
+										<tbody>
+										<c:forEach var="msgList" items="${msgList}">
+											<tr>
+												<td>
+													${msgList.userA}
+												</td>
+												<td>
+													${msgList.mesContext}
+												</td>
+												<td>
+													${msgList.mesRegdate}
+												</td>
+												<td>
+													<div id="btnDiv">
+														<button class="btn btn-danger" id="deleteBtn">삭제</button>
+													</div>
+													<input type="hidden" class="accepter" value="${msgList.mesNum}">
+												</td>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									</c:if>
+								</div>
+						</div>
 					</div>
 				</div>		
 			</div>
 		</div>
-
+<script type="text/javascript" src="resources/sockjs-0.3.4.js"></script>
 <script type="text/javascript">
+var userId = '<c:out value="${sessionScope.loginId}"/>';
+
+$(function() {
+	connect();
+});
+//소켓 스크립트
+function connect() {
+	sock = new SockJS("<c:url value="/echo"/>");
+	sock.onopen = function() {
+		
+		sock.send(":::"+userId);
+		console.log('open');
+	};
+	sock.onmessage = function(evt) {
+		var data = evt.data;
+		var strArray  = data.split('-');
+		var message = strArray[0];
+		var receiveuserid   = strArray[1];
+		var senduserid   = strArray[2];
+		var date      = strArray[3];
+		chatOneAppend(message, senduserid, receiveuserid, date);
+	};
+	sock.onclose = function() {
+		console.log('close');
+	};
+}
+$(document).on('click', '#messageBtn', function(){
+ 	var receiveuserid = $(this).parents().parents().children('.accepter').val();
+	chatOneConnect(receiveuserid);	
+});
+function chatOneConnect(receiveuserid){
+	var url = 'messageList?receiveuserid='+receiveuserid;
+	var openWin = window.open(url, 'testWindow', 'width=610, height=500, scrollbars=no');
+}
+function chatOneAppend(msg, senduserId, receiveuserid, date){
+	var url = 'messageList?senduserId='+senduserId+'&receiveuserid='+receiveuserid+'&msg='+msg+'&date='+date;
+	var openWin = window.open(url, 'testWindow', 'width=610, height=500, scrollbars=no');
+}
+function send(msg) {
+	sock.send(msg + "-" + userId);
+}
+/* ================================================================================================== */
 $(function(){
 	$('tr').hover(function(){
 		$(this).css("background-color","#bfc3c9");
@@ -126,7 +209,6 @@ if(!confirm("수락하시겠습니까?")){
 }else{
 	var friRequester = $(this).parent().parent().children('.accepter').val();
 	var sendData = {"friRequester" : friRequester}
-	console.log($(this).parent().parent().parent());
 	$(this).parent().parent().parent().fadeOut(1500);
 	
 	$.ajax({
@@ -147,30 +229,54 @@ if(!confirm("수락하시겠습니까?")){
 });
 
 $(document).on("click", "#refuseBtn", function(){
-if(!confirm("삭제하시겠습니까?")){
-	return false;
-}else{
-	var friRequester = $(this).parent().parent().children('.accepter').val();
-	var sendData = {"friRequester" : friRequester}
-	
-	console.log($(this).parent().parent().parent());
-	$(this).parent().parent().parent().fadeOut(1500);
-	
-	$.ajax({
-		method : 'post'
-		, url  : 'friDelete'
-		, data : JSON.stringify(sendData)
-		, dataType : 'text'
-		, contentType : 'application/json; charset=UTF-8'
-		, success : function(response){
-			if(response == 1){
-				alert("완료되었습니다.");
-			}else{
-				alert('다시 시도해주세요');
+	if(!confirm("삭제하시겠습니까?")){
+		return false;
+	}else{
+		var friRequester = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"friRequester" : friRequester}
+		
+		$(this).parent().parent().parent().fadeOut(1500);
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'friDelete'
+			, data : JSON.stringify(sendData)
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("완료되었습니다.");
+				}else{
+					alert('다시 시도해주세요');
+				}
 			}
-		}
-	})
-}
+		})
+	}
+});
+$(document).on("click", "#deleteBtn", function(){
+	if(!confirm("삭제하시겠습니까?")){
+		return false;
+	}else{
+		var messageNum = $(this).parent().parent().children('.accepter').val();
+		var sendData = {"messageNum" : messageNum}
+		
+ 		$(this).parent().parent().parent().fadeOut(1500);
+		
+		$.ajax({
+			method : 'post'
+			, url  : 'msgDelete'
+			, data : messageNum
+			, dataType : 'text'
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				if(response == 1){
+					alert("완료되었습니다.");
+				}else{
+					alert('다시 시도해주세요');
+				}
+			}
+		})
+	}
 });
 </script>
 </body>
