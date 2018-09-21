@@ -13,4 +13,6 @@ public interface T_FriendMapper {
 	int friUpdate(T_Friend check);	//친구수락(수정)
 
 	int friDelete(T_Friend check);	//친구거절(삭제)
+	
+	List<T_Friend> myFriendList(T_Friend friend); //수락한 친구 출력
 }

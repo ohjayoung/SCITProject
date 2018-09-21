@@ -78,6 +78,7 @@ $(function(){
                               <thead>
                                  <tr>
                                     <th scope="col"><i class="la la-drupal" id="buddyIcon"></i></th>
+                                    <th>모임 명</th>
                                     <th scope="col" colspan="2">名前</th>
                                     <th></th>
                                  </tr>
@@ -93,7 +94,8 @@ $(function(){
                                        </div>
                                     </a>
                                     </td>
-                                    <td colspan="2">
+                                    <td>${list.groName }</td>
+                                    <td >
                                        <a href="userDetail?userId=${list.gRequester}">
                                        <div id="listTd">
                                           ${list.userName}<br>

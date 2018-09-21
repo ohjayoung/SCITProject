@@ -32,7 +32,11 @@
     WHERE GRONUM=#{groNum}
 	</select>
 	<select id="selectMyGroupList" resultType="group" parameterType="group">
-	SELECT *FROM T_GROUP WHERE USERID=#{userId}
+	SELECT *FROM T_GROUP
+   	WHERE GRONUM IN
+    (SELECT DISTINCT GRONUM FROM T_GREQUEST
+    WHERE
+    #{userId} IN (GREQACCEPTER,GREQUESTER))
 	</select>
 	
 	<update id="plusUserCount" parameterType="group">
