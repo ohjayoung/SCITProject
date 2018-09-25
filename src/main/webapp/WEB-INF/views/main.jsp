@@ -84,7 +84,6 @@
 
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 
-
 /* geolocation api */
  function geoFindMe() {
 	  if (!navigator.geolocation){
@@ -99,11 +98,9 @@
 	  };
 	  
 	  function success(position) {
-
-		var latitude  = position.coords.latitude;
+ 		var latitude  = position.coords.latitude;
 	    var longitude = position.coords.longitude;
-	    var acc = position.coords.accuracy;
-		console.log(acc);
+
 	    $.ajax({
 	    	type : "GET"
 	    	,url : "https://api2.sktelecom.com/weather/current/hourly?appKey=926493ca-9bd8-44c4-a253-2ffe309c014f&version=1&lat="+latitude+"&lon="+longitude
@@ -115,23 +112,37 @@
 	    		var city = response.weather.hourly[0].grid.city;
 	    		var county = response.weather.hourly[0].grid.county;
 	    		var village = response.weather.hourly[0].grid.village;
-	    		var sky = response.weather.hourly[0].sky.code;
+/*	    		var sky = response.weather.hourly[0].sky.code;
 	    		var tc = response.weather.hourly[0].temperature.tc;
 	    		var tmin = response.weather.hourly[0].temperature.tmin;
 	    		var tmax = response.weather.hourly[0].temperature.tmax;
-	    		var time = response.weather.hourly[0].timeRelease;
+	    		var time = response.weather.hourly[0].timeRelease; */
 	    		 
 	    		console.log(city + " " + county + " " + village);
-	    		$('#weatherDiv').html('<a class="weatherwidget-io" href="https://forecast7.com/ja/37d54127d05/seongsu-1il-ga-1il-dong/" data-label_1="'+village+'" data-label_2="WEATHER" data-font="ヒラギノ角ゴ Pro W3" data-theme="pure">Locating…</a>');
-/* 	    		$('.cardCity').html(city + " " + county + " " + village);
-	    		$('.cardDate').html(time);
-	    		$('.tcP').html(tc + "℃");
-	    		$('.tMinMaxP').html("최저온도 : " + tmin + "℃, 최대온도 : " + tmax); */
+	    		$('#weatherDiv').html('<a class="weatherwidget-io" href="https://forecast7.com/ja/37d51127d06/samseong-dong/" data-label_1="サムソンドン" data-label_2="WEATHER" data-font="ヒラギノ角ゴ Pro W3" data-theme="pure">Locating…</a>');
+	    		sessionUpload(response);
 	    	}
 	    })
-	    
 	  };
-
+	  
+	  function sessionUpload(response){
+		var city = response.weather.hourly[0].grid.city;
+  		var county = response.weather.hourly[0].grid.county;
+  		var village = response.weather.hourly[0].grid.village;
+  		
+  		var sendData = { "village" : village };
+  		
+  		$.ajax({
+  			method : 'get'
+  			, url  : 'villageUpload'
+  			, data : sendData
+  			, contentType : 'application/json; charset=UTF-8'
+  			, success : function(response){
+  				console.log('session등록완료');
+  			}
+  		})
+	  }
+			
 	  function error() {
 	    alert("사용자의 위치를 찾을 수 없습니다.");
 	  };

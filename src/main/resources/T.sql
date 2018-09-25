@@ -305,15 +305,32 @@ INSERT INTO T_SCHEDULE(
 	)
 VALUES(
 	T_SCHEDULE_SEQ.NEXTVAL,
-	'스케쥴15',
-	'내용15',
-	'2018.09.28',
-	'2018.09.30',
-	'3',
+	'스케쥴13',
+	'내용13',
+	'2018-09-21',
+	'2018-09-24',
+	'2',
 	21,
-	'카테고리',
+	'데이트',
 	'삼성동'
 );
-
+COMMIT
 SELECT * FROM T_SCHEDULE;
 DELETE FROM T_SCHEDULE WHERE IMPORTANCE = '3';
+
+create table messageroom(
+userid varchar2(20) not null,
+id varchar2(20) not null
+);
+alter table t_message add(accessed number(10));
+
+INSERT INTO T_FRIEND(
+      FRINUM, FRIREQUESTER, FRIACCEPTER
+      )VALUES(
+      T_FRIEND_SEQ.NEXTVAL, 'akehdgml', 'akehdgml'
+      );
+      
+SELECT * FROM T_PLIST;
+SELECT * FROM T_SCHEDULE;
+SELECT * FROM T_USER;
+UPDATE T_SCHEDULE SET CHECKED = 1 WHERE IMPORTANCE = '2';

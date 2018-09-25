@@ -10,6 +10,7 @@
 </head>
 <body>
 <div class="main-panel">
+	<input type="hidden" name="sessionName" id="sessionName" value="${sessionScope.loginName}"/>
 	<div class="content">
 		<div class="container-fluid">
 			<h4 class="page-title">Pattern Analysis</h4>
@@ -101,6 +102,7 @@
 <script src="resources/circle-progress.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
 <c:set value="${sessionScope.loginId}" var="userId" />
+<c:set value="${sessionScope.userName}" var="userName" />
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -117,7 +119,9 @@ $(document).ready(function() {
 	var changeMonth = "";
 	var checked="";
 	var month="";
-	var userId = '<c:out value="${userId}"/>'
+	var userId = '<c:out value="${userId}"/>';
+	var categoryCount = [];
+	var categoryCount2 = [];
 	
 	/* ===============createChart============================== */
 	function createChart() {
@@ -183,8 +187,8 @@ $(document).ready(function() {
 		$('#graph').html('<div id="graph" style="width: 80%; margin: 30px;"><div><canvas id="canvas" height="350" width="600"></canvas></div></div>');
 		
 		//getJson으로 데이터
-		$.getJSON("./getCategory", {
-			userId : userId,
+		$.getJSON("./	", {
+			userId	 : userId,
 			checked : checked
 		}, function(data) {
 			var i = 0;
@@ -276,38 +280,65 @@ $(document).ready(function() {
 			secondDiv();
 		});
 	})
-	$(document).on('click','#btn2', function(){
-		var dataSize = 0;
-		checked = $('#selectCheck option:selected').val();
-		$('.tr').html('');
-		
-		$.ajax({
-			data: checked,
-			url: 'scheduleList',
-			type: 'POST',
-			dataType : 'json',
-			contentType : 'application/json; charset:utf-8',
-			success : function(data){
-				var str ='';
-				$.each(data, function(i){
-					str += '<tr>';
-					str += '<td>'+data[i].schNum+'</td>';
-					str += '<td>'+data[i].schTitle+'</td>';
-					str += '<td>'+data[i].schContent+'</td>';
-					str += '<td>'+data[i].startDate+'</td>';
-					str += '<td>'+data[i].endDate+'</td>';
-					str += '<td>'+data[i].category+'</td>';
-					str += '</tr>';
-				});
-				$('.tr').append(str);
-				dataSize = data.size;
-			},
-			error: function(){
-				alert("error");
-			}
-		});
-		secondTable();
-	});
+	 $(document).on('click','#btn2', function(){
+      var dataSize = 0;
+      checked = $('#selectCheck option:selected').val();
+      $('.tr').html('');
+      
+      $.ajax({
+         data: checked,
+         url: 'scheduleList',
+         type: 'POST',
+         dataType : 'json',
+         contentType : 'application/json; charset:utf-8',
+         success : function(data){
+            var str ='';
+            var i = 0;
+            $.each(data, function(i){
+               str += '<tr>';
+               str += '<td>'+data[i].schNum+'</td>';
+               str += '<td>'+data[i].schTitle+'</td>';
+               str += '<td>'+data[i].schContent+'</td>';
+               str += '<td>'+data[i].schStartdate+'</td>';
+               str += '<td>'+data[i].schEnddate+'</td>';
+               str += '<td>'+data[i].category+'</td>';
+               str += '</tr>';
+               
+               if(categoryCount.length == 0){
+                  categoryCount.push(data[i].category);
+                  i = categoryCount.indexOf(data[i].category);
+                  if(categoryCount2[i]==null){
+                     categoryCount2[i]=0;
+                  }
+                  categoryCount2[i] ++;
+               }else {
+                  if(categoryCount.includes(data[i].category)){
+                     i = categoryCount.indexOf(data[i].category);
+                     if(categoryCount2[i]==null){
+                        categoryCount2[i]=0;
+                     }
+                     categoryCount2[i] ++;
+                  }else {
+                     categoryCount.push(data[i].category);
+                     i = categoryCount.indexOf(data[i].category);
+                     if(categoryCount2[i]==null){
+                        categoryCount2[i]=0;
+                     }
+                     categoryCount2[i] ++;
+                  }
+               }
+               
+            });
+            $('.tr').append(str);
+            dataSize = data.size;
+            secondTable();
+         },
+         error: function(){
+            alert("error");
+         }
+      });
+   });
+	
 	$(document).on('click','#btn3',function(){
 		/* chartLabels = [];
 		chartLabel = []; */
@@ -430,7 +461,7 @@ $(document).ready(function() {
 		str += '</div>';
 		str += '<div class="card">';
 		str += '<div class="card-header">';
-		str += '<div class="card-title">Hoverable Table</div>';
+		str += '<div class="card-title">チェックリスト</div>';
 		str += '</div>';
 		str += '<div class="card-body">';
 		str += '<table class="table table-hover">';
@@ -452,40 +483,40 @@ $(document).ready(function() {
 		
 		$('#firstDiv').html(str);
 	}
- 	function secondTable(){
- 		/* 
-		var str = '';
+	function secondTable(){
+		$('#secondDiv').html('');
+		var sessionName = $('#sessionName').val();
+		var category = categoryCount[0];
+		var sendData = {"category" : category};
 		
-		str += '<div class="card card-stats" id="three">';
+		var str = '<br>';
+		str += '<div class="card card-stats">';
 		str += '<div class="card-header" >';
-		str += '<h4 class="card-title">' + month +'월' +'</h4>';
+		str += '<h4 class="card-title">'+ sessionName +' 様におすすめします！</h4>';
+		str += '<h4 class="card-title">これはいかがでしょうか？</h4>';
 		str += '</div>';
-		str += '<div class="card-body">' ;
-		str += '<h4 class="card-title">' + chartDataCount + '개 중'+'</h4>';
-		
-		if(checked=='1'){
-			str += '<h4 class="card-title">'+checkedCount;
-			str += '<h4 class="card-title"> 개 수행</h4>';
-			str += '<h4 class="card-title">이번 달 가장 많이 수행한 카테고리'+ newData + maxCate + '개 수행'+'</h4>';
-		}else{
-			str += '<h4 class="card-title">'+unFinished;
-			str += '<h4 class="card-title"> 개를 수행하지 못함</h4>';
-			str += '<h4 class="card-title">이번 달 가장 많이 수행하지 못한 카테고리'+ newData + maxCate + '개 '+'</h4>';
-		}
-		str += '</div>';
-		str += '</div>';
-		str += '<div class="card">';
-		str += '<div class="card-header">';
-		str += '<h4 class="card-title">Task</h4>';
-		str += '</div>';
-		str += '<div class="card-body">';
-		str += '<div id="circle" class="chart-circle mt-4 mb-3">';
-		str += '<strong class="circle_strong"></strong> ';
-		str += '</div>';
-		str += '</div>';
-		str += '</div>';
-		str += '';
-		$('#secondDiv').html(str); */
+		str += '<div class="card-body recommendDiv">';
+
+		$.ajax({
+			method : 'get'
+			, url  : 'recPerCategory'
+			, data : sendData
+			, contentType : 'application/json; charset=UTF-8'
+			, success : function(response){
+				/* console.log(response[0][0]); */
+ 				$.each(response, function(index, item){
+					console.log(response[index][index]);
+					str += '<a href="' + response[index][0] +'" target="_blank">' + response[index][1] + '</a>'
+					str += '<p>電話番号 : ' + response[index][2] +'</p>';
+					str += '<p>アドレス : ' + response[index][3] + '</p>';
+					str += '<hr>';
+				}) 
+					str += '</div>';
+					str += '</div>';
+					$('#secondDiv').html(str);
+			}
+		})
+	    console.log("가장많은 카테고리가 뭔가"+categoryCount);
 	}
 	/* ====================================secondDiv====================== */
 	function secondDiv(){
@@ -519,7 +550,7 @@ $(document).ready(function() {
 	 			} 		
 	 		}
  		}
- 		unFinished = chartDataCount - checkedCount
+ 		unFinished = chartDataCount - checkedCount;
 		str += '<div class="card card-stats">';
 		str += '<div class="card-header" >';
 		str += '<h4 class="card-title">' + month +'월' +'</h4>';
@@ -527,7 +558,7 @@ $(document).ready(function() {
 		str += '<div class="card-body">' ;
 		str += '<h4 class="card-title">' + chartDataCount + '개 중'+'</h4>';
 		
-		if(checked=='1'){
+		/* if(checked=='1'){
 			str += '<h4 class="card-title">'+checkedCount;
 			str += '<h4 class="card-title"> 개 수행</h4>';
 			str += '<h4 class="card-title">이번 달 가장 많이 수행한 카테고리'+ newData + maxCate + '개 수행'+'</h4>';
@@ -535,7 +566,7 @@ $(document).ready(function() {
 			str += '<h4 class="card-title">'+unFinished;
 			str += '<h4 class="card-title"> 개를 수행하지 못함</h4>';
 			str += '<h4 class="card-title">이번 달 가장 많이 수행하지 못한 카테고리'+ newData + maxCate + '개 '+'</h4>';
-		}
+		} */
 		str += '</div>';
 		str += '</div>';
 		str += '<div class="card">';
@@ -604,5 +635,9 @@ $(document).ready(function() {
 .card-body:hover {
 	background-color: yellow;
 }
+
+/* .recommendDiv {
+	height: 300px;
+} */
 </style>
 </html>
