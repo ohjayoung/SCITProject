@@ -1,10 +1,13 @@
 package global.sesoc.www.controller;
 
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.www.dao.T_FriendRepository;
+import global.sesoc.www.dao.T_PlannerRepository;
 import global.sesoc.www.dao.T_ScheduleRepository;
 import global.sesoc.www.dto.T_Friend;
+import global.sesoc.www.dto.T_Group;
+import global.sesoc.www.dto.T_Planner;
 import global.sesoc.www.dto.T_Schedule;
 import global.sesoc.www.dto.T_User;
 
@@ -28,6 +34,8 @@ public class T_ScheduleController {
 	T_ScheduleRepository T_ScheduleRepository; 
 	@Autowired
 	T_FriendRepository T_FriendRepository;
+	@Autowired
+	T_PlannerRepository T_PlannerRepository;
 	@RequestMapping(value="/scheduleList", method=RequestMethod.GET)
 	public String scheduleList(Model model,T_Schedule schedule) {
 		
@@ -57,12 +65,15 @@ public class T_ScheduleController {
 		return "schedule/insertSchedule";
 	}
 	@RequestMapping(value="/insertSchedule", method=RequestMethod.POST)
-	public String insertSchedule(T_Schedule s,Model model) {	//schedule insert -- db
+	public String insertSchedule(T_Schedule s,Model model, HttpSession session) {	//schedule insert -- db
+		String userId=(String)session.getAttribute("loginId");
+		
+		List<T_Planner> plannerList=T_PlannerRepository.plannerList(userId);
+		model.addAttribute("plannerList",plannerList);
+		
 		int result= T_ScheduleRepository.insertSchedule(s);
-		List<T_Schedule> list=T_ScheduleRepository.selectPlannerSchedule(s.getPlaNum());
-		model.addAttribute("plaNum",s.getPlaNum());
-		model.addAttribute("schdulelist",list);
-		return "redirect:/scheduleList";
+	
+		return "schedule/plannerList";
 	}
 	
 	
@@ -127,9 +138,25 @@ public class T_ScheduleController {
 		return list;
 		
 	}
+
+	@ResponseBody
+	@RequestMapping(value="/selectUserPlannerSchedule",method=RequestMethod.POST)
+	public List<T_Schedule> selectUserPlannerSchedule(@RequestBody T_Planner planner,HttpSession session){
+		String userId=(String)session.getAttribute("loginId");
+		System.out.println(planner);
+		List<T_Schedule>list=T_ScheduleRepository.selectUserPlannerSchedule(userId, planner.getPlaNum());
+		System.out.println("asasa::"+list);
+		return list;
+	}
 	
-	
-	
+	@ResponseBody
+	@RequestMapping(value="/selectGroupSchedule",method=RequestMethod.POST)
+	public List<T_Schedule> selectGroupSchedule(@RequestBody T_Group group){
+		System.out.println("aa::"+group);
+		List<T_Schedule> list=T_ScheduleRepository.selectGroupSchedule(group.getGroNum());
+		System.out.println("aaa::"+list);
+		return list;
+
 	@RequestMapping(value="schDelete", method=RequestMethod.POST)
 	public String schDelete(String schNum) {
 		System.out.println(schNum +"schDelete쪽입니다.");
@@ -199,6 +226,7 @@ public class T_ScheduleController {
 		int check = T_ScheduleRepository.updateCheck(checked);
 		
 		return check;
+
 	}
 }
 

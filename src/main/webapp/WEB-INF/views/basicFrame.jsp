@@ -369,7 +369,7 @@ $(document).on("click", "#successBtn", function(){
 					alert('다시 시도해주세요');
 				}
 			}
-		})
+		});
 	}
 });
 

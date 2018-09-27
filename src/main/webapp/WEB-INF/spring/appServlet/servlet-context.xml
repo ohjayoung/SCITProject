@@ -27,6 +27,7 @@
 	<resources mapping="/images/**" location="/resources/images/" />
 	<resources mapping="/vendor/**" location="/resources/vendor/" />
 	<resources mapping="/assets/**" location="/resources/assets/" />
+	<resources mapping="/schduleResist/**" location="/resources/schduleResist/" />
 	<resources mapping="/group/**" location="/resources/group/" />
   	<resources mapping="/groupDetail/**" location="/resources/groupDetail/" />
 	

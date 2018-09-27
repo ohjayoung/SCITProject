@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.www.dao.T_RequestMapper">
-
+	<insert id="calendarShare" parameterType="request">
+	INSERT INTO T_REQUEST(
+	REQNUM,
+	REQUESTER,
+	REQACCEPTER
+	)VALUES(
+	T_REQUEST_SEQ.NEXTVAL,
+	#{requester},
+	#{reqAccepter}	
+	)
+	</insert>
+	<select id="checkShare" parameterType="request" resultType="request">
+	SELECT *FROM T_REQUEST
+	WHERE REQUESTER=#{requester}
+	OR REQACCEPTER=#{reqAccepter}
+	</select>
 </mapper>
 

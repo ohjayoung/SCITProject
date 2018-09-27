@@ -46,5 +46,18 @@
 	WHERE 
 	GRONUM=#{groNum}
 	</update>
+	
+	<select id="checkApplyGroup" parameterType="map" resultType="int">
+	SELECT DISTINCT t_grequest.GRONUM FROM T_GREQUEST t_grequest,T_GROUP t_group
+	WHERE 
+	t_grequest.GRONUM=t_group.GRONUM
+	AND t_grequest.ISGREQACCEPTED=1
+	AND t_grequest.GREQACCEPTER=#{loginId}
+	OR t_grequest.GREQUESTER=#{loginId}
+	</select>
+	
+	<delete id="deleteGroup" parameterType="int">
+	DELETE T_GROUP WHERE GRONUM=#{groNum}
+	</delete>
 </mapper>
 
