@@ -58,4 +58,26 @@
 	<delete id="applyCancel" parameterType="int">
 	delete T_GREQUEST WHERE GREQNUM=#{greqNum}
 	</delete>
+	
+	<select id="checkInvite" parameterType="grequest" resultType="grequest">
+	SELECT *FROM T_GREQUEST 
+	WHERE GRONUM=#{groNum} 
+	
+	AND (GREQUESTER=#{gRequester}
+	OR GREQACCEPTER=#{greqAccepter})
+	</select>
+	<delete id="groupMemberDelete" parameterType="grequest">
+	DELETE T_GREQUEST 
+	WHERE GRONUM=#{groNum}
+	AND GREQUESTER=#{gRequester}
+	</delete>
+	<delete id="deleteGroupGrequest" parameterType="int">
+	DELETE T_GREQUEST WHERE GRONUM=#{groNum}
+	</delete>
+	
+	<select id="getGroupUsers" parameterType="int" resultType="grequest">
+	SELECT *FROM T_GREQUEST 
+	WHERE GRONUM=#{groNum}
+	AND ISGREQACCEPTED=1
+	</select>
 </mapper>

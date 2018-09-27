@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import global.sesoc.www.dao.T_BoardRepository;
+import global.sesoc.www.dao.T_GrequestRepository;
 import global.sesoc.www.dao.T_GroupRepository;
 import global.sesoc.www.dto.T_Board;
+import global.sesoc.www.dto.T_Grequest;
 import global.sesoc.www.dto.T_Group;
 import global.sesoc.www.util.FileService;
 
@@ -29,11 +32,18 @@ public class T_GroupController {
 	T_GroupRepository T_GroupRepository; 
 	@Autowired
 	T_BoardRepository T_BoardRepository;
+	@Autowired
+	T_GrequestRepository T_GrequestRepository;
+	
 	final String uploadPath="/uploadPath";
 	
 	@RequestMapping(value="/groupList", method=RequestMethod.GET)
-	public String groupList(Model model) {
+	public String groupList(Model model,HttpSession session) {
+		String loginId=(String)session.getAttribute("loginId");
+		List<Integer> applyList=T_GroupRepository.checkApplyGroup(loginId);
 		List<T_Group> list=T_GroupRepository.selectAllGroup();
+		
+		model.addAttribute("applyList",applyList);
 		model.addAttribute("group",list);
 		
 		return "group/groupList";
@@ -43,7 +53,9 @@ public class T_GroupController {
 		String userId=(String)session.getAttribute("loginId");
 		T_Group g = new T_Group(); 	g.setUserId(userId);
 		List<T_Group> list=T_GroupRepository.selectMyGroupList(g);
+		List<Integer> applyList=T_GroupRepository.checkApplyGroup(userId);
 		model.addAttribute("group",list);
+		model.addAttribute("applyList",applyList);
 		return "group/myGroupList";
 	}
 	
@@ -75,9 +87,12 @@ public class T_GroupController {
 	}
 	@RequestMapping(value="/groupDetail", method=RequestMethod.GET)
 	public String groupDetail(T_Group group, Model model) {
+	
 		List<T_Board> bList=T_BoardRepository.selectGroNumBoard(group.getGroNum());
 		T_Group g=T_GroupRepository.selectOneGroup(group);
+		List<T_Grequest> userList=T_GrequestRepository.getGroupUsers(group.getGroNum());
 		
+		model.addAttribute("userList",userList);
 		model.addAttribute("group",g);
 		model.addAttribute("bList",bList);
 		
@@ -112,5 +127,18 @@ public class T_GroupController {
 			e.printStackTrace();
 		}
 		return null; 
+	}
+	@RequestMapping(value="/groupDelete", method=RequestMethod.GET)
+	public String deleteGroup(T_Group group) {
+		System.out.println("111111::"+group);
+		int groNum=group.getGroNum();
+		int r=T_BoardRepository.deleteGroupBoard(groNum);
+		System.out.println("2:"+r);
+		int r2=T_GrequestRepository.deleteGroupGrequest(groNum);
+		System.out.println("3:"+r2);
+		int result=T_GroupRepository.deleteGroup(groNum);
+		System.out.println("4:"+result);
+		
+		return "redirect:groupList";
 	}
 }

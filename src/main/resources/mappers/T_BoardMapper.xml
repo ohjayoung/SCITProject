@@ -25,7 +25,19 @@ INSERT INTO T_BOARD(
    )
 </insert>
 <select id="selectGroNumBoard" parameterType="int" resultType="board">
-SELECT *FROM T_BOARD WHERE GRONUM=#{groNum}
+SELECT *FROM T_BOARD WHERE GRONUM=#{groNum} 
+ORDER BY BOAREGDATE DESC
 </select>
+<select id="detailBoard" parameterType="board" resultType="board">
+SELECT *FROM T_BOARD 
+WHERE
+BOANUM=#{boaNum} 
+<if test="groNum != 0">
+AND GRONUM=#{groNum}
+</if>
+</select>
+<delete id="deleteGroupBoard" parameterType="int">
+DELETE T_BOARD WHERE GRONUM=#{groNum}
+</delete>
 </mapper>
 

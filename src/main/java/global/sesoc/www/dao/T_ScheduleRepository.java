@@ -90,9 +90,11 @@ public class T_ScheduleRepository {
 		return schduleList;
 	}
 	
-	public List<T_Schedule> selectUserPlannerSchedule(T_Schedule schedule){
+	public List<T_Schedule> selectUserPlannerSchedule(String userId, int plaNum){
+		Map<String, Object>map=new HashMap<String,Object>();
+		map.put("userId", userId);	map.put("plaNum", plaNum);
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
-		List<T_Schedule> schduleList =mapper.selectUserPlannerSchedule(schedule);
+		List<T_Schedule> schduleList =mapper.selectUserPlannerSchedule(map);
 		return schduleList;
 	}
 	
@@ -104,6 +106,12 @@ public class T_ScheduleRepository {
 		List<T_Schedule> list=mapper.selectMixSchedule(map);
 		return list;
 		
+	}
+	
+	public List<T_Schedule> selectGroupSchedule(int groNum){
+		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
+		List<T_Schedule>list=mapper.selectGroupSchedule(groNum);
+		return list;
 	}
 
 }

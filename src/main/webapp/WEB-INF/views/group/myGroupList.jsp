@@ -54,7 +54,18 @@
                   <div class="course_footer d-flex flex-row align-items-center justify-content-start">
                      <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>${group.userCount}</span></div>
                      <div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div>
+                      <c:forEach var="applyList" items="${applyList }">
+                     <c:if test="${group.groNum != applyList }">
                      <div class="course_mark trans_200"><a data-rno="${group.groNum}" class="applyUser" href="#" >가입신청</a></div>
+                  	</c:if>
+                  	</c:forEach>
+                  	
+                  	<c:forEach var="applyList" items="${applyList }">
+                     <c:if test="${group.groNum == applyList }">
+                     <div class="course_mark trans_200"><a data-rno="${group.groNum}" class="#" href="#" >가입 됨</a></div>
+                     
+                  	</c:if>
+                  	</c:forEach>
                   </div>
                </div>
             </div>

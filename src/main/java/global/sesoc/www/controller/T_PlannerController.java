@@ -7,8 +7,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.www.dao.T_PlannerRepository;
 import global.sesoc.www.dao.T_PlistRepository;
@@ -48,16 +50,16 @@ public class T_PlannerController {
 		T_PlistRepository.insertPlist(plist);
 		return "redirect:/plannerList";
 	}
-	@RequestMapping(value="/deletePlanner", method=RequestMethod.GET)
-	public String deletePlanner(T_Planner planner, Model model,HttpSession session) {
+	@ResponseBody
+	@RequestMapping(value="/deletePlanner", method=RequestMethod.POST)
+	public int deletePlanner(@RequestBody T_Planner planner, Model model,HttpSession session) {
 		String userId=(String)session.getAttribute("loginId");
-		
+	
 		int result1=T_PlistRepository.deletePlanner_Plist(planner.getPlaNum());
 		int result2=T_ScheduleRepository.deletePlanner_Schedule(planner.getPlaNum());
 		int result=T_PlannerRepository.deletePlanner(planner.getPlaNum());
 
-		List<T_Planner> plannerList=T_PlannerRepository.plannerList(userId);
-		model.addAttribute("plannerList",plannerList);
-		return "redirect:/plannerList";
+		
+		return result;
 	}
 }

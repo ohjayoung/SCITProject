@@ -16,6 +16,7 @@
 		schedule.SHAREABLE SHAREABLE,
 		schedule.PLANUM PLANUM,
 		schedule.CATEGORY CATEGORY,
+		schedule.SCHLOCATION SCHLOCATION, 
 		SUBSTR(schedule.schstartdate, 4,2) MONTH
 	FROM T_SCHEDULE schedule,T_PLIST plist
 	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
@@ -35,6 +36,7 @@
 		schedule.SHAREABLE SHAREABLE,
 		schedule.PLANUM PLANUM,
 		schedule.CATEGORY CATEGORY,
+		schedule.SCHLOCATION SCHLOCATION, 
 		SUBSTR(schedule.schstartdate, 4,2) MONTH
 	FROM T_SCHEDULE schedule,T_PLIST plist
 	WHERE schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId} AND schedule.CHECKED=#{checked}
@@ -52,18 +54,19 @@
 </select>
 
 <insert id="insertSchedule" parameterType="schedule">
-	INSERT INTO T_SCHEDULE(
+   INSERT INTO T_SCHEDULE(
     SCHNUM,
     SCHTITLE,
     SCHCONTENT,
     SCHSTARTDATE,
     SCHENDDATE,
     IMPORTANCE,
-    <if test="SHAREABLE=!null">
+    <if test="shareable != 0">
     SHAREABLE,
     </if>
     PLANUM,
-	CATEGORY
+   CATEGORY,
+   SCHLOCATION
     )VALUES(
     T_SCHEDULE_SEQ.NEXTVAL,
     #{schTitle},
@@ -71,13 +74,14 @@
     #{schStartdate},
     #{schEnddate},
     #{importance},
-    <if test="shareable!=null">
+    <if test="shareable != 0">
     #{shareable},
     </if>
     #{plaNum},
-    #{category}
+    #{category},
+    #{schLocation}
     )
-</insert>
+   </insert>
 	
 	<select id="selectUserSchedule" parameterType="string" resultType="schedule">
 	SELECT *FROM T_SCHEDULE
@@ -92,7 +96,7 @@
 	</select>
 	
 	<update id="updateSchedule" parameterType="schedule">
-	UPDATE T_SCHEDULE
+   UPDATE T_SCHEDULE
     SET 
     SCHTITLE=#{schTitle},
     SCHCONTENT=#{schContent},
@@ -100,10 +104,12 @@
     SCHENDDATE=#{schEnddate},
     IMPORTANCE=#{importance},
     SHAREABLE=#{shareable},
-    CATEGORY=#{category}
+    CATEGORY=#{category},
+    SCHLOCATION=#{schLocation}
     WHERE 
     SCHNUM=#{schNum}
-	</update>
+   </update>
+	
 	<delete id="deletePlanner_Schedule" parameterType="int">
 	DELETE T_SCHEDULE WHERE PLANUM=#{plaNum}
 	</delete>
@@ -121,13 +127,14 @@
             schedule.CHECKED CHECKED,
             schedule.SHAREABLE SHAREABLE,
             schedule.PLANUM PLANUM,
-            schedule.CATEGORY CATEGORY
+            schedule.CATEGORY CATEGORY,
+            schedule.SCHLOCATION SCHLOCATION 
    		 FROM T_SCHEDULE schedule,T_PLIST plist 
   		  where schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
    		 order by PLANUM
 	</select>
 	
-	<select id="selectUserPlannerSchedule" resultType="schedule" parameterType="schedule">
+	<select id="selectUserPlannerSchedule" resultType="schedule" parameterType="map">
 	  SELECT schedule.SCHNUM SCHNUM,
             schedule.SCHTITLE SCHTITLE,
             schedule.SCHCONTENT SCHCONTENT,
@@ -138,7 +145,8 @@
             schedule.CHECKED CHECKED,
             schedule.SHAREABLE SHAREABLE,
             schedule.PLANUM PLANUM,
-            schedule.CATEGORY CATEGORY
+            schedule.CATEGORY CATEGORY,
+            schedule.SCHLOCATION SCHLOCATION
     FROM T_SCHEDULE schedule,T_PLIST plist 
     where schedule.PLANUM=plist.PLANUM AND plist.USERID=#{userId}
         AND schedule.PLANUM=#{plaNum}
@@ -155,11 +163,22 @@
             schedule.CHECKED CHECKED,
             schedule.SHAREABLE SHAREABLE,
             schedule.PLANUM PLANUM,
-            schedule.CATEGORY CATERGORY
+            schedule.CATEGORY CATERGORY,
+            schedule.SCHLOCATION SCHLOCATION
     FROM T_SCHEDULE schedule,T_PLIST plist 
-    where schedule.PLANUM=plist.PLANUM AND plist.USERID in(#{loginId},#{friendId})
+    where 
+    schedule.PLANUM=plist.PLANUM
+    AND plist.USERID in(#{loginId},#{friendId})
+    AND schedule.CHECKED=1
     order by PLANUM
 	
+	</select>
+	
+	<select id="selectGroupSchedule" parameterType="int" resultType="schedule">
+	SELECT *FROM T_SCHEDULE
+	WHERE PLANUM IN
+	(SELECT PLANUM FROM T_PLIST
+	WHERE GRONUM=#{groNum})
 	</select>
 </mapper>
 

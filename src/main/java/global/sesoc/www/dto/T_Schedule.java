@@ -12,6 +12,7 @@ public class T_Schedule {
 	private int shareable;
 	private int plaNum;	//T_Planner fk
 	private String category;
+	private String schLocation;
 	public T_Schedule() {}
 	public int getSchNum() {
 		return schNum;
@@ -79,12 +80,19 @@ public class T_Schedule {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	public String getSchLocation() {
+		return schLocation;
+	}
+	public void setSchLocation(String schLocation) {
+		this.schLocation = schLocation;
+	}
 	@Override
 	public String toString() {
 		return "T_Schedule [schNum=" + schNum + ", schTitle=" + schTitle + ", schContent=" + schContent
 				+ ", schRegdate=" + schRegdate + ", schStartdate=" + schStartdate + ", schEnddate=" + schEnddate
 				+ ", importance=" + importance + ", checked=" + checked + ", shareable=" + shareable + ", plaNum="
-				+ plaNum + ", category=" + category + "]";
+				+ plaNum + ", category=" + category + ", schLocation=" + schLocation + "]";
 	}
+	
 	
 }
