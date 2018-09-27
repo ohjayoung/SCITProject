@@ -11,7 +11,9 @@ body {
   top: 0;
   height: 100vh;
 }
-
+.mainlogo{
+  padding-right: 10px;
+}
 .main-header {
   min-height: 55px;
   width: 100%;
@@ -33,6 +35,7 @@ body {
     padding-right: 25px;
     z-index: 1001;
     display: inline-block;
+    padding-top: 8px;
     a.logo {
       color: $body-text-color;
     }

@@ -44,7 +44,7 @@ $(function(){
 		<input type="hidden" name="loginId" id="loginId" value="${sessionScope.loginId}">
 		<div class="main-header">
 			<div class="logo-header logoStyle">
-				<a href="main"><img alt="mainlogo" src="images/mainlogo.png"></a>
+				<a href="main"><img class="mainlogo" alt="mainlogo" src="images/mainlogo40.png"><img alt="logo" src="images/logowhite40.png"></a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
