@@ -156,7 +156,8 @@ public class T_ScheduleController {
 		List<T_Schedule> list=T_ScheduleRepository.selectGroupSchedule(group.getGroNum());
 		System.out.println("aaa::"+list);
 		return list;
-
+	}
+	
 	@RequestMapping(value="schDelete", method=RequestMethod.POST)
 	public String schDelete(String schNum) {
 		System.out.println(schNum +"schDelete쪽입니다.");

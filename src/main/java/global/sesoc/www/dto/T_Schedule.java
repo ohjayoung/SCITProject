@@ -13,10 +13,27 @@ public class T_Schedule {
 	private int plaNum;	//T_Planner fk
 	private String category;
 	private String schLocation;
-	public T_Schedule() {}
+	
 	public T_Schedule() {
-		
 	}
+	
+	public T_Schedule(int schNum, String schTitle, String schContent, String schRegdate, String schStartdate,
+			String schEnddate, String importance, int checked, int shareable, int plaNum, String category,
+			String schLocation) {
+		this.schNum = schNum;
+		this.schTitle = schTitle;
+		this.schContent = schContent;
+		this.schRegdate = schRegdate;
+		this.schStartdate = schStartdate;
+		this.schEnddate = schEnddate;
+		this.importance = importance;
+		this.checked = checked;
+		this.shareable = shareable;
+		this.plaNum = plaNum;
+		this.category = category;
+		this.schLocation = schLocation;
+	}
+	
 	public int getSchNum() {
 		return schNum;
 	}
