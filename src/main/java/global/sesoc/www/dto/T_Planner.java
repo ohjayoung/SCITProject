@@ -4,8 +4,8 @@ public class T_Planner {
 	private int plaNum;//PK
 	private String plaTitle;
 	private String plaRegdate;
+	
 	public T_Planner() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 	public int getPlaNum() {

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.www.dao.T_FriendRepository;
+import global.sesoc.www.dao.T_MessageRepository;
 import global.sesoc.www.dao.T_UserRepository;
 import global.sesoc.www.dto.T_Friend;
+import global.sesoc.www.dto.T_Message;
 import global.sesoc.www.dto.T_User;
 
 @Controller
@@ -26,7 +28,10 @@ public class T_FriendController {
 	
 	@Autowired
 	T_UserRepository repository2;
-
+	
+	@Autowired
+	T_MessageRepository repository3;
+	//친구리스트 보여주기
 	@RequestMapping(value = "/friendList", method = RequestMethod.GET)
 	public String friendList(HttpSession session, T_Friend check, Model model) {
 		String userId = (String) session.getAttribute("loginId"); // 사용자가 요청받은 친구 친구요청이 수락된 친구
@@ -75,12 +80,18 @@ public class T_FriendController {
 				friList.add(user);
 			}
 		}
+		repository3.updateMsg(userId);
+		T_Message message = new T_Message();
+		message.setUserB(userId);
+		List<T_Message> msgList = repository3.messageList(message);
+		
+		model.addAttribute("msgList", msgList);
 		model.addAttribute("requestList", requestList);
 		model.addAttribute("friList", friList);
 
 		return "friend/friendList";
 	}
-
+	//친구 요청
 	@ResponseBody
 	@RequestMapping(value = "/friRequest", method = RequestMethod.POST)
 	public int friRequest(@RequestBody T_Friend friend, HttpSession session) {
@@ -89,7 +100,7 @@ public class T_FriendController {
 		int result = repository.friInsert(friend);
 		return result;
 	}
-
+	//그 사람이 나랑 친구인지 확인
 	@ResponseBody
 	@RequestMapping(value = "/friCheck", method = RequestMethod.POST)
 	public String friCheck(@RequestBody String idList, HttpSession session, T_Friend check) {
@@ -116,7 +127,7 @@ public class T_FriendController {
 		System.out.println(result);
 		return result;
 	}
-	
+	//친구요청 수락
 	@ResponseBody
 	@RequestMapping(value = "/friAccept", method = RequestMethod.POST)
 	public int friAccept(@RequestBody T_Friend check, HttpSession session) {
@@ -126,7 +137,7 @@ public class T_FriendController {
 		int r = repository.friUpdate(check);
 		return r;
 	}
-	
+	//친구 삭제
 	@ResponseBody
 	@RequestMapping(value = "/friDelete", method = RequestMethod.POST)
 	public int friDelete(@RequestBody T_Friend check, HttpSession session) {
@@ -136,7 +147,7 @@ public class T_FriendController {
 		int r = repository.friDelete(check);
 		return r;
 	}
-	
+	//처음 로그인했을 때 친구요청 상태가 있는지 없는지 확인.
 	@ResponseBody
 	@RequestMapping(value = "/reqCheck", method = RequestMethod.POST)
 	public List<T_User> reqCheck(T_Friend check, HttpSession session, Model model) {

@@ -14,6 +14,9 @@ public class T_Schedule {
 	private String category;
 	private String schLocation;
 	public T_Schedule() {}
+	public T_Schedule() {
+		
+	}
 	public int getSchNum() {
 		return schNum;
 	}
@@ -93,6 +96,5 @@ public class T_Schedule {
 				+ ", importance=" + importance + ", checked=" + checked + ", shareable=" + shareable + ", plaNum="
 				+ plaNum + ", category=" + category + ", schLocation=" + schLocation + "]";
 	}
-	
 	
 }

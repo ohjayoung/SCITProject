@@ -123,7 +123,7 @@
             </div> <!-- card body  -->
             <div class="card-action">
                <button class="btn btn-success" type="submit">登録完了</button>
-               <button class="btn btn-danger" onclick="reset">削除</button>
+               <input class="btn btn-danger" type="reset" value="削除" />
             </div>
             </form>   <!-- signUpForm -->      
          </div>

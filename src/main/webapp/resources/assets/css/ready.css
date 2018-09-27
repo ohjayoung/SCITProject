@@ -53,7 +53,7 @@ body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, 
 
 body {
   font-size: 14px;
-  color: #575962;
+  color: #fffff5;
 }
 
 h1, .h1 {
@@ -2049,7 +2049,7 @@ body {
   height: 55px;
   line-height: 55px;
   border-right: 1px solid #eee;
-  color: #333333;
+  color: #ededea;
   z-index: 1001;
   font-size: 18px;
   font-weight: 600;
@@ -2104,7 +2104,7 @@ body {
   padding-bottom: 12.5px;
   border-bottom: 1px solid #eee;
   display: block;
-  background : linear-gradient( to bottom, #21314f, #15243f);	/* user background-color */
+  background : linear-gradient( to bottom, #1c1c19, #1e1e1d);	/* user background-color */
 }
 .sidebar .user .photo {
   width: 40px;
@@ -2130,7 +2130,7 @@ body {
 .sidebar .user .info a > span {
   font-size: 14px;
   font-weight: 600;
-  color: #e1eef6;		/* text color */
+  color: #ededea;		/* text color */
   letter-spacing: 0.04em;
   display: flex;
   flex-direction: column;
@@ -2160,7 +2160,7 @@ body {
   z-index: 4;
   padding-top: 55px;
   padding-bottom: 100px;
-  background : linear-gradient( to bottom, #15243f, #21314f);	/* sidebar background color */
+  background : linear-gradient( to bottom, #1c1c19, #1e1e1d);	/* sidebar background color */
 }
 .sidebar .nav {
   display: block;
@@ -2202,7 +2202,7 @@ body {
 .sidebar .nav .nav-item a {
   display: flex;
   align-items: center;
-  color: #e1eef6;			/* text color */
+  color: #f0f5f9;			/* text color */
   padding: 13px 25px;
   width: 100%;
   font-size: 14px;
@@ -2247,10 +2247,10 @@ body {
   min-height: 100%;
   float: right;
   background: #15243f;
-  background: -webkit-linear-gradient(-135deg, #15243f, #bfc3c9);
-  background: -o-linear-gradient(-135deg, #f9ef2f, #f9ef2f);
-  background: -moz-linear-gradient(-135deg, #ed65a9, #f9ef2f);
-  background: linear-gradient(-135deg, #15243f, #bfc3c9);	/* dashboard content background color */
+  background: -webkit-linear-gradient(-135deg, #f9fbff, #f7f7f7);
+  background: -o-linear-gradient(-135deg, #f9fbff, #f7f7f7);
+  background: -moz-linear-gradient(-135deg, #f9fbff, #f7f7f7);
+  background: linear-gradient(-135deg, #f9fbff, #f7f7f7);	/* dashboard content background color */
 }
 .main-panel .content {
   padding: 30px 15px;
@@ -6698,12 +6698,17 @@ body {
   }
   
   .navTop {
-  	background: linear-gradient( to right, #c9cdd6,  #bfc3c9);
+  	background: linear-gradient( to right, #f9fbff,  #f7f7f7);
   	
   }
 
   .logoStyle {
- 	 background: linear-gradient( to bottom, #15243f,  #21314f);
+ 	 background : linear-gradient( to bottom, #1c1c19, #1e1e1d);
+  }
+  
+  .cardDate {
+  	float: right;
+  	
   }
  
  /* signUp ======================================================== */
@@ -6741,4 +6746,25 @@ body {
   	width: 100%;
     height: 100%;
   }
+  
+/* non check list ======================================================== */
+.circle_strong{
+ position:absolute;
+ top:30px;
+ left:20px;
+ text-align:center;
+ line-height:40px;
+ font-size:24px;
+ }
+
+.selected{
+ text-decoration:line-through;
+ font-weight:700;
+ color:red;
+}
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: absolute;
+    left: auto;
+}
 /*# sourceMappingURL=ready.css.map */

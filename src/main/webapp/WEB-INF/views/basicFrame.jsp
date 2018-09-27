@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -68,10 +68,10 @@ $(function(){
 						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- message toggle ------------------------------>
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-envelope"></i>
-								<span class="notification messageNotify">!</span>		<!-- 새로운 메세지가 있으면 ! 표시-->
+								<span class="notification messageNotify" id="msgCount"></span>		<!-- 새로운 메세지가 있으면 ! 표시-->
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown1">	<!-- 알림 구현이 끝나면 메세지도 만들기 메세지방보여주기, c:if 새로운 레코드가 추가되면 알려주기 -->
-								<a class="dropdown-item" href="messageList">메세지리스트</a>
+								<a class="dropdown-item" href="friendList">메세지리스트</a>
 								<a class="dropdown-item" href="#">b</a>
 							</div>
 						</li>
@@ -252,6 +252,7 @@ $(function(){
 					</ul>
 				</div>
 			</div>
+
 <!--===============================================================================================-->	
 <script src="assets/js/core/jquery.3.2.1.min.js"></script>
 <!--===============================================================================================-->	
@@ -277,7 +278,14 @@ $(function(){
 <!--===============================================================================================-->
 <script>
  $(function(){
-	
+
+	 $.ajax({
+         method  : 'post'
+         , url   : 'msgCount'
+         , success : function(resp){
+        	 $('#msgCount').text(resp);
+         }
+      });
 	reqCheck();
 });
 
@@ -286,7 +294,6 @@ function reqCheck(){
 		method : 'post'
 		,  url : 'reqCheck'
 		,  success : function(response){
-			console.log(response);
 			if(response.length > 0) {
 				reqOutput(response);
 			}else {

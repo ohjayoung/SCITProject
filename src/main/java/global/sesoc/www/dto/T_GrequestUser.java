@@ -14,7 +14,6 @@ public class T_GrequestUser {
 	private String email;
 	private String belong;
 	public T_GrequestUser() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 	public String getGroName() {
