@@ -5,7 +5,7 @@ public class T_Request {
 	private String requester;
 	private String reqAccepter;
 	private int isAccepted;
-	private int plaNum; //T_Planner fk
+	
 	public T_Request() {
 		// TODO Auto-generated constructor stub
 	}
@@ -33,16 +33,11 @@ public class T_Request {
 	public void setIsAccepted(int isAccepted) {
 		this.isAccepted = isAccepted;
 	}
-	public int getPlaNum() {
-		return plaNum;
-	}
-	public void setPlaNum(int plaNum) {
-		this.plaNum = plaNum;
-	}
 	@Override
 	public String toString() {
 		return "T_Request [reqNum=" + reqNum + ", requester=" + requester + ", reqAccepter=" + reqAccepter
-				+ ", isAccepted=" + isAccepted + ", plaNum=" + plaNum + "]";
+				+ ", isAccepted=" + isAccepted + "]";
 	}
+	
 	
 }

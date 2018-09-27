@@ -49,4 +49,25 @@ public class T_GrequestRepository {
 		int result=mapper.applyCancel(greqNum);
 		return result;
 	}
+	
+	public List<T_Grequest> checkInvite(T_Grequest grequest){
+		T_GrequestMapper mapper=session.getMapper(T_GrequestMapper.class);
+		List<T_Grequest> list=mapper.checkInvite(grequest);
+		return list;	
+	}
+	public int groupMemberDelete(T_Grequest grequest) {
+		T_GrequestMapper mapper=session.getMapper(T_GrequestMapper.class);
+		int result=mapper.groupMemberDelete(grequest);
+		return result;
+	}
+	public int deleteGroupGrequest(int groNum) {
+		T_GrequestMapper mapper=session.getMapper(T_GrequestMapper.class);
+		int result=mapper.deleteGroupGrequest(groNum);
+		return result;
+	}
+	public List<T_Grequest> getGroupUsers(int groNum){
+		T_GrequestMapper mapper=session.getMapper(T_GrequestMapper.class);
+		List<T_Grequest> list=mapper.getGroupUsers(groNum);
+		return list;
+	}
 }

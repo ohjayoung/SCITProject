@@ -260,9 +260,25 @@
 		}
 	}
       
+     	  
        // 친구의 정보를 가져와서 ajax로 calendar를 가져오게 함.
-         var sendData={'userId': friendId}; 
-        
+         var requsetData={'reqAccepter':friendId};
+         $.ajax({
+       	  method:'post',
+       	  url:'calendarShare',
+       	  data:JSON.stringify(requsetData),
+       	  dataType:'json',
+       	  contentType:'application/json; charset=utf-8',
+       	  success:function(r){
+       		  if(r==1){
+       			  alert(friendId+'님에게 공유여부를 보냈습니다.');
+       		  }else if (r==0) {
+				alert('이미 요청하였습니다.');
+			}
+       	  }
+         });
+       
+         var sendData={'userId': friendId};
           $('#friendCalendar').fullCalendar({
             header: {
               left: 'prev,next today',
@@ -547,7 +563,7 @@
       </c:forEach>
    </select> 
    
-   <input type="button" id="friendCalendarBtn" value="calendar 보기">
+   <input type="button" id="friendCalendarBtn" value="calendar 공유">
    <!-- 휴지통 사진 부분 -->
    <div id="calendarTrash" class="calendar-trash"><img src="resources/calendar/trash.jpg" /></div><br/>
    <div class="allCalendar">

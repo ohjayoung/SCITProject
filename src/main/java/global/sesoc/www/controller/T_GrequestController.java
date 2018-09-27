@@ -103,4 +103,33 @@ public class T_GrequestController {
 		int result=T_GRequestRepository.applyCancel(gRequest.getGreqNum());
 		return result;
 	}
+	@ResponseBody
+	@RequestMapping(value="/inviteFriend",method=RequestMethod.POST)
+	public int inviteFriend(@RequestBody T_Grequest grequest, HttpSession session) {
+		
+		List<T_Grequest> checkList=T_GRequestRepository.checkInvite(grequest);
+		System.out.println("가입여부 ::"+checkList);
+		if(checkList != null) {
+			return 0;
+		}else {
+			String userId=(String)session.getAttribute("loginId");
+			grequest.setGreqAccepter(userId);
+			int result= T_GRequestRepository.insertGrequest(grequest);
+			if(result==1) {
+				return 1;
+			}
+			return 0;
+		}
+		
+	}
+	@ResponseBody
+	@RequestMapping(value="/groupMemberDelete", method=RequestMethod.POST)
+	public int groupMemberDelete(@RequestBody T_Grequest grequest, HttpSession session) {
+		System.out.println("qwwww"+grequest);
+		String userId=(String)session.getAttribute("loginId");
+		grequest.setgRequester(userId);
+		System.out.println("22qwwww"+grequest);
+		int result=T_GRequestRepository.groupMemberDelete(grequest);
+		return result;
+	}
 }
