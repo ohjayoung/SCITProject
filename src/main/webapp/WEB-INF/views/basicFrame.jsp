@@ -16,35 +16,11 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('.groupManual').on('click',function(){
-		var isAccepted='';
-		isAccepted +='<a href="groupApply">';
-		isAccepted +='<span class="link-collapse">## 그룹 신청이 왔습니다!!!##</span>';
-		isAccepted +='</a>';
-		 $.ajax({
-			method:'post',
-			url:'isAccepted',
-			contentType:'application/json;charset=json',
-			success:function(r){
-				if(r==1){
-					$("#a").html(isAccepted);
-				}
-			}
-		}); 
-	});
-	////
-	
-	
-});
-</script>
 <body>
 		<input type="hidden" name="loginId" id="loginId" value="${sessionScope.loginId}">
 		<div class="main-header">
 			<div class="logo-header logoStyle">
-				<a href="main"><img class="mainlogo" alt="mainlogo" src="images/mainlogo40.png"><img alt="logo" src="images/logowhite40.png"></a>
+				<a href="main"><img class="mainlogo" alt="mainlogo" src="images/mainlogo40.png"><img class="mainlogo2"alt="logo" src="images/logowhite40.png"></a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -404,6 +380,27 @@ $(document).on("click", "#dangerBtn", function(){
 	}
 });
 
+$(function(){
+	$('.groupManual').on('click',function(){
+		var isAccepted='';
+		isAccepted +='<a href="groupApply">';
+		isAccepted +='<span class="link-collapse">## 그룹 신청이 왔습니다!!!##</span>';
+		isAccepted +='</a>';
+		 $.ajax({
+			method:'post',
+			url:'isAccepted',
+			contentType:'application/json;charset=json',
+			success:function(r){
+				if(r==1){
+					$("#a").html(isAccepted);
+				}
+			}
+		}); 
+	});
+	////
+	
+	
+});
 </script>
 </body>
 </html>
