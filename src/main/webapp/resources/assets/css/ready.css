@@ -2028,14 +2028,15 @@ body {
   min-height: 100vh;
   position: relative;
 }
-
 .wrapper {
   min-height: 100vh;
   position: relative;
   top: 0;
   height: 100vh;
 }
-
+.mainlogo{
+  padding-right: 10px;
+}
 .main-header {
   min-height: 55px;
   width: 100%;
@@ -2053,10 +2054,11 @@ body {
   z-index: 1001;
   font-size: 18px;
   font-weight: 600;
-  padding-left: 1px;		/* logo padding */
-  padding-right: 25px;
+  padding-left: 11px;		/* logo padding */
+  padding-right: 5px;
   z-index: 1001;
   display: inline-block;
+  padding-top: 8px;
 }
 .main-header .logo-header a.logo {
   color: #575962;
@@ -5524,6 +5526,7 @@ body {
 }
 
 .input-pill {
+  width: 30%;
   border-radius: 1.3rem !important;
 }
 
@@ -5927,7 +5930,41 @@ body {
 .notif-box .see-all i {
   float: right;
 }
-
+/* Update User */
+#userUD{
+	margin: 0 auto;
+}
+#userId {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+.loginName{
+	margin: 0 auto;
+}
+#edit{
+	margin-left: 44%;
+}
+.user-update-box {
+    display: flex;
+    padding: .25rem 1rem;
+}
+.form-control-file{
+	margin-left: 44%;
+}
+.u{
+	max-width: 300px;
+	max-height: 300px;
+}
+.image{
+	margin-left: 50%;
+	width:100%;
+	border: 3px #ed65a9;
+	border-radius: 70px;
+	-moz-border-radius: 70px;
+	-khtml-border-radius: 70px;
+	-webkit-border-radius: 70px;
+}
 /*     User Dropdown    */
 .dropdown-user {
   width: 280px;
