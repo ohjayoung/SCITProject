@@ -6764,7 +6764,17 @@ body {
 }
 
 [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
-    position: absolute;
-    left: auto;
+  position: absolute;
+  left: auto;
+}
+
+#weatherDiv{
+  max-width: 45%;
+}
+
+ #calendar {
+  width: 50%;
+  height: 700px;
+  color : #343a40;
 }
 /*# sourceMappingURL=ready.css.map */
