@@ -12,6 +12,7 @@
 	<div class="main-panel">
 			<div class="content">
 				<div class="container-fluid">
+					<h4 class="page-title">Profile</h4>
 					<div class="row">
 						
 						<div class="col-md-5" id="userUD">

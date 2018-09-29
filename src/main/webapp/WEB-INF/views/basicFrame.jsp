@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="assets/js/core/jquery.3.2.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.groupManual').on('click',function(){
@@ -66,14 +66,10 @@ $(function(){
 					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- message toggle ------------------------------>
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" href="friendList" id="navbarDropdown1" role="button">
 								<i class="la la-envelope"></i>
 								<span class="notification messageNotify" id="msgCount"></span>		<!-- 새로운 메세지가 있으면 ! 표시-->
 							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown1">	<!-- 알림 구현이 끝나면 메세지도 만들기 메세지방보여주기, c:if 새로운 레코드가 추가되면 알려주기 -->
-								<a class="dropdown-item" href="friendList">메세지리스트</a>
-								<a class="dropdown-item" href="#">b</a>
-							</div>
 						</li>
 						<li class="nav-item dropdown hidden-caret">	<!-------------------------------- request toggle ------------------------------>
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -283,7 +279,12 @@ $(function(){
          method  : 'post'
          , url   : 'msgCount'
          , success : function(resp){
-        	 $('#msgCount').text(resp);
+        	 console.log("왜"+resp);
+        	 if(resp == 0 ){
+        		 $('#msgCount').remove();
+        	 }else{
+        		 $('#msgCount').text(resp);
+        	 }
          }
       });
 	reqCheck();
