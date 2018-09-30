@@ -2216,6 +2216,7 @@ body {
   font-size: 13px;
   letter-spacing: 0.05em;
   margin-top: 5px;
+  padding-right: 30px;
 }
 .sidebar .user .info a .link-collapse {
   padding: 7px 0;
@@ -6009,7 +6010,6 @@ body {
 }
 #userId {
     display: inline-block;
-    width: auto;
     vertical-align: middle;
 }
 .loginName{
@@ -6030,13 +6030,17 @@ body {
 	max-height: 300px;
 }
 .image{
-	margin-left: 50%;
+	margin-left: 23%;
 	width:100%;
 	border: 3px #ed65a9;
 	border-radius: 70px;
 	-moz-border-radius: 70px;
 	-khtml-border-radius: 70px;
 	-webkit-border-radius: 70px;
+}
+
+#modoru{
+	float: right;
 }
 /*     User Dropdown    */
 .dropdown-user {
@@ -6727,6 +6731,8 @@ body {
   }
   .main-panel .content {
     padding: 30px 10px;
+    width: 100%;
+    height : 100%;
   }
 
   .main-header .logo-header {
@@ -6803,8 +6809,9 @@ body {
   }
 }
 /* main ======================================================== */
-  .caretDiv {
-  	padding-left: 80px;
+   .caretDiv {
+  	margin-right: 0 auto;
+  	margin-left: 20%;	
   }
   
   .navTop {
@@ -6830,12 +6837,15 @@ body {
  .img_wrap img{
      max-width: 100%;
  }
-
+ 
  /* nav search ======================================================== */
  #searchForm {
 	padding-top: 10px;
 }
 
+#phone{
+	padding-left: 34px !important;
+}
  /* friend ======================================================== */
  #buddyIcon {
  	font-size: 33px;
@@ -6858,7 +6868,7 @@ body {
   }
   
 /* non check list ======================================================== */
-.circle_strong{
+.circle_strong {
  position:absolute;
  top:60px;
  left:20px;
@@ -6867,7 +6877,7 @@ body {
  font-size:24px;
  }
 
-.selected{
+.selected {
  text-decoration:line-through;
  font-weight:700;
  color:red;
@@ -6879,12 +6889,38 @@ body {
 }
 
 #weatherDiv{
-  max-width: 45%;
+  height: 220px;
 }
 
  #calendar {
-  width: 50%;
-  height: 700px;
+  width: 53%;
+  height: 755px;
   color : #343a40;
 }
+
+#main1Div{
+  display: flex;
+}
+
+#main2Div{
+  width : 45%;
+  height : 755px;
+  color : #343a40;
+  padding-left: 20px;
+}
+
+#Querie{
+  background-color: #ff9999;
+  color: #ffffff;
+  padding: 0 !important;
+}
+
+#proTable{
+  padding: 0 !important;
+}
+
+.uLevel2{
+  padding-right: 42px;
+}
+
 /*# sourceMappingURL=ready.css.map */
