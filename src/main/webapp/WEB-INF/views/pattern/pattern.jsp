@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>パタン管理</title>
-
+<title>パターン管理</title>
 </head>
 <body>
 <div class="main-panel">
-   <input type="hidden" id="sessionId" class="sessionId" name="sessionId" value="${sessionScope.loginId}"> 
+   <input type="hidden" id="sessionId" name="sessionId" value="${sessionScope.loginId}">
+   <input type="hidden" id="sessionName" name="sessionName" value="${sessionScope.loginName}"> 
    <div class="content">
       <div class="container-fluid">
          <div class="row">
@@ -299,8 +299,8 @@ $(document).ready(function() {
                str += '<td>'+data[i].schNum+'</td>';
                str += '<td>'+data[i].schTitle+'</td>';
                str += '<td>'+data[i].schContent+'</td>';
-               str += '<td>'+data[i].startDate+'</td>';
-               str += '<td>'+data[i].endDate+'</td>';
+               str += '<td>'+data[i].schStartdate+'</td>';
+               str += '<td>'+data[i].schEnddate+'</td>';
                str += '<td>'+data[i].category+'</td>';
                str += '</tr>';
                
