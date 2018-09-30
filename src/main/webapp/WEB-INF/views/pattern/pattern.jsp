@@ -479,6 +479,16 @@ $(document).ready(function() {
  	function secondTable(){
  		console.log("가장많은 카테고리가 뭔가"+categoryCount);
  		console.log("가장많은 카테고리가 수가 얼마가"+categoryCount2);
+ 		var temp = 0;
+ 		var temp2 = '';
+ 		for(var i = 0; i<categoryCount2.length; i++){
+ 			if(temp<categoryCount2[i]){
+ 				temp = categoryCount2[i];
+ 				temp2 = categoryCount[i];
+ 			}
+ 		}
+ 		console.log(temp);
+ 		console.log(temp2);
 
 	}
 	/* ====================================secondDiv====================== */
