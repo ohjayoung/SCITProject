@@ -12,12 +12,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< HEAD
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-=======
->>>>>>> dev
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -105,26 +102,6 @@ public class T_UserController {
 		
 		return "redirect:/";
 	}
-<<<<<<< HEAD
-	//내프로필 화면 요청
-    @RequestMapping(value="/userDetail", method=RequestMethod.GET)
-    public String userDetail(HttpSession session, Model model) {
-    	String userId = (String) session.getAttribute("loginId");
-    	T_User user = new T_User();
-    	user.setUserId(userId);
-    	    	
-    	T_User t = repository.selectOne(user);
-    	String p1 = t.getPhone();
-    	String[] p2 = p1.split(",");
-    	String phone1 = p2[0];
-    	String phone2 = p2[1];
-    	model.addAttribute("phone1",phone1);
-    	model.addAttribute("phone2",phone2);
-    	model.addAttribute("user", t);
-    	String mime = null;
-		if(t.getOriginalImage() != null ) {
-			String fullPath= uploadPath + "/"+ t.getSavedImage();
-=======
 
 	// 내프로필 화면 요청
 	@RequestMapping(value = "/userDetail", method = RequestMethod.GET)
@@ -143,7 +120,6 @@ public class T_UserController {
 		String mime = null;
 		if (t.getOriginalImage() != null) {
 			String fullPath = uploadPath + "/" + t.getSavedImage();
->>>>>>> dev
 			try {
 				String type = Files.probeContentType(Paths.get(fullPath));
 				if(type != null && type.contains("image")) {
@@ -174,26 +150,15 @@ public class T_UserController {
 			user.setOriginalImage(originalImage);
 			user.setSavedImage(savedImage);	
 		}
-<<<<<<< HEAD
   		repository.userUpdate(user);
   		return "redirect:/";
   	}
   	
-  	@RequestMapping(value="/download", method=RequestMethod.GET)
-	public String download(HttpSession session,T_User t, HttpServletResponse response) {
-  		String userId = (String) session.getAttribute("loginId");
-  		t.setUserId(userId);
-  		T_User user = repository.selectOne(t);
-=======
-		repository.userUpdate(user);
-		return "redirect:/";
-	}
 
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
 	public String download(HttpSession session, T_User t, HttpServletResponse response,String userId) {
 		t.setUserId(userId);
 		T_User user = repository.selectOne(t);
->>>>>>> dev
 		String originalImage = user.getOriginalImage();
 		String fullPath = uploadPath + "/" + user.getSavedImage();
 		try {

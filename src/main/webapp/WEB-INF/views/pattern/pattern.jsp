@@ -478,23 +478,18 @@ $(document).ready(function() {
    }
     function secondTable(){
 		
-    	var newData = [];
-  		var maxCate = 0;
-		alert(categoryCount.length);
-	 		for(var i = 0; i < categoryCount.length; i++){
-	 			if(maxCate < parseInt(categoryCount[i].size)){
-	 				maxCate = parseInt(categoryCount[i].size);
-	 				newData = categoryCount[i];
-	 			}else if(maxCate == parseInt(categoryCount[i])){
-	 				newData += categoryCount[i];
-	 			} 		
-	 		}
- 		alert(newData);
- 		alert(maxCate);
-		
+    	var temp = 0;
+        var category = '';
+        for(var i = 0; i<categoryCount2.length; i++){
+           if(temp<categoryCount2[i]){
+              temp = categoryCount2[i];
+              category = categoryCount[i];
+           }
+        }
+        console.log(category);
+        
 		$('#secondDiv').html('');
 		var sessionName = $('#sessionName').val();
-		var category = categoryCount[0];
 		var sendData = {"category" : category};
 		
 		var str = '<br>';
