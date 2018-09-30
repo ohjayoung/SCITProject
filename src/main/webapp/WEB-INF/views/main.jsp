@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <style type="text/css">
     #calendar {
+    	color:black;
         max-width: 900px;
         margin-right : 5%;
         width: 50%;
@@ -259,14 +260,16 @@
 	 });
 	 
 	 $(document).ready(function() {
-		    
+		 var fullDate = new Date();
+		   var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)?(fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+		   var currentDate = fullDate.getFullYear()+"-"+twoDigitMonth+ "-" +fullDate.getDate();
 		   $('#calendar').fullCalendar({
 		     header: {
 		       left: 'prev,next today',
 		       center: 'title',
-		       right: 'month,agendaWeek,agendaDay'
+		       right: ''
 		     },
-		     defaultDate: '2018-08-24',
+		     defaultDate: currentDate,
 		     navLinks: true, // can click day/week names to navigate views
 		     selectable: true,
 		     selectHelper: true,
@@ -386,16 +389,26 @@
 		        doc[i].schEnddate=update[0]+'-'+update[1]+'-'+update[2];
 		        //중요도 색상 표시
 		        if(doc[i].importance==1){
-		           doc[i].importance='red';
-		        }else if(doc[i].importance==2){
-		           doc[i].importance='blue';
-		        }else if(doc[i].importance==3){
-		           doc[i].importance='green';
-		        }else if(doc[i].importance==4){
-		           doc[i].importance='yellow';
-		        }else if(doc[i].importance==5){
-		           doc[i].importance='black';
-		        }
+                    doc[i].importance='azure';
+                 }else if(doc[i].importance==2){
+                    doc[i].importance='indigo';
+                 }else if(doc[i].importance==3){
+                    doc[i].importance='purple';
+                 }else if(doc[i].importance==4){
+                    doc[i].importance='pink';
+                 }else if(doc[i].importance==5){
+                    doc[i].importance='red';
+                 }else if(doc[i].importance==6){
+                    doc[i].importance='orange';
+                 }else if(doc[i].importance==7){
+                    doc[i].importance='yellow';
+                 }else if(doc[i].importance==8){
+                    doc[i].importance='lime';
+                 }else if(doc[i].importance==9){
+                    doc[i].importance='green';
+                 }else if(doc[i].importance==10){
+                    doc[i].importance='teal';
+                 }
 		     }
 		       
 		       $.each(doc,function() {
@@ -419,4 +432,5 @@
 		 }); 
 </script>
 </body>
+
 </html>

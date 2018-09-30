@@ -103,6 +103,26 @@ public class T_ScheduleController {
 		
 	}
 	@ResponseBody
+	@RequestMapping(value="/scheduleUpdate1" , method=RequestMethod.POST)
+	public int scheduleUpdate1(@RequestBody T_Schedule schedule) {		//schedule update -- db
+		T_Schedule sctitle=new T_Schedule(); sctitle.setSchTitle("제목을 입력해주세요.");
+		sctitle.setSchContent("내용을 입력해주세요.");
+		if(schedule.getSchTitle().trim().length()==0) {
+			return 1;
+		}else if (schedule.getSchContent().trim().length()==0) {
+			return 2;
+		}else if (schedule.getSchStartdate().trim().length()==0) {
+			return 3;
+		}else if (schedule.getSchEnddate().trim().length()==0) {
+			return 4; 
+		}else {
+			int result=T_ScheduleRepository.updateSchedule1(schedule);
+			T_Schedule schedule2=T_ScheduleRepository.selectOneUserSchedule(schedule);
+			return schedule.getPlaNum();
+		}
+		
+	}
+	@ResponseBody
 	@RequestMapping(value="/selectFriendAllSchedule" , method=RequestMethod.POST)
 	public List<T_Schedule> selectFriendAllSchedule(@RequestBody T_User user){
 
@@ -124,7 +144,9 @@ public class T_ScheduleController {
 	@ResponseBody
 	@RequestMapping(value="/deleteSchedule", method=RequestMethod.POST)
 	public String deleteSchedule(@RequestBody T_Schedule schedule) {
+		
 		int result=T_ScheduleRepository.deleteSchedule(schedule.getSchNum());
+		
 		return "삭제했습니다.";
 	}
 	@ResponseBody
