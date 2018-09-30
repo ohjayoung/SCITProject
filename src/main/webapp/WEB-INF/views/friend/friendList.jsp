@@ -19,12 +19,12 @@
 								<div class="card-body">
 									<c:if test="${empty requestList}">
 										<div class="card-sub">
-											친구 요청이 없습니다.
+											友達要請なし
 										</div>
 									</c:if>
 									<c:if test="${not empty requestList}">
 										<div class="card-sub">
-											친구 요청 리스트입니다.
+											友達要請リスト
 										</div>
 										<table class="table mt-3">
 										<thead>
@@ -38,16 +38,18 @@
 													</div>
 												</td>
 												<td colspan="2">
+													<a href="userDetail?userId=${requestList.userId}">
 													<div id="listTd">
 														${requestList.userName}<br>
 														${requestList.belong}<br>
 														${requestList.phone}
 													</div>
+													</a>
 												</td>
 												<td>
 													<div id="btnDiv">
-														<input type="button" id="acceptBtn" class="btn btn-success" value="수락">
-														<button class="btn btn-danger" id="refuseBtn">거절</button>
+														<input type="button" id="acceptBtn" class="btn btn-success" value="承知">
+														<button class="btn btn-danger" id="refuseBtn">拒絶</button>
 													</div>
 														<input type="hidden" class="accepter" value="${requestList.userId}">
 												</td>
@@ -61,13 +63,13 @@
 								<div class="card-body">
 									<c:if test="${empty friList}">
 										<div class="card-sub">
-											등록된 친구가 없습니다.
+											友達なし
 										</div>
 									</c:if>
 									
  									<c:if test="${not empty friList}">
 										<div class="card-sub">
-											친구 리스트입니다.
+											友達リスト
 										</div>
 										<table class="table mt-3">
 										<thead>
@@ -82,20 +84,22 @@
 											<tr>
 												<td>
 													<div class="searchPhoto">
-														<img src="download?${friList.originalImage }">
+														<img src="download?userId=${friList.userId}">
 													</div>
 												</td>
 												<td colspan="2">
+													<a href="userDetail?userId=${friList.userId}">
 													<div id="listTd">
 														${friList.userName}<br>
 														${friList.belong}<br>
 														${friList.phone}
 													</div>
+													</a>
 												</td>
 												<td>
 													<div id="btnDiv">
-														<button class="btn btn-danger" id="refuseBtn">삭제</button>
-														<button class="btn btn-warning" id="messageBtn">메세지</button>
+														<button class="btn btn-danger" id="refuseBtn">友達削除</button>
+														<button class="btn btn-warning" id="messageBtn">メッセージ</button>
 													</div>
 														<input type="hidden" class="accepter" value="${friList.userId}">
 												</td>
@@ -112,12 +116,12 @@
 								<div class="card-body">
 									<c:if test="${empty msgList}">
 										<div class="card-sub">
-											메세지가 없습니다.
+											メッセージなし
 										</div>
 									</c:if>
 									<c:if test="${not empty msgList}">
 										<div class="card-sub">
-											메세지 리스트입니다.
+											メッセージリスト
 										</div>
 										<table class="table mt-3">
 										<thead>
@@ -136,7 +140,7 @@
 												</td>
 												<td>
 													<div id="btnDiv">
-														<button class="btn btn-danger" id="deleteBtn">삭제</button>
+														<button class="btn btn-danger" id="deleteBtn">削除</button>
 													</div>
 													<input type="hidden" class="accepter" value="${msgList.mesNum}">
 												</td>
@@ -151,6 +155,7 @@
 				</div>		
 			</div>
 		</div>
+	</div>
 <script type="text/javascript" src="resources/sockjs-0.3.4.js"></script>
 <script type="text/javascript">
 var userId = '<c:out value="${sessionScope.loginId}"/>';
@@ -219,7 +224,8 @@ if(!confirm("수락하시겠습니까?")){
 		, contentType : 'application/json; charset=UTF-8'
 		, success : function(response){
 			if(response == 1){
-				alert("친구등록이 완료되었습니다.");
+				alert("登録完了");
+				location.href="friendList";
 			}else{
 				alert('다시 시도해주세요');
 			}
@@ -229,7 +235,7 @@ if(!confirm("수락하시겠습니까?")){
 });
 
 $(document).on("click", "#refuseBtn", function(){
-	if(!confirm("삭제하시겠습니까?")){
+	if(!confirm("拒絶しますか?")){
 		return false;
 	}else{
 		var friRequester = $(this).parent().parent().children('.accepter').val();
@@ -245,7 +251,7 @@ $(document).on("click", "#refuseBtn", function(){
 			, contentType : 'application/json; charset=UTF-8'
 			, success : function(response){
 				if(response == 1){
-					alert("완료되었습니다.");
+					alert("拒絶完了");
 				}else{
 					alert('다시 시도해주세요');
 				}
@@ -254,7 +260,7 @@ $(document).on("click", "#refuseBtn", function(){
 	}
 });
 $(document).on("click", "#deleteBtn", function(){
-	if(!confirm("삭제하시겠습니까?")){
+	if(!confirm("削除しますか")){
 		return false;
 	}else{
 		var messageNum = $(this).parent().parent().children('.accepter').val();
@@ -270,7 +276,7 @@ $(document).on("click", "#deleteBtn", function(){
 			, contentType : 'application/json; charset=UTF-8'
 			, success : function(response){
 				if(response == 1){
-					alert("완료되었습니다.");
+					alert("削除完了");
 				}else{
 					alert('다시 시도해주세요');
 				}

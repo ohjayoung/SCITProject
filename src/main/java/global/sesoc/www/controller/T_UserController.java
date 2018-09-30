@@ -12,10 +12,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +45,6 @@ public class T_UserController {
 	public String login(T_User user, HttpSession session, Model model) {
 
 		T_User t = repository.selectOne(user);
-
 		if (t != null) {
 			session.setAttribute("loginId", t.getUserId());
 			session.setAttribute("loginName", t.getUserId());
@@ -107,8 +102,7 @@ public class T_UserController {
 
 	// 내프로필 화면 요청
 	@RequestMapping(value = "/userDetail", method = RequestMethod.GET)
-	public String userDetail(HttpSession session, Model model) {
-		String userId = (String) session.getAttribute("loginId");
+	public String userDetail(HttpSession session, Model model, String userId) {
 		T_User user = new T_User();
 		user.setUserId(userId);
 
@@ -159,8 +153,7 @@ public class T_UserController {
 	}
 
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
-	public String download(HttpSession session, T_User t, HttpServletResponse response) {
-		String userId = (String) session.getAttribute("loginId");
+	public String download(HttpSession session, T_User t, HttpServletResponse response,String userId) {
 		t.setUserId(userId);
 		T_User user = repository.selectOne(t);
 		String originalImage = user.getOriginalImage();
