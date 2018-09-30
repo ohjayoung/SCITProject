@@ -82,7 +82,7 @@
 											<tr>
 												<td>
 													<div class="searchPhoto">
-														<img src="download?${friList.originalImage }">
+														<img src="download?${friList.originalImage}">
 													</div>
 												</td>
 												<td colspan="2">
@@ -119,31 +119,21 @@
 										<div class="card-sub">
 											메세지 리스트입니다.
 										</div>
-										<table class="table mt-3">
-										<thead>
-										</thead>
-										<tbody>
-										<c:forEach var="msgList" items="${msgList}">
-											<tr>
-												<td>
-													${msgList.userA}
-												</td>
-												<td>
-													${msgList.mesContext}
-												</td>
-												<td>
-													${msgList.mesRegdate}
-												</td>
-												<td>
+										<div class="msgitem">
+											<c:forEach var="msgList" items="${msgList}">
+											<div class="item">
+												<div class="msgdetails">
+													<div class="msgname">${msgList.userA}</div>
+													<div class="msgtime">${msgList.mesRegdate}</div>
+													<div class="msgdescription">${msgList.mesContext}</div>
 													<div id="btnDiv">
 														<button class="btn btn-danger" id="deleteBtn">삭제</button>
 													</div>
 													<input type="hidden" class="accepter" value="${msgList.mesNum}">
-												</td>
-											</tr>
+												</div>
+											</div>
 											</c:forEach>
-										</tbody>
-									</table>
+										</div>
 									</c:if>
 								</div>
 						</div>
@@ -185,11 +175,11 @@ $(document).on('click', '#messageBtn', function(){
 });
 function chatOneConnect(receiveuserid){
 	var url = 'messageList?receiveuserid='+receiveuserid;
-	var openWin = window.open(url, 'testWindow', 'width=610, height=500, scrollbars=no');
+	var openWin = window.open(url, 'testWindow', 'width=450, height=350, scrollbars=no');
 }
 function chatOneAppend(msg, senduserId, receiveuserid, date){
 	var url = 'messageList?senduserId='+senduserId+'&receiveuserid='+receiveuserid+'&msg='+msg+'&date='+date;
-	var openWin = window.open(url, 'testWindow', 'width=610, height=500, scrollbars=no');
+	var openWin = window.open(url, 'testWindow', 'width=450, height=380, scrollbars=no');
 }
 function send(msg) {
 	sock.send(msg + "-" + userId);
@@ -280,4 +270,5 @@ $(document).on("click", "#deleteBtn", function(){
 });
 </script>
 </body>
+
 </html>

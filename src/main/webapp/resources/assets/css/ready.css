@@ -13,6 +13,79 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
+ 
+ /* friend */
+ .item{
+	border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.msgdetails{
+	margin-left: 5px;
+}
+.msgname .msgtime .msgdescription #btnDiv {
+    float: left;
+    display: inline-block;
+    margin-left : 10px;
+    margin-bottom: 3px;
+    margin-top: 15px;
+    
+}
+#btnDiv{
+	text-align: right;
+	padding-right: 15px;
+}
+.msgname{
+	font-size: 20px;
+	color : black;
+	font-family: 'Raleway';
+}
+.msgtime{
+	font-size : 15px;
+	color: #999;
+}
+.msgdescription{
+	font-size: 18px;
+	color : black;
+	font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    margin-top: 10px;
+    line-height: 26px;
+    margin-bottom: 10px;
+}
+/* pattern jsp  */
+
+.fontColor{
+	color : #575962;
+}
+.card-body .cb{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.pt {
+	margin-left : 10px;
+	margin-bottom: 3px;
+	margin-top: 15px;
+	font-size: 20px;
+	color : black;
+	font-family: 'nunito', sans-serif;
+}
+.ptpt{
+	display: inline-block;
+	font-size : 20px;
+	color: red;
+}
+i{
+	color : black;
+}
+.circle_strong{
+	color : black;
+	margin-left : 282px;
+	margin-top : 80px;
+}
+.card .card-stats{
+	margin-bottom: 30px;
+}
 /*   Background   */
 .bg-default {
   background: #607D8B !important;
@@ -6787,7 +6860,7 @@ body {
 /* non check list ======================================================== */
 .circle_strong{
  position:absolute;
- top:30px;
+ top:60px;
  left:20px;
  text-align:center;
  line-height:40px;

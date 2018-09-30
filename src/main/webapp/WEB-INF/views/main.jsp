@@ -20,43 +20,43 @@
 <body>
 			<div class="main-panel">
 				<div class="content">
+					<div id="main1Div">
 						<div id="calendar">
 						</div>
-						<div class="col-md-4" id="weatherDiv">  <!-- weather -->
+					<div id="main2Div">
+						<div id="weatherDiv">  <!-- weather -->
 						</div>
-						<div class="row">
-								<div class="card card-tasks">
-									<div class="card-header ">
-										<h4 class="card-title">プログレス</h4>
-										<p class="card-category">スケジュール確認</p>
-										<input id="relyInsert" type="button" value="検査">
-									</div>
-									<div class="card-body">
-									 <table class="table table-hover" border="1">
-										<tr>
-											<th>完了チェック</th>
-											<th>スケジュール名前</th>
-											<th>ストーリー</th>
-											<th>パーセント</th>
-											<th>修整／削除</th>
-										</tr>
-										<tbody id="result">
-											<c:if test="${empty replylist}">
-                                     		<tr>
-                                        		<td colspan="5">-　検査をクリックしてください。<br>-　今日が含まれたスケジュールがありません。</td>
-                                      		</tr>
-										</c:if>
-										</tbody>
-									</table>
-								</div>
+						<br>
+						<div class="card card-tasks" id="progress">
+						<div class="card-body">
+							<h5 class="card-title">スケジュールプログレス</h5><hr>
+							<table class="table table-hover" border="1" id="proTable">
+								<tr id="Querie">
+									<th><img src="assets/img/check.png" width="20" height="15"></th>
+									<th>名前 </th>
+									<th>ストーリー</th>
+									<th>パーセント&nbsp;</th>
+									<th>修整／削除</th>
+								</tr>
+								<c:if test="${empty replylist}">
+									<tbody id="result">
+                                   	<tr>
+                                  		<td colspan="5">-　検査をクリックしてください。<br>-　今日が含まれたスケジュールがありません。</td>
+                                   	</tr>
+									</c:if>
+								</tbody>
+								</table>
 							</div>
+						</div>
 					</div>
 				</div>
-			</div>
+				</div>
+ 			</div>
 
 <script>
  $(function(){
 	geoFindMe();
+	replyInsert();
 }); 
 
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
@@ -129,120 +129,121 @@
 	  
 } 
 
- $(function(){
-		$("#relyInsert").on('click', replyInsert);
-	});//버튼을 누르면
+function replyInsert(){ //컨트롤로 가게 하는 경로
+     $.ajax({
+        method  : 'post'
+        , url   : 'selectAll'
+        , success : output  //성공하면  output 실행
+     });
+  }
+                                    
+  function output(resp){
+     var result = "";
+     
+     $.each(resp.replylist, function(index, item) {
+        
+        result += '<tr class="index">';
+        console.log(item.checked);
+        if(item.checked == '1'){
+           result += '<td><div class="selected"><input class="check test" type="checkbox" data-cno="' + item.schNum + '" value="' + item.checked + ' "checked="checked""/></div></td>';//<사진> 
+           console.log("체크인");
+        }else{
+           console.log("체크아웃");
+           result += '<td><div class="selected"><input class="check test" type="checkbox" data-cno="' + item.schNum + '" value="' + item.checked + '"/></div></td>';//<사진> 
+        }
+        result += '<td><div class="scetch">'+ item.schTitle +'</div></td>';
+        result += '<td><div class="progressbar"><div class="progress-label" >'+ item.schStartdate + ' ~ ' + item.schEnddate +'</div></div></td>';
+        result += '<td><div class="num' + index + '"><span></span></div></td>';//<퍼센트>
+        result += '<td>'
+        result += '<input class="schUpdate" data-rno="'+ item.schNum+'" type="image" src="assets/img/crystal.png" alt="Submit" width="30" height="30" onclick="schUpdate()"/> ';
+        result += '<input class="schDelete" data-rno="'+ item.schNum+'" type="image" src="assets/img/delete.png" alt="Submit" width="30" height="30" onclick="schDelete()"/> ';
+        result += '<input value="'+ item.schNum+'" type="hidden" class="schNum" /> ';
+        result += '</td>'
+         result += '</tr>';
+     });
+     
+     $("#result").html(result);  
+     
+     $.each(resp.percentlist, function(index, item) {
+        $( ".progressbar" ).children().eq(index).progressbar({
+           value: resp.percentlist[index]
+        })
+        //막데 그레프
+        
+        $('.num' + index).circleProgress({      //들어갈 div class명을 넣어주세요
+           value: item/100,    //진행된 수를 넣어주세요. 1이 100기준입니다.
+           size: 40,//도넛의 크기를 결정해줍니다.
+           fill: {
+              gradient: ["red", "orange"]    //도넛의 색을 결정해줍니다.
+           }
+        
+           }).on('circle-animation-progress', function(event, progress) {    //라벨을 넣어줍니다.
+               $(this).children().html(parseInt(item) + '<i>%</i>');
+        });
+     });
+     $(".schDelete").click(schDelete);
+     $(".schUpdate").click(schUpdate);
+  }
 
-	function replyInsert(){ //컨트롤로 가게 하는 경로
-		$.ajax({
-			method  : 'post'
-			, url   : 'selectAll'
-			, success : output  //성공하면  output 실행
-		});
-	}
-	                                  
-	function output(resp){
-	    var result = "";
-	      
-	      $.each(resp.replylist, function(index, item) {
-	         
-	         result += '<tr class="index">';
-	         console.log(item.checked);
-	         if(item.checked == '1'){
-	            result += '<td><div class="selected"><input type="checkbox" data-cno="' + item.schNum + '" value="' + item.checked + ' "checked="checked""/></div></td>';//<사진> 
-	            console.log("체크인");
-	         }else{
-	            console.log("체크아웃");
-	            result += '<td><div class="selected"><input type="checkbox" data-cno="' + item.schNum + '" value="' + item.checked + '"/></div></td>';//<사진> 
-	         }
-	         result += '<td><div class="scetch">'+ item.schTitle +'</div></td>';
-	         result += '<td><div class="progressbar"><div class="progress-label" >'+ item.schStartdate + ' ~ ' + item.schEnddate +' "</div></div></td>';
-	         result += '<td><div class="num' + index + '"><div></div></div></td>';//<퍼센트>
-	         result += '<td>'
-	         result += '<input class="schUpdate" data-rno="'+ item.schNum+'" type="image" src="assets/img/crystal.png" alt="Submit" width="20" height="20" onclick="schUpdate()"/> ';
-	         result += '<input class="schDelete" data-rno="'+ item.schNum+'" type="image" src="assets/img/delete.png" alt="Submit" width="20" height="20" onclick="schDelete()"/> ';
-	         result += '<input value="'+ item.schNum+'" type="hidden" class="schNum" /> ';
-	         result += '</td>'
-	          result += '</tr>';
-	      });
-	      
-	      $("#result").html(result);  
-	      
-	      $.each(resp.percentlist, function(index, item) {
-	         $( ".progressbar" ).children().eq(index).progressbar({
-	            value: resp.percentlist[index]
-	         })
-	         //막데 그레프
-	         
-	         $('.num' + index).circleProgress({      //들어갈 div class명을 넣어주세요
-	            value: item/100,    //진행된 수를 넣어주세요. 1이 100기준입니다.
-	            size: 80,//도넛의 크기를 결정해줍니다.
-	            fill: {
-	               gradient: ["red", "orange"]    //도넛의 색을 결정해줍니다.
-	            }
-	         
-	            }).on('circle-animation-progress', function(event, progress) {    //라벨을 넣어줍니다.
-	                $(this).children().html(parseInt(item) + '<i>%</i>');
-	         });
-	      });
-	      $(".schDelete").click(schDelete);
-	      $(".schUpdate").click(schUpdate);
-	  }
+   function schDelete(){ // 데이터 삭제
+     var schNum = $(this).attr("data-rno"); 
+      $.ajax({
+        method : 'post'
+        , url  : 'schDelete'
+        , data : 'schNum=' + schNum
+        , success : function(resp){
+        }
+     }); 
+     $(this).parents().parents().remove(".index"); //parents()=바로 위 부모 나타냄!!
+  } 
+   
+  function schUpdate(){
+      var schNum = $(this).attr("data-rno");  
+      location.href="http://localhost:8888/www/scheduleUpdate?schNum=" + schNum; 
+   }// 수정 할때 사용!!!
+   
+   
+   $(document).ready(function(){  // 체크체크
+      $(document).on('click',".check",function(){
+         var index=$(this).parents().parents().parents().attr("class");
+         var checked = 0;
+          if($(this).prop('checked')){
+            console.log("선 긋기");
+            $(this).parents().children('.test').hide();
+            $(this).parents().parents().parents("."+index).addClass("selected");
+            checked = 1;
+         }else{
+            console.log("선 지우기");
+            $(this).parents().removeClass("selected"); 
+            checked = 0;
+         }
+         var schNum = $(this).attr("data-cno");
+         console.log("스케줄넘버"+JSON.stringify(schNum));
+          $.ajax({
+           method : 'get'
+            , url  : 'schUpdate'
+           , data : {'checked' : checked,
+                    'schNum' :  schNum}
+            , success : function(checked){
+              }
+        });  
+      });
+   });
 
-	 function schDelete(){ // 데이터 삭제
-		var schNum = $(this).attr("data-rno"); 
-		 $.ajax({
-			method : 'post'
-			, url  : 'schDelete'
-			, data : 'schNum=' + schNum
-			, success : function(resp){
-			}
-		}); 
-		$(this).parents().parents().remove(".index"); //parents()=바로 위 부모 나타냄!!
-	} 
-	function schUpdate(){
-		 var schNum = $(this).attr("data-rno");  
-		 location.href="http://localhost:8888/www/scheduleUpdate?schNum=" + schNum; 
-	 }// 수정 할때 사용!!!
-	 
-	 
-	 $(document).ready(function(){  // 체크체크
-		 
-		 $(document).on('click',".check",function(){
-			 var index=$(this).parents().parents().parents().attr("class");
-			 var checked = 0;
-			  if($(this).prop('checked')){
-				 console.log("선 긋기");
-				 $(this).parents().children('.test').hide();
-				 $(this).parents().parents().parents("."+index).addClass("selected");
-				 checked = 1;
-			 }else{
-				 console.log("선 지우기");
-				 $(this).parents().removeClass("selected"); 
-				 checked = 0;
-			 }
-			 var schNum = $(this).attr("data-cno");
-			 console.log("스케줄넘버"+JSON.stringify(schNum));
-			  $.ajax({
-				method : 'get'
-			    , url  : 'schUpdate'
-				, data : {'checked' : checked,
-					      'schNum' :  schNum}
-			    , success : function(checked){
-					}
-			});  
-		 });
-	 });
 	 
 	 $(document).ready(function() {
 		    
+		 var fullDate = new Date();
+         var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)?(fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+         var currentDate = fullDate.getFullYear()+"-"+twoDigitMonth+ "-" +fullDate.getDate();
+		 
 		   $('#calendar').fullCalendar({
 		     header: {
 		       left: 'prev,next today',
 		       center: 'title',
 		       right: ''
 		     },
-		     defaultDate: '2018-08-24',
+		     defaultDate: currentDate,
 		     navLinks: true, // can click day/week names to navigate views
 		     selectable: true,
 		     selectHelper: true,
@@ -279,7 +280,7 @@
 
 		          if (jsEvent.pageX >= x1 && jsEvent.pageX<= x2 &&
 		              jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
-		              var message = confirm("정말로 삭제하시겠습니까?");
+		              var message = confirm("削除しますか？");
 		              if(message == true){
 		                 
 		                 $('#calendar').fullCalendar('removeEvents', event._id);
@@ -310,7 +311,7 @@
 		              /* code here */
 		              ///////////////////////
 		              
-		              alert('삭제성공!');
+		              alert('削除完了');
 		              }else
 		                 return false;
 		          }
