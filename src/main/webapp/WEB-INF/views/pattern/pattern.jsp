@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>パタン管理</title>
-
+<title>パターン管理</title>
 </head>
 <body>
 <div class="main-panel">
-   <input type="hidden" id="sessionId" class="sessionId" name="sessionId" value="${sessionScope.loginId}"> 
+   <input type="hidden" id="sessionId" name="sessionId" value="${sessionScope.loginId}">
+   <input type="hidden" id="sessionName" name="sessionName" value="${sessionScope.loginName}"> 
    <div class="content">
       <div class="container-fluid">
          <div class="row">
@@ -188,9 +188,10 @@ $(document).ready(function() {
    
       //getJson으로 데이터
       $.getJSON("./getCategory", {
-         userId    : sessionId,
+         userId    : userId,
          checked : checked
       }, function(data) {
+    	  console.log("ddddd"+data);
          var i = 0;
          var temp = [];
             $.each(data, function(key, value) {
@@ -278,6 +279,7 @@ $(document).ready(function() {
          }
          createChart();
          secondDiv();
+         console.log("확인"+chartLabels);
       });
    })
    $(document).on('click','#btn2', function(){
@@ -299,8 +301,8 @@ $(document).ready(function() {
                str += '<td>'+data[i].schNum+'</td>';
                str += '<td>'+data[i].schTitle+'</td>';
                str += '<td>'+data[i].schContent+'</td>';
-               str += '<td>'+data[i].startDate+'</td>';
-               str += '<td>'+data[i].endDate+'</td>';
+               str += '<td>'+data[i].schStartdate+'</td>';
+               str += '<td>'+data[i].schEnddate+'</td>';
                str += '<td>'+data[i].category+'</td>';
                str += '</tr>';
                
@@ -487,6 +489,11 @@ $(document).ready(function() {
            }
         }
         console.log(category);
+        
+        if (cateory.equals(date)) {
+			category = "데이트";
+			alert('변환완료!!!!');
+		}
         
 		$('#secondDiv').html('');
 		var sessionName = $('#sessionName').val();

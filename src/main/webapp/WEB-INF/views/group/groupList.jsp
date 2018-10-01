@@ -18,7 +18,6 @@
 <link rel="stylesheet" type="text/css" href="group/plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="group/styles/courses.css">
 <link rel="stylesheet" type="text/css" href="group/styles/courses_responsive.css">
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.applyUser').on('click',function(){
@@ -29,7 +28,7 @@ $(function(){
 		$.ajax({
 			method:'post',
 			url:'checkGrequest',
-			data:JSON.stringify(sendData),
+// 			data:JSON.stringify(sendData),
 			dataType:'json',
 			contentType:'application/json;charset=utf-8',
 			success:function(r){
@@ -66,157 +65,7 @@ $(function(){
             <div class="super_container">
 
    
-   <!-- Language -->
-
-   <div class="language">
-      <div class="container">
-         
-         <div class="row">
-            <div class="col">
-               <div class="language_slider_container">
-                  
-                  <!-- Language Slider -->
-
-                  <div class="owl-carousel owl-theme language_slider">
-
-                     <!-- Flag -->
-                     <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/all.svg" alt=""></div>
-                           <div class="lang_name">All</div>
-                        </a>
-                     </div>
-                     
-                     <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/beer.svg" alt=""></div>
-                           <div class="lang_name">Beer</div>
-                        </a>
-                     </div>
-                     
-                        
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/date.svg" alt=""></div>
-                           <div class="lang_name">Date</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/driving.svg" alt=""></div>
-                           <div class="lang_name">Driving</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/event.svg" alt=""></div>
-                           <div class="lang_name">Event</div>
-                        </a>
-                     </div>
-                     
-                     <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/exercise.svg" alt=""></div>
-                           <div class="lang_name">Exercise</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/family.svg" alt=""></div>
-                           <div class="lang_name">Family</div>
-                        </a>
-                     </div>
-                     
-                     <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/friend.svg" alt=""></div>
-                           <div class="lang_name">Friendship</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/game.svg" alt=""></div>
-                           <div class="lang_name">Game</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/healing.svg" alt=""></div>
-                           <div class="lang_name">Healing</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/meal.svg" alt=""></div>
-                           <div class="lang_name">Meal</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/movie.svg" alt=""></div>
-                           <div class="lang_name">Movie</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/promise.svg" alt=""></div>
-                           <div class="lang_name">Promise</div>
-                        </a>
-                     </div>
-                     
-                     <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/reading.svg" alt=""></div>
-                           <div class="lang_name">Reading</div>
-                        </a>
-                     </div>
-
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/shopping.svg" alt=""></div>
-                           <div class="lang_name">Shopping</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/study.svg" alt=""></div>
-                           <div class="lang_name">Study</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/traveling.svg" alt=""></div>
-                           <div class="lang_name">Traveling</div>
-                        </a>
-                     </div>
-                     
-                        <div class="owl-item language_item">
-                        <a href="#">
-                           <div class="flag"><img src="group/images/svg/working.svg" alt=""></div>
-                           <div class="lang_name">Working</div>
-                        </a>
-                     </div>
-
-                  </div>
-
-                  <div class="lang_nav lang_prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                  <div class="lang_nav lang_next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
+  
 
    <!-- Courses -->
 
@@ -229,10 +78,10 @@ $(function(){
                <div class="course">
                
                <c:if test="${group.savedImage!=null }">
-                  <div class="course_image"><img src="groupDownload?originalImage=${group.originalImage}&groNum=${group.groNum}"alt="" ></div>
+                  <div class="course_image"><img src="groupDownload?originalImage=${group.originalImage}&groNum=${group.groNum}"alt="" style="width: 358px; height: 240px;" ></div>
                   </c:if>
                <c:if test="${group.savedImage==null }">
-               <div class="course_image"><img src="assets/img/profile.jpg"alt=""  ></div>
+               <div class="course_image"><img src="assets/img/profile.jpg"alt="" style="width: 358px; height: 240px;" ></div>
                </c:if>
                    
                   <div class="course_body">
@@ -250,7 +99,7 @@ $(function(){
                   </div>
                   <div class="course_footer d-flex flex-row align-items-center justify-content-start">
                      <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>${group.userCount}</span></div>
-                     <div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div>
+                
                      
                      <c:forEach var="applyList" items="${applyList}" varStatus="st">
                      
@@ -275,7 +124,7 @@ $(function(){
 
          <div class="row">
             <div class="col">
-               <div class="load_more_button"><a href="#">load more</a></div>
+                <div class="load_more_button"><a href="insertGroup">NEW グループ</a></div> 
             </div>
          </div>
       </div>
@@ -284,7 +133,6 @@ $(function(){
    
 </div>
 
-<script src="group/js/jquery-3.3.1.min.js"></script>
 <script src="group/styles/bootstrap4/popper.js"></script>
 <script src="group/styles/bootstrap4/bootstrap.min.js"></script>
 <script src="group/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
