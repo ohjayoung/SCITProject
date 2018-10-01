@@ -702,7 +702,7 @@ $(document).ready(function() {
 								
 							</div>
 							</c:forEach>
-																		
+																	
 						</div>
 						<div class="col-lg-4 sidebar">
 						<c:if test="${group.userId==loginId }">

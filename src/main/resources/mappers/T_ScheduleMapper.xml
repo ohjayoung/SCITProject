@@ -109,7 +109,16 @@
     WHERE 
     SCHNUM=#{schNum}
    </update>
-	
+	<update id="updateSchedule1" parameterType="schedule">
+	 UPDATE T_SCHEDULE
+    SET 
+    SCHTITLE=#{schTitle},
+    SCHCONTENT=#{schContent},
+    SCHSTARTDATE=#{schStartdate},
+    SCHENDDATE=#{schEnddate}
+    WHERE 
+    SCHNUM=#{schNum}
+	</update>
 	<delete id="deletePlanner_Schedule" parameterType="int">
 	DELETE T_SCHEDULE WHERE PLANUM=#{plaNum}
 	</delete>
@@ -169,7 +178,7 @@
     where 
     schedule.PLANUM=plist.PLANUM
     AND plist.USERID in(#{loginId},#{friendId})
-    AND schedule.CHECKED=1
+    AND schedule.SHAREABLE=1
     order by PLANUM
 	
 	</select>

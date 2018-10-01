@@ -17420,7 +17420,9 @@ svg {
 .fe-chevron-up:before {
   content: "\e930";
 }
-
+.fe-chevron-up_opened:before {
+  content: "\e930";
+}
 .fe-chevrons-down:before {
   content: "\e931";
 }
