@@ -12,10 +12,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -152,7 +148,7 @@ public class T_UserController {
 			user.setSavedImage(savedImage);	
 		}
   		repository.userUpdate(user);
-  		return "redirect:/";
+  		return "redirect:/userDetail";
   	}
   	
 
