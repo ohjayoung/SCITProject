@@ -26,5 +26,6 @@ public interface T_ScheduleMapper {
 	public int delete(int schNum);
 	public List<T_Schedule> selectCategoryMoon(String userId);
     public int updateCheck(T_Schedule checked);
+    public int updateSchedule1(T_Schedule schedule);
 
 }

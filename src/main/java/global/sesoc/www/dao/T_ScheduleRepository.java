@@ -71,7 +71,11 @@ public class T_ScheduleRepository {
 		int result=mapper.updateSchedule(schedule);
 		return result;
 	}
-	
+	public int updateSchedule1(T_Schedule schedule) {
+		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
+		int result=mapper.updateSchedule1(schedule);
+		return result;
+	}
 	public int deletePlanner_Schedule(int plaNum) {
 		T_ScheduleMapper mapper=session.getMapper(T_ScheduleMapper.class);
 		int result=mapper.deletePlanner_Schedule(plaNum);
