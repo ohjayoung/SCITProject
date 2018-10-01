@@ -48,7 +48,6 @@ public class T_UserController {
 	public String login(T_User user, HttpSession session, Model model) {
 
 		T_User t = repository.selectOne(user);
-
 		if (t != null) {
 			session.setAttribute("loginId", t.getUserId());
 			session.setAttribute("loginName", t.getUserId());
@@ -103,24 +102,24 @@ public class T_UserController {
 		
 		return "redirect:/";
 	}
-	//내프로필 화면 요청
-    @RequestMapping(value="/userDetail", method=RequestMethod.GET)
-    public String userDetail(HttpSession session, Model model) {
-    	String userId = (String) session.getAttribute("loginId");
-    	T_User user = new T_User();
-    	user.setUserId(userId);
-    	    	
-    	T_User t = repository.selectOne(user);
-    	String p1 = t.getPhone();
-    	String[] p2 = p1.split(",");
-    	String phone1 = p2[0];
-    	String phone2 = p2[1];
-    	model.addAttribute("phone1",phone1);
-    	model.addAttribute("phone2",phone2);
-    	model.addAttribute("user", t);
-    	String mime = null;
-		if(t.getOriginalImage() != null ) {
-			String fullPath= uploadPath + "/"+ t.getSavedImage();
+
+	// 내프로필 화면 요청
+	@RequestMapping(value = "/userDetail", method = RequestMethod.GET)
+	public String userDetail(HttpSession session, Model model, String userId) {
+		T_User user = new T_User();
+		user.setUserId(userId);
+
+		T_User t = repository.selectOne(user);
+		String p1 = t.getPhone();
+		String[] p2 = p1.split(",");
+		String phone1 = p2[0];
+		String phone2 = p2[1];
+		model.addAttribute("phone1", phone1);
+		model.addAttribute("phone2", phone2);
+		model.addAttribute("user", t);
+		String mime = null;
+		if (t.getOriginalImage() != null) {
+			String fullPath = uploadPath + "/" + t.getSavedImage();
 			try {
 				String type = Files.probeContentType(Paths.get(fullPath));
 				if(type != null && type.contains("image")) {
@@ -155,11 +154,11 @@ public class T_UserController {
   		return "redirect:/";
   	}
   	
-  	@RequestMapping(value="/download", method=RequestMethod.GET)
-	public String download(HttpSession session,T_User t, HttpServletResponse response) {
-  		String userId = (String) session.getAttribute("loginId");
-  		t.setUserId(userId);
-  		T_User user = repository.selectOne(t);
+
+	@RequestMapping(value = "/download", method = RequestMethod.GET)
+	public String download(HttpSession session, T_User t, HttpServletResponse response,String userId) {
+		t.setUserId(userId);
+		T_User user = repository.selectOne(t);
 		String originalImage = user.getOriginalImage();
 		String fullPath = uploadPath + "/" + user.getSavedImage();
 		try {

@@ -6,7 +6,7 @@
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-   <title>회원가입 폼</title>
+   <title>新規取得</title>
    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -30,7 +30,7 @@
             <div class="form-group">
                <label for="userID">ID</label>
                <div class="wrap-input100  input-group" data-validate = "">
-                  <input type="text" id="userId" name="userId" placeholder="아이디를 입력해주세요" class="input100">
+                  <input type="text" id="userId" name="userId" placeholder="英語、数字３~１０以内" class="input100">
                   <span class="focus-input100"></span>
                </div>
                <span id="userIdHelp" class="form-text"></span>
@@ -117,13 +117,13 @@
             <div class="form-group">
                   <label for="comment">自己紹介</label>
                   <textarea class="form-control" id="introduce" name="introduce" rows="5">
-                           
                   </textarea>
             </div>
             </div> <!-- card body  -->
             <div class="card-action">
                <button class="btn btn-success" type="submit">登録完了</button>
                <input class="btn btn-danger" type="reset" value="削除" />
+	     	   <input class="btn btn-danger" type="button" value="戻る" id="modoru"/>
             </div>
             </form>   <!-- signUpForm -->      
          </div>
@@ -410,6 +410,10 @@ $(function(){
    }
    
 }); 
+
+$('#modoru').on('click',function(){
+	location.href="index";
+})
 </script>
 </body>
 </html>
